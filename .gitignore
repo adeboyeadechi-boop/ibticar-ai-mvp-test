@@ -1,0 +1,112 @@
+# =======================================
+#  DEPENDENCIES
+# =======================================
+node_modules/
+.pnp/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# =======================================
+#  TESTING & COVERAGE
+# =======================================
+coverage/
+*.lcov
+
+# =======================================
+#  NEXT.JS / BUILD
+# =======================================
+.next/
+.next/cache/
+out/
+build/
+dist/
+
+# =======================================
+#  ENVIRONMENT VARIABLES
+# (ne jamais versionner les .env contenant des secrets)
+# =======================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =======================================
+#  LOGS
+# =======================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+logs/
+*.log
+
+# =======================================
+#  SYSTEM & EDITOR FILES
+# =======================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# =======================================
+#  TYPESCRIPT
+# =======================================
+*.tsbuildinfo
+next-env.d.ts
+
+# =======================================
+#  SECURITY / SECRETS
+# =======================================
+*.pem
+*.key
+*.crt
+*.p12
+*.cert
+
+# =======================================
+#  BACKEND FILES 
+# =======================================
+__pycache__/
+*.pyc
+venv/
+.envrc
+.mypy_cache/
+data/
+uploads/
+tmp/
+temp/
+*.sqlite
+*.db
+*.pid
+*.seed
+
+# =======================================
+#  DOCKER
+# =======================================
+docker-compose.override.yml
+docker-compose.local.yml
+.docker/
+*.tar
+
+# =======================================
+#  DEPLOYMENT
+# =======================================
+.vercel
+
+# =======================================
+# MISC
+# =======================================
+*.tgz
+*.zip
+*.tar.gz
+*.rar
+.cache/
+.parcel-cache/
+.babel-cache/
