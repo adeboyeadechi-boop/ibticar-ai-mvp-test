@@ -30,6 +30,32 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+      # === DÉBUT DU BLOC À AJOUTER ===
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Setup Environment File
+        # Crée un .env pour la CI basé sur les secrets GitHub
+        # (Nous utiliserons les mêmes variables que notre CI standard)
+        run: |
+          echo "DATABASE_USER=admin_ibticar" >> .env
+          echo "DATABASE_PASSWORD=test_password" >> .env
+          echo "DATABASE_NAME=ibticar_ai_db_test" >> .env
+          echo "DATABASE_URL=postgresql://admin_ibticar:test_password@localhost:5432/ibticar_ai_db_test?schema=public" >> .env
+          echo "REDIS_URL=redis://localhost:6379" >> .env
+          echo "NEXTAUTH_URL=http://localhost:3000" >> .env
+          echo "NEXTAUTH_SECRET=un-secret-de-test-pour-la-ci" >> .env
+
+      - name: Launch Services
+        run: |
+          docker-compose up -d
+          echo "Attente du démarrage des services..."
+          sleep 10 # Donne 10s à Postgres/Redis pour démarrer
 
       - name: Run Claude Code Review
         id: claude-review
@@ -40,16 +66,34 @@ jobs:
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event.pull_request.number }}
 
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
+            Veuillez examiner cette pull request et fournir des commentaires sur :
+            - La qualité du code et les bonnes pratiques
+            - Les bogues ou problèmes potentiels
+            - Les considérations de performance
+            - Les questions de sécurité
+            - La couverture des tests
 
-            Use the repository's CLAUDE.md for guidance on style and conventions. Be constructive and helpful in your feedback.
+            Utilisez le fichier CLAUDE.md du dépôt comme référence pour le style et les conventions. Soyez constructif et utile dans vos retours.
 
-            Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
+            Utilisez `gh pr comment` avec votre outil Bash pour laisser votre revue en commentaire sur la PR.
+
+          # === DÉBUT DU BLOC À AJOUTER/MODIFIER ===
+          custom_instructions: |
+            Le projet est un backend Next.js 15.
+            Les dépendances sont installées avec 'npm ci'.
+            La base de données (PostgreSQL) et Redis tournent via 'docker-compose up'.
+            Un fichier .env est DÉJÀ créé et rempli.
+
+            TRES IMPORTANT: Toutes les commandes Prisma DOIVENT être préfixées 
+            par 'npx dotenv -e .env --' pour charger les variables d'environnement.
+            
+            Exemple de commande VALIDE: 'npx dotenv -e .env -- npx prisma migrate status'
+            Exemple de commande INVALIDE: 'npx prisma migrate status'
+
+            Pour lancer les tests: 'npx dotenv -e .env -- npm run test'
+            
+          allowed_tools: "Bash(npm:*),Bash(docker-compose:*),Bash(npx:*),Bash(sleep:*)"
+          # === FIN DU BLOC À AJOUTER/MODIFIER ===
 
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.claude.com/en/docs/claude-code/cli-reference for available options
