@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # Service PostgreSQL (déjà présent)
+  db:
+    image: postgres:16
+    container_name: ibticar_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ibticar_net
+
+  # === NOUVEAU SERVICE REDIS ===
+  redis:
+    image: redis:7-alpine # Image légère de Redis
+    container_name: ibticar_redis
+    restart: always
+    ports:
+      - "6379:6379" # Mappe le port Redis par défaut
+    volumes:
+      - redis_data:/data # Volume pour la persistance
+    networks:
+      - ibticar_net
+  # ==============================
+
+volumes:
+  postgres_data:
+  redis_data: # <-- AJOUTEZ CE VOLUME
+
+networks:
+  ibticar_net:
+    driver: bridge
