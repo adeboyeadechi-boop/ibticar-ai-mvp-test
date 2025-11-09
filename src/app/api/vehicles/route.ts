@@ -4,7 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/prisma/client'
-import { VehicleStatus, FuelType, Transmission } from '@/generated/prisma'
+import { VehicleStatus, FuelType, TransmissionType } from '@/generated/prisma'
 import { getAuthenticatedUser } from '@/lib/auth-helpers'
 
 // GET /api/vehicles - Liste tous les véhicules
