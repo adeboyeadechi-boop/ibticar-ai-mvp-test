@@ -1,7 +1,7 @@
 // Seed script for Ibticar.AI MVP
 // Generates initial test data for development
 
-import { PrismaClient } from '@/generated/prisma'
+import { PrismaClient, NotificationType, NotificationChannel, TeamType, TaxType } from '@/generated/prisma'
 import * as bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
@@ -114,7 +114,7 @@ async function main() {
   const ibticarTeam = await prisma.team.create({
     data: {
       name: 'Ibticar HQ',
-      type: 'IBTICAR',
+      type: TeamType.IBTICAR,
       code: 'IBTICAR-HQ',
       managerId: '', // Will be updated after creating users
       city: 'Alger',
@@ -127,7 +127,7 @@ async function main() {
   const dealerTeam = await prisma.team.create({
     data: {
       name: 'Concessionnaire Alger Centre',
-      type: 'DEALER',
+      type: TeamType.DEALER,
       code: 'DEALER-ALG-01',
       managerId: '',
       city: 'Alger',
@@ -277,7 +277,7 @@ async function main() {
     data: {
       name: 'TVA Standard Algérie',
       rate: 19.0,
-      type: 'VAT',
+      type: TaxType.VAT,
       applicableTo: 'Vente de véhicules neufs',
       startDate: new Date('2024-01-01'),
       isActive: true,
@@ -288,7 +288,7 @@ async function main() {
     data: {
       name: 'TAP Algérie',
       rate: 1.0,
-      type: 'TAP',
+      type: TaxType.TAP,
       applicableTo: 'Toutes transactions commerciales',
       startDate: new Date('2024-01-01'),
       isActive: true,
@@ -301,8 +301,8 @@ async function main() {
     {
       code: 'WELCOME_EMAIL',
       name: 'Email de bienvenue',
-      type: 'SYSTEM',
-      channel: 'EMAIL',
+      type: NotificationType.SYSTEM,
+      channel: NotificationChannel.EMAIL,
       language: 'FR',
       subject: 'Bienvenue sur Ibticar.AI',
       template: 'Bonjour {{firstName}},\n\nBienvenue sur Ibticar.AI...',
@@ -311,8 +311,8 @@ async function main() {
     {
       code: 'ORDER_CONFIRMATION',
       name: 'Confirmation de commande',
-      type: 'ORDER',
-      channel: 'EMAIL',
+      type: NotificationType.ORDER,
+      channel: NotificationChannel.EMAIL,
       language: 'FR',
       subject: 'Confirmation de votre commande #{{orderNumber}}',
       template: 'Votre commande a été confirmée...',
@@ -321,8 +321,8 @@ async function main() {
     {
       code: 'PAYMENT_REMINDER',
       name: 'Rappel de paiement',
-      type: 'PAYMENT',
-      channel: 'EMAIL',
+      type: NotificationType.PAYMENT,
+      channel: NotificationChannel.EMAIL,
       language: 'FR',
       subject: 'Rappel: Facture #{{invoiceNumber}} en attente',
       template: 'Nous vous rappelons que la facture...',
