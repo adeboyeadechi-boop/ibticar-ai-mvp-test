@@ -114,7 +114,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     if (status !== undefined) {
       updateData.status = status
       // Si converti en vente, mettre à jour la date
-      if (status === 'CONVERTED' && !existingLead.convertedAt) {
+      if (status === LeadStatus.WON && !existingLead.convertedAt) {
         updateData.convertedAt = new Date()
       }
     }

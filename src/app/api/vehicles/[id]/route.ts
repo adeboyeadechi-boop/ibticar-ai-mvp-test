@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/prisma/client'
+import { VehicleStatus } from '@/generated/prisma'
 import { getAuthenticatedUser } from '@/lib/auth-helpers'
 
 type Params = {
@@ -160,10 +161,10 @@ export async function PATCH(request: NextRequest, { params }: Params) {
       updateData.status = status
 
       // Mettre à jour les dates selon le statut
-      if (status === 'SOLD' && !existingVehicle.soldAt) {
+      if (status === VehicleStatus.SOLD && !existingVehicle.soldAt) {
         updateData.soldAt = new Date()
       }
-      if (status === 'ARCHIVED' && !existingVehicle.archivedAt) {
+      if (status === VehicleStatus.ARCHIVED && !existingVehicle.archivedAt) {
         updateData.archivedAt = new Date()
       }
     }
@@ -278,14 +279,14 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     }
 
     // Vérifier que le véhicule n'est pas vendu ou réservé
-    if (existingVehicle.status === 'SOLD') {
+    if (existingVehicle.status === VehicleStatus.SOLD) {
       return NextResponse.json(
         { error: 'Cannot delete a sold vehicle' },
         { status: 400 }
       )
     }
 
-    if (existingVehicle.status === 'RESERVED') {
+    if (existingVehicle.status === VehicleStatus.RESERVED) {
       return NextResponse.json(
         { error: 'Cannot delete a reserved vehicle. Please cancel the reservation first.' },
         { status: 400 }

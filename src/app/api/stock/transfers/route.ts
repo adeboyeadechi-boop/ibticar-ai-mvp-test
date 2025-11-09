@@ -4,7 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/prisma/client'
-import { TransferStatus } from '@/generated/prisma'
+import { TransferStatus, VehicleStatus } from '@/generated/prisma'
 import { getAuthenticatedUser } from '@/lib/auth-helpers'
 
 // GET /api/stock/transfers - Liste tous les transferts
@@ -193,14 +193,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Vérifier que le véhicule n'est pas vendu ou réservé
-    if (vehicle.status === 'SOLD') {
+    if (vehicle.status === VehicleStatus.SOLD) {
       return NextResponse.json(
         { error: 'Cannot transfer a sold vehicle' },
         { status: 400 }
       )
     }
 
-    if (vehicle.status === 'RESERVED') {
+    if (vehicle.status === VehicleStatus.RESERVED) {
       return NextResponse.json(
         { error: 'Cannot transfer a reserved vehicle' },
         { status: 400 }
