@@ -61,7 +61,7 @@ export class RotationPredictionService {
           model: vehicle.model?.name || 'Unknown',
           year: vehicle.year,
           price: vehicle.sellingPrice,
-          mileage: vehicle.mileage,
+          mileage: vehicle.mileage || 0,
           condition: vehicle.condition,
           fuelType: vehicle.model?.fuelType || 'Unknown',
           transmission: vehicle.model?.transmission || 'Unknown',

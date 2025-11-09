@@ -40,7 +40,7 @@ export class DynamicPricingService {
         vehicle.model?.brand?.name || 'Unknown',
         vehicle.model?.name || 'Unknown',
         vehicle.year,
-        vehicle.mileage
+        vehicle.mileage || 0
       )
 
       // 3. Calculate days in inventory
@@ -59,7 +59,7 @@ export class DynamicPricingService {
           year: vehicle.year,
           currentPrice: vehicle.sellingPrice,
           purchasePrice: vehicle.purchasePrice || undefined,
-          mileage: vehicle.mileage,
+          mileage: vehicle.mileage || 0,
           condition: vehicle.condition,
           fuelType: vehicle.model?.fuelType || 'Unknown',
           transmission: vehicle.model?.transmission || 'Unknown',
