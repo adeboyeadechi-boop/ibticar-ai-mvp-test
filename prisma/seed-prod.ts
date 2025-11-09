@@ -203,6 +203,15 @@ async function main() {
     data: { managerId: superAdmin.id },
   })
 
+  // Link superadmin to Super Admin role
+  console.log('🔗 Linking superadmin to role...')
+  await prisma.usersOnRoles.create({
+    data: {
+      userId: superAdmin.id,
+      roleId: superAdminRole.id,
+    },
+  })
+
   // 6. Create Tax Configuration
   console.log('💰 Creating tax configurations...')
   await prisma.taxConfiguration.create({
