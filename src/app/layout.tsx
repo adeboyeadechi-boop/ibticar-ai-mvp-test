@@ -1,12 +1,16 @@
 // /src/app/layout.tsx
 
 import type { Metadata } from "next";
-import "./globals.css"; // Vous pouvez même vider ce CSS plus tard
+// import "./globals.css"; // Temporarily disabled
 
 export const metadata: Metadata = {
-  title: "Ibticar.AI API", // Modifié
-  description: "Backend services for Ibticar.AI", // Modifié
+  title: "Ibticar.AI API",
+  description: "Backend services for Ibticar.AI",
 };
+
+// Disable static generation for the entire app
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
 
 export default function RootLayout({
   children,
@@ -14,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en"> {/* Simplifié en "en" */}
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
