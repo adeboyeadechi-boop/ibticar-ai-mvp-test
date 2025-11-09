@@ -70,38 +70,38 @@ async function main() {
   console.log('🔐 Creating permissions...')
   const permissions = [
     // Users & Teams
-    { code: 'users.view', name: 'Voir utilisateurs', module: 'users', action: 'view', resource: 'users' },
-    { code: 'users.create', name: 'Créer utilisateurs', module: 'users', action: 'create', resource: 'users' },
-    { code: 'users.update', name: 'Modifier utilisateurs', module: 'users', action: 'update', resource: 'users' },
-    { code: 'users.delete', name: 'Supprimer utilisateurs', module: 'users', action: 'delete', resource: 'users' },
-    { code: 'teams.manage', name: 'Gérer équipes', module: 'teams', action: 'manage', resource: 'teams' },
+    { code: 'users:view', name: 'Voir utilisateurs', module: 'users', action: 'view', resource: 'users' },
+    { code: 'users:create', name: 'Créer utilisateurs', module: 'users', action: 'create', resource: 'users' },
+    { code: 'users:update', name: 'Modifier utilisateurs', module: 'users', action: 'update', resource: 'users' },
+    { code: 'users:delete', name: 'Supprimer utilisateurs', module: 'users', action: 'delete', resource: 'users' },
+    { code: 'teams:manage', name: 'Gérer équipes', module: 'teams', action: 'manage', resource: 'teams' },
 
     // Vehicles & Stock
-    { code: 'vehicles.view', name: 'Voir véhicules', module: 'stock', action: 'view', resource: 'vehicles' },
-    { code: 'vehicles.create', name: 'Ajouter véhicules', module: 'stock', action: 'create', resource: 'vehicles' },
-    { code: 'vehicles.update', name: 'Modifier véhicules', module: 'stock', action: 'update', resource: 'vehicles' },
-    { code: 'vehicles.delete', name: 'Supprimer véhicules', module: 'stock', action: 'delete', resource: 'vehicles' },
-    { code: 'stock.transfer', name: 'Transférer véhicules', module: 'stock', action: 'transfer', resource: 'vehicles' },
+    { code: 'vehicles:view', name: 'Voir véhicules', module: 'stock', action: 'view', resource: 'vehicles' },
+    { code: 'vehicles:create', name: 'Ajouter véhicules', module: 'stock', action: 'create', resource: 'vehicles' },
+    { code: 'vehicles:update', name: 'Modifier véhicules', module: 'stock', action: 'update', resource: 'vehicles' },
+    { code: 'vehicles:delete', name: 'Supprimer véhicules', module: 'stock', action: 'delete', resource: 'vehicles' },
+    { code: 'stock:transfer', name: 'Transférer véhicules', module: 'stock', action: 'transfer', resource: 'vehicles' },
 
     // Customers & CRM
-    { code: 'customers.view', name: 'Voir clients', module: 'crm', action: 'view', resource: 'customers' },
-    { code: 'customers.create', name: 'Créer clients', module: 'crm', action: 'create', resource: 'customers' },
-    { code: 'customers.update', name: 'Modifier clients', module: 'crm', action: 'update', resource: 'customers' },
-    { code: 'leads.manage', name: 'Gérer prospects', module: 'crm', action: 'manage', resource: 'leads' },
+    { code: 'customers:view', name: 'Voir clients', module: 'crm', action: 'view', resource: 'customers' },
+    { code: 'customers:create', name: 'Créer clients', module: 'crm', action: 'create', resource: 'customers' },
+    { code: 'customers:update', name: 'Modifier clients', module: 'crm', action: 'update', resource: 'customers' },
+    { code: 'leads:manage', name: 'Gérer prospects', module: 'crm', action: 'manage', resource: 'leads' },
 
     // Sales & Finance
-    { code: 'quotes.manage', name: 'Gérer devis', module: 'finance', action: 'manage', resource: 'quotes' },
-    { code: 'invoices.manage', name: 'Gérer factures', module: 'finance', action: 'manage', resource: 'invoices' },
-    { code: 'payments.manage', name: 'Gérer paiements', module: 'finance', action: 'manage', resource: 'payments' },
+    { code: 'quotes:manage', name: 'Gérer devis', module: 'finance', action: 'manage', resource: 'quotes' },
+    { code: 'invoices:manage', name: 'Gérer factures', module: 'finance', action: 'manage', resource: 'invoices' },
+    { code: 'payments:manage', name: 'Gérer paiements', module: 'finance', action: 'manage', resource: 'payments' },
 
     // Reports
-    { code: 'reports.view', name: 'Voir rapports', module: 'reports', action: 'view', resource: 'reports' },
-    { code: 'reports.export', name: 'Exporter rapports', module: 'reports', action: 'export', resource: 'reports' },
+    { code: 'reports:view', name: 'Voir rapports', module: 'reports', action: 'view', resource: 'reports' },
+    { code: 'reports:export', name: 'Exporter rapports', module: 'reports', action: 'export', resource: 'reports' },
 
     // AI Features
-    { code: 'ai.recommendations', name: 'Recommandations IA', module: 'ai', action: 'recommendations', resource: 'ai' },
-    { code: 'ai.predictions', name: 'Prédictions IA', module: 'ai', action: 'predictions', resource: 'ai' },
-    { code: 'ai.pricing', name: 'Pricing dynamique IA', module: 'ai', action: 'pricing', resource: 'ai' },
+    { code: 'ai:recommendations', name: 'Recommandations IA', module: 'ai', action: 'recommendations', resource: 'ai' },
+    { code: 'ai:predictions', name: 'Prédictions IA', module: 'ai', action: 'predictions', resource: 'ai' },
+    { code: 'ai:pricing', name: 'Pricing dynamique IA', module: 'ai', action: 'pricing', resource: 'ai' },
   ]
 
   for (const perm of permissions) {
