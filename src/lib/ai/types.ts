@@ -116,7 +116,12 @@ export interface DynamicPricingRequest {
   daysInStock?: number
   targetMargin?: number
   includeMarketAnalysis?: boolean
-  businessObjectives?: string
+  businessObjectives?: {
+    targetMargin?: number
+    urgencyLevel?: 'low' | 'medium' | 'high'
+    targetRotationDays?: number
+    minimumAcceptablePrice?: number
+  }
 }
 
 export interface DynamicPricingRecommendation {
