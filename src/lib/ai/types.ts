@@ -106,14 +106,16 @@ export interface RotationPrediction {
 // Dynamic Pricing
 export interface DynamicPricingRequest {
   vehicleId: string
-  currentPrice: number
+  currentPrice?: number
   marketData?: {
     averageMarketPrice?: number
     competitorPrices?: number[]
     demandLevel?: 'low' | 'medium' | 'high'
   }
-  daysInStock: number
+  daysInStock?: number
   targetMargin?: number
+  includeMarketAnalysis?: boolean
+  businessObjectives?: string
 }
 
 export interface DynamicPricingRecommendation {
