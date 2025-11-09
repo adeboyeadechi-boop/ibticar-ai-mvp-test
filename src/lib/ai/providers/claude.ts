@@ -56,7 +56,7 @@ export class ClaudeProvider implements IAIProvider {
         max_tokens: request.maxTokens || this.defaultMaxTokens,
         temperature: request.temperature || this.defaultTemperature,
         system: systemPrompt,
-        messages: messages.filter((msg) => msg.role !== 'system'),
+        messages: messages,
       })
 
       // Extract text content from response
@@ -113,7 +113,7 @@ export class ClaudeProvider implements IAIProvider {
         max_tokens: request.maxTokens || this.defaultMaxTokens,
         temperature: request.temperature || this.defaultTemperature,
         system: systemPrompt,
-        messages: messages.filter((msg) => msg.role !== 'system'),
+        messages: messages,
         stream: true,
       })
 
