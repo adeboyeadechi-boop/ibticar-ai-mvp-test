@@ -89,6 +89,7 @@ export interface RotationPredictionRequest {
     seasonalTrends?: Record<string, number>
     similarVehiclesRotation?: number[]
   }
+  includeMarketAnalysis?: boolean
 }
 
 export interface RotationPrediction {
