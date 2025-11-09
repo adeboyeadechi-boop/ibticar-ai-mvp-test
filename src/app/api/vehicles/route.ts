@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     const brandId = searchParams.get('brandId') || null
     const modelId = searchParams.get('modelId') || null
     const fuelType = searchParams.get('fuelType') as FuelType | null
-    const transmission = searchParams.get('transmission') as Transmission | null
+    const transmission = searchParams.get('transmission') as TransmissionType | null
     const teamId = searchParams.get('teamId') || null
     const minPrice = searchParams.get('minPrice') ? parseFloat(searchParams.get('minPrice')!) : null
     const maxPrice = searchParams.get('maxPrice') ? parseFloat(searchParams.get('maxPrice')!) : null
