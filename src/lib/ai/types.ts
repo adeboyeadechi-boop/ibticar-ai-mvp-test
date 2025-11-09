@@ -5,7 +5,7 @@
 
 // Base AI Provider Configuration
 export interface AIProviderConfig {
-  provider: 'claude' | 'local' | 'openai'
+  provider: 'claude' | 'gemini' | 'openai' | 'local'
   apiKey?: string
   baseUrl?: string
   model?: string
