@@ -10,9 +10,10 @@ import { checkPermission, clearAllPermissionsCache } from '@/lib/rbac'
 // POST /api/roles/[id]/permissions - Assign permissions to a role
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
@@ -34,7 +35,7 @@ export async function POST(
 
     // Check if role exists
     const role = await prisma.role.findUnique({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     if (!role) {
@@ -70,13 +71,13 @@ export async function POST(
       prisma.rolePermission.upsert({
         where: {
           roleId_permissionId: {
-            roleId: params.id,
+            roleId: id,
             permissionId,
           },
         },
         update: {},
         create: {
-          roleId: params.id,
+          roleId: id,
           permissionId,
         },
       })
@@ -89,7 +90,7 @@ export async function POST(
 
     // Fetch updated role with permissions
     const updatedRole = await prisma.role.findUnique({
-      where: { id: params.id },
+      where: { id: id },
       include: {
         permissions: {
           include: {
@@ -134,9 +135,10 @@ export async function POST(
 // DELETE /api/roles/[id]/permissions - Revoke permissions from a role
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
@@ -158,7 +160,7 @@ export async function DELETE(
 
     // Check if role exists
     const role = await prisma.role.findUnique({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     if (!role) {
@@ -176,7 +178,7 @@ export async function DELETE(
     // Revoke permissions
     const result = await prisma.rolePermission.deleteMany({
       where: {
-        roleId: params.id,
+        roleId: id,
         permissionId: {
           in: permissionIds,
         },
@@ -188,7 +190,7 @@ export async function DELETE(
 
     // Fetch updated role
     const updatedRole = await prisma.role.findUnique({
-      where: { id: params.id },
+      where: { id: id },
       include: {
         permissions: {
           include: {
