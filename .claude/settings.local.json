@@ -30,7 +30,9 @@
       "Bash(timeout /t 3 /nobreak)",
       "Bash(cmd //c \"taskkill //PID 12536 //F\")",
       "Bash(ngrok version:*)",
-      "Bash(del nul)"
+      "Bash(del nul)",
+      "Bash(git check-ignore:*)",
+      "Bash(git ls-tree:*)"
     ]
   }
 }

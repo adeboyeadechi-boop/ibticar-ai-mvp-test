@@ -11,7 +11,7 @@
 
 ### URL de Base (Production - Vercel)
 ```
-Base URL: https://votre-projet.vercel.app/api
+Base URL: https://ibticar-ai-mvp-test-git-main-adechi-adeboyes-projects.vercel.app/api
 ```
 
 ### URL Locale (Développement)
@@ -1241,7 +1241,7 @@ Authorization: Bearer {access_token}
 
 ```typescript
 // lib/api.ts
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://votre-projet.vercel.app/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ibticar-ai-mvp-test-git-main-adechi-adeboyes-projects.vercel.app/api';
 
 interface ApiResponse<T> {
   success: boolean;
@@ -1563,7 +1563,7 @@ Permissions: Basic sales operations
 **1. Configurer l'URL API:**
 ```typescript
 // .env.local dans Lovable
-NEXT_PUBLIC_API_URL=https://votre-projet.vercel.app/api
+NEXT_PUBLIC_API_URL=https://ibticar-ai-mvp-test-git-main-adechi-adeboyes-projects.vercel.app/api
 ```
 
 **2. Installer le client API:**
