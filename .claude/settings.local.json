@@ -35,7 +35,10 @@
       "Bash(git ls-tree:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(next build)"
+      "Bash(next build)",
+      "Bash(bash:*)",
+      "Bash(BASE_URL=\"https://ibticar-ai-mvp-test-3mtyicgk4-adechi-adeboyes-projects.vercel.app\":*)",
+      "Bash(echo:*)"
     ]
   }
 }
