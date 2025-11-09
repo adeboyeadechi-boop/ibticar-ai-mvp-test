@@ -1,7 +1,7 @@
 // Seed script for Ibticar.AI MVP
 // Generates initial test data for development
 
-import { PrismaClient, NotificationType, NotificationChannel, TeamType, TaxType } from '@/generated/prisma'
+import { PrismaClient, NotificationType, NotificationChannel, TeamType, TaxType, Language } from '@/generated/prisma'
 import * as bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
@@ -303,7 +303,7 @@ async function main() {
       name: 'Email de bienvenue',
       type: NotificationType.SYSTEM,
       channel: NotificationChannel.EMAIL,
-      language: 'FR',
+      language: Language.FR,
       subject: 'Bienvenue sur Ibticar.AI',
       template: 'Bonjour {{firstName}},\n\nBienvenue sur Ibticar.AI...',
       isActive: true,
@@ -313,7 +313,7 @@ async function main() {
       name: 'Confirmation de commande',
       type: NotificationType.ORDER,
       channel: NotificationChannel.EMAIL,
-      language: 'FR',
+      language: Language.FR,
       subject: 'Confirmation de votre commande #{{orderNumber}}',
       template: 'Votre commande a été confirmée...',
       isActive: true,
@@ -323,7 +323,7 @@ async function main() {
       name: 'Rappel de paiement',
       type: NotificationType.PAYMENT,
       channel: NotificationChannel.EMAIL,
-      language: 'FR',
+      language: Language.FR,
       subject: 'Rappel: Facture #{{invoiceNumber}} en attente',
       template: 'Nous vous rappelons que la facture...',
       isActive: true,
