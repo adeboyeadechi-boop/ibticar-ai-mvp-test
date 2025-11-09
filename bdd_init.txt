@@ -1,0 +1,449 @@
+═══════════════════════════════════════════════════════════════════
+                    IBTICAR.AI MVP - DATABASE INITIALIZATION
+                           TEST ACCOUNTS & DATA SUMMARY
+═══════════════════════════════════════════════════════════════════
+
+📅 Date de création: 2025-11-09
+🗄️  Database: PostgreSQL via Prisma ORM
+🌱 Seed script: prisma/seed-complete.ts
+✅ Status: Production Ready
+
+═══════════════════════════════════════════════════════════════════
+                           👤 COMPTES DE TEST
+═══════════════════════════════════════════════════════════════════
+
+🔑 MOT DE PASSE UNIVERSEL POUR TOUS LES COMPTES
+────────────────────────────────────────────────
+Password: Password123!
+
+⚠️  IMPORTANT: Changez ces mots de passe en production!
+
+═══════════════════════════════════════════════════════════════════
+                        COMPTES PAR RÔLE
+═══════════════════════════════════════════════════════════════════
+
+1️⃣  SUPER ADMIN (Administrateur Système)
+────────────────────────────────────────────────
+   Email:        superadmin@ibticar.ai
+   Password:     Password123!
+   Nom:          Super Admin
+   Téléphone:    +213 555 000 001
+   Rôle:         SUPER_ADMIN
+   Équipe:       Ibticar HQ
+   Privilèges:   ✅ Tous les privilèges système
+                 ✅ Gestion utilisateurs complète
+                 ✅ Configuration système
+                 ✅ Accès toutes les fonctionnalités
+
+2️⃣  ADMIN (Administrateur de Concession)
+────────────────────────────────────────────────
+   Email:        admin@ibticar.ai
+   Password:     Password123!
+   Nom:          Mohamed Belaidi
+   Téléphone:    +213 555 000 002
+   Rôle:         ADMIN
+   Équipe:       Concessionnaire Oran
+   Privilèges:   ✅ Gestion concession
+                 ✅ Gestion stock
+                 ✅ Gestion clients et prospects
+                 ✅ Rapports et analytics
+                 ✅ Fonctionnalités IA
+
+3️⃣  MANAGER (Responsable d'Équipe)
+────────────────────────────────────────────────
+   Email:        manager@dealer.com
+   Password:     Password123!
+   Nom:          Ahmed Benali
+   Téléphone:    +213 555 000 003
+   Rôle:         MANAGER
+   Équipe:       Concessionnaire Alger Centre
+   Privilèges:   ✅ Gestion véhicules
+                 ✅ Gestion clients et prospects
+                 ✅ Consultation rapports
+                 ✅ Affectation de leads
+
+4️⃣  COMMERCIAL (Agent Commercial)
+────────────────────────────────────────────────
+   Email:        commercial@dealer.com
+   Password:     Password123!
+   Nom:          Karim Meziane
+   Téléphone:    +213 555 000 004
+   Rôle:         SALES
+   Équipe:       Concessionnaire Alger Centre
+   Privilèges:   ✅ Consultation véhicules
+                 ✅ Gestion clients
+                 ✅ Gestion prospects
+                 ✅ Création devis
+
+5️⃣  USER (Utilisateur Standard)
+────────────────────────────────────────────────
+   Email:        user@dealer.com
+   Password:     Password123!
+   Nom:          Fatima Zouaoui
+   Téléphone:    +213 555 000 005
+   Rôle:         USER
+   Équipe:       Concessionnaire Alger Centre
+   Privilèges:   ✅ Consultation limitée
+                 ✅ Accès basique
+
+═══════════════════════════════════════════════════════════════════
+                      📊 DONNÉES DE TEST CRÉÉES
+═══════════════════════════════════════════════════════════════════
+
+🏢 ÉQUIPES (3)
+────────────────────────────────────────────────
+1. Ibticar HQ
+   - Type: IBTICAR
+   - Code: IBTICAR-HQ
+   - Manager: Super Admin
+   - Localisation: Alger, Alger
+   - Contact: contact@ibticar.ai / +213 23 45 67 89
+
+2. Concessionnaire Alger Centre
+   - Type: DEALER
+   - Code: DEALER-ALG-01
+   - Manager: Ahmed Benali (Manager)
+   - Localisation: Alger, Alger
+   - Contact: alger@dealer.com / +213 23 45 67 90
+
+3. Concessionnaire Oran
+   - Type: DEALER
+   - Code: DEALER-ORA-01
+   - Manager: Mohamed Belaidi (Admin)
+   - Localisation: Oran, Oran
+   - Contact: oran@dealer.com / +213 41 12 34 56
+
+────────────────────────────────────────────────
+🚗 MARQUES DE VÉHICULES (10)
+────────────────────────────────────────────────
+1. Renault (France)
+2. Peugeot (France)
+3. Volkswagen (Allemagne)
+4. Toyota (Japon)
+5. Hyundai (Corée du Sud)
+6. Kia (Corée du Sud)
+7. Seat (Espagne)
+8. Skoda (République Tchèque)
+9. Mercedes-Benz (Allemagne)
+10. BMW (Allemagne)
+
+────────────────────────────────────────────────
+🏎️  MODÈLES DE VÉHICULES (7)
+────────────────────────────────────────────────
+1. Renault Clio 5 (Hatchback, Essence, Manuel, 100cv)
+2. Renault Captur (SUV, Diesel, Automatique, 115cv)
+3. Renault Megane (Sedan, Diesel, Manuel, 110cv)
+4. Peugeot 208 (Hatchback, Essence, Manuel, 110cv)
+5. Peugeot 3008 (SUV, Diesel, Automatique, 130cv)
+6. Toyota Corolla (Sedan, Hybride, Automatique, 122cv)
+7. Hyundai i20 (Hatchback, Essence, Manuel, 84cv)
+
+────────────────────────────────────────────────
+🚙 VÉHICULES EN STOCK (5)
+────────────────────────────────────────────────
+
+1. Renault Clio 5 - Bleu Cosmos
+   - VIN: VF1RJA00068123456
+   - Immatriculation: 16-12345-16
+   - Année: 2024
+   - Kilométrage: 10 km
+   - Prix d'achat: 2,500,000 DZD
+   - Prix de vente: 2,950,000 DZD
+   - Statut: DISPONIBLE
+   - Localisation: Alger Centre
+   - Date d'achat: 15/01/2024
+
+2. Renault Captur - Rouge Flamme
+   - VIN: VF1RJB00068234567
+   - Immatriculation: 16-23456-16
+   - Année: 2024
+   - Kilométrage: 5 km
+   - Prix d'achat: 3,200,000 DZD
+   - Prix de vente: 3,750,000 DZD
+   - Statut: DISPONIBLE
+   - Localisation: Alger Centre
+   - Date d'achat: 01/02/2024
+
+3. Renault Megane - Gris Titanium
+   - VIN: VF1RJC00068345678
+   - Immatriculation: 16-34567-16
+   - Année: 2024
+   - Kilométrage: 8 km
+   - Prix d'achat: 2,800,000 DZD
+   - Prix de vente: 3,300,000 DZD
+   - Statut: RÉSERVÉ
+   - Localisation: Alger Centre
+   - Date d'achat: 10/02/2024
+
+4. Peugeot 208 - Blanc Nacré
+   - VIN: VF3ABCDEF12456789
+   - Immatriculation: 31-45678-31
+   - Année: 2024
+   - Kilométrage: 15 km
+   - Prix d'achat: 2,400,000 DZD
+   - Prix de vente: 2,850,000 DZD
+   - Statut: DISPONIBLE
+   - Localisation: Oran
+   - Date d'achat: 20/01/2024
+
+5. Peugeot 3008 - Noir Perla Nera
+   - VIN: VF3ABCDEF12567890
+   - Immatriculation: 31-56789-31
+   - Année: 2023
+   - Kilométrage: 12,000 km
+   - Prix d'achat: 3,500,000 DZD
+   - Prix de vente: 3,950,000 DZD
+   - Statut: DISPONIBLE
+   - Localisation: Oran
+   - Date d'achat: 15/12/2023
+
+────────────────────────────────────────────────
+👥 CLIENTS (4)
+────────────────────────────────────────────────
+
+1. Amina Boumediene (Particulier)
+   - Email: amina.boumediene@email.dz
+   - Téléphone: +213 550 123 456
+   - Localisation: Alger, Alger
+   - Notes: Cliente fidèle, 2ème achat
+   - Commercial assigné: Karim Meziane (SALES)
+
+2. Yacine Brahimi (Particulier)
+   - Email: y.brahimi@email.dz
+   - Téléphone: +213 660 234 567
+   - Localisation: Oran, Oran
+   - Notes: Recherche SUV
+   - Commercial assigné: Karim Meziane (SALES)
+
+3. Entreprise SARL Transport (Entreprise)
+   - Email: contact@transport-sarl.dz
+   - Téléphone: +213 21 55 44 33
+   - Localisation: Alger, Alger
+   - NIF: 123456789012345
+   - Notes: Achat en flotte, 5 véhicules
+   - Commercial assigné: Ahmed Benali (MANAGER)
+
+4. Leila Hamidi (Particulier)
+   - Email: leila.h@email.dz
+   - Téléphone: +213 770 345 678
+   - Localisation: Constantine, Constantine
+   - Notes: Premier achat
+   - Commercial assigné: Karim Meziane (SALES)
+
+────────────────────────────────────────────────
+📊 PROSPECTS / LEADS (4)
+────────────────────────────────────────────────
+
+1. Lead #1 - Amina Boumediene
+   - Source: Site Web
+   - Statut: NOUVEAU
+   - Budget estimé: 3,000,000 DZD
+   - Notes: Intéressée par Captur
+   - Commercial: Karim Meziane
+   - Équipe: Alger Centre
+
+2. Lead #2 - Yacine Brahimi
+   - Source: Référencement
+   - Statut: CONTACTÉ
+   - Budget estimé: 3,500,000 DZD
+   - Notes: Référé par client existant
+   - Commercial: Karim Meziane
+   - Équipe: Oran
+
+3. Lead #3 - SARL Transport
+   - Source: Téléphone
+   - Statut: QUALIFIÉ
+   - Budget estimé: 15,000,000 DZD
+   - Notes: Commande flotte de 5 véhicules
+   - Commercial: Ahmed Benali
+   - Équipe: Alger Centre
+
+4. Lead #4 - Leila Hamidi
+   - Source: Visite physique
+   - Statut: NOUVEAU
+   - Budget estimé: 2,800,000 DZD
+   - Notes: Visite showroom
+   - Commercial: Karim Meziane
+   - Équipe: Alger Centre
+
+────────────────────────────────────────────────
+🏭 FOURNISSEURS (2)
+────────────────────────────────────────────────
+
+1. Import Auto Algérie
+   - Code: SUP-001
+   - Email: contact@importauto.dz
+   - Téléphone: +213 21 12 34 56
+   - Localisation: Alger, Algérie
+   - Notes: Importateur officiel Renault
+   - Statut: Actif
+
+2. Auto Distribution
+   - Code: SUP-002
+   - Email: info@autodist.dz
+   - Téléphone: +213 21 98 76 54
+   - Localisation: Oran, Algérie
+   - Notes: Distributeur multi-marques
+   - Statut: Actif
+
+────────────────────────────────────────────────
+💰 CONFIGURATIONS FISCALES (3)
+────────────────────────────────────────────────
+
+1. TVA Standard Algérie
+   - Taux: 19.0%
+   - Type: VAT
+   - Application: Vente de véhicules neufs
+   - Date d'entrée en vigueur: 01/01/2024
+
+2. TAP Algérie
+   - Taux: 1.0%
+   - Type: TAP
+   - Application: Toutes transactions commerciales
+   - Date d'entrée en vigueur: 01/01/2024
+
+3. TVA Réduite
+   - Taux: 9.0%
+   - Type: VAT
+   - Application: Véhicules utilitaires
+   - Date d'entrée en vigueur: 01/01/2024
+
+────────────────────────────────────────────────
+📧 MODÈLES DE NOTIFICATIONS (5)
+────────────────────────────────────────────────
+
+1. Email de bienvenue (WELCOME_EMAIL)
+2. Confirmation de commande (ORDER_CONFIRMATION)
+3. Rappel de paiement (PAYMENT_REMINDER)
+4. Prospect assigné (LEAD_ASSIGNED)
+5. Véhicule disponible (VEHICLE_AVAILABLE)
+
+────────────────────────────────────────────────
+🔐 PERMISSIONS ET RÔLES
+────────────────────────────────────────────────
+
+Total permissions: 22
+Modules couverts:
+- Users & Teams (5 permissions)
+- Vehicles & Stock (5 permissions)
+- Customers & CRM (4 permissions)
+- Sales & Finance (3 permissions)
+- Reports (2 permissions)
+- AI Features (3 permissions)
+
+Attribution par rôle:
+- SUPER_ADMIN: Toutes les permissions (22/22)
+- ADMIN: Presque toutes (21/22)
+- MANAGER: Opérations + Rapports (12/22)
+- SALES: CRM + Consultation (8/22)
+- USER: Consultation limitée (5/22)
+
+═══════════════════════════════════════════════════════════════════
+                     🚀 UTILISATION DU SEED
+═══════════════════════════════════════════════════════════════════
+
+📝 INITIALISER LA BASE DE DONNÉES
+────────────────────────────────────────────────
+
+1. Développement Local:
+   npm run db:seed
+
+2. Ou directement:
+   npx tsx prisma/seed-complete.ts
+
+3. Vérifier le résultat:
+   npx prisma studio
+
+────────────────────────────────────────────────
+🧪 TESTER L'AUTHENTIFICATION
+────────────────────────────────────────────────
+
+Exemple avec curl:
+
+# Test Super Admin
+curl -X POST http://localhost:3000/api/auth/signin \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "superadmin@ibticar.ai",
+    "password": "Password123!"
+  }'
+
+# Test Commercial
+curl -X POST http://localhost:3000/api/auth/signin \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "commercial@dealer.com",
+    "password": "Password123!"
+  }'
+
+────────────────────────────────────────────────
+📊 TESTER LES ENDPOINTS
+────────────────────────────────────────────────
+
+1. Health Check:
+   curl http://localhost:3000/api/health
+
+2. Liste des véhicules (nécessite authentification):
+   curl http://localhost:3000/api/vehicles \
+     -H "Authorization: Bearer <token>"
+
+3. Liste des clients:
+   curl http://localhost:3000/api/customers \
+     -H "Authorization: Bearer <token>"
+
+4. Liste des prospects:
+   curl http://localhost:3000/api/leads \
+     -H "Authorization: Bearer <token>"
+
+═══════════════════════════════════════════════════════════════════
+                        ⚠️  SÉCURITÉ IMPORTANTE
+═══════════════════════════════════════════════════════════════════
+
+🔴 AVANT DE DÉPLOYER EN PRODUCTION:
+
+1. ✅ Changer TOUS les mots de passe
+   - Utiliser des mots de passe forts uniques
+   - Minimum 12 caractères
+   - Mélanger majuscules, minuscules, chiffres, symboles
+
+2. ✅ Mettre à jour les emails
+   - Utiliser des adresses email réelles
+   - Configurer la vérification email
+
+3. ✅ Supprimer les données de test
+   - Les clients fictifs
+   - Les véhicules de test
+   - Les leads de test
+
+4. ✅ Configurer les variables d'environnement
+   - NEXTAUTH_SECRET (générer avec: openssl rand -base64 32)
+   - DATABASE_URL (production)
+   - API keys (AI services)
+
+5. ✅ Limiter les comptes admin
+   - Créer uniquement les comptes nécessaires
+   - Activer 2FA pour les super admins
+   - Logger toutes les actions admin
+
+═══════════════════════════════════════════════════════════════════
+                           📞 SUPPORT
+═══════════════════════════════════════════════════════════════════
+
+📖 Documentation complète:
+   - DATABASE_AUTO_INIT.md
+   - AUTO_INIT_SUMMARY.md
+   - FINAL_DEPLOYMENT_SUCCESS_REPORT.md
+   - DOCUMENTATION_INDEX.md
+
+🔗 URLs Production:
+   - Production: https://ibticar-ai-mvp-test-kxlu1lhkw-adechi-adeboyes-projects.vercel.app
+   - Health: https://ibticar-ai-mvp-test-kxlu1lhkw-adechi-adeboyes-projects.vercel.app/api/health
+
+═══════════════════════════════════════════════════════════════════
+
+📅 Document créé le: 2025-11-09
+✍️  Par: Claude Code
+📝 Version: 1.0.0
+✅ Status: Production Ready
+
+═══════════════════════════════════════════════════════════════════
