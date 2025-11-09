@@ -126,9 +126,9 @@ export async function GET(request: NextRequest) {
         total: totalVehicles,
         byStatus: vehiclesStats,
         stockValue: {
-          totalPurchase: stockValue._sum.purchasePrice || 0,
-          totalSelling: stockValue._sum.sellingPrice || 0,
-          avgPurchasePrice: stockValue._avg.purchasePrice || 0,
+          totalPurchase: stockValue._sum.purchasePrice?.toNumber() || 0,
+          totalSelling: stockValue._sum.sellingPrice?.toNumber() || 0,
+          avgPurchasePrice: stockValue._avg.purchasePrice?.toNumber() || 0,
         },
       },
       customers: {
