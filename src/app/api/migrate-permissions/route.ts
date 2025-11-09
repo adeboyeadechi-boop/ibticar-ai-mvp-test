@@ -7,6 +7,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/prisma/client'
 import { getAuthenticatedUser } from '@/lib/auth-helpers'
+import { clearAllPermissionsCache } from '@/lib/rbac'
 
 export async function POST(req: NextRequest) {
   try {
@@ -46,11 +47,16 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Clear permissions cache after migration
+    console.log('🧹 Clearing permissions cache...')
+    clearAllPermissionsCache()
+
     return NextResponse.json({
       success: true,
       message: `Migration complete! Updated ${updates.length} permissions`,
       updated: updates.length,
       details: updates,
+      cacheClear: true,
     })
   } catch (error: any) {
     console.error('❌ Migration error:', error)
