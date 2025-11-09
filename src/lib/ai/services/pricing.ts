@@ -57,8 +57,8 @@ export class DynamicPricingService {
           brand: vehicle.model?.brand?.name || 'Unknown',
           model: vehicle.model?.name || 'Unknown',
           year: vehicle.year,
-          currentPrice: vehicle.sellingPrice,
-          purchasePrice: vehicle.purchasePrice || undefined,
+          currentPrice: vehicle.sellingPrice.toNumber(),
+          purchasePrice: vehicle.purchasePrice?.toNumber(),
           mileage: vehicle.mileage || 0,
           condition: vehicle.condition,
           fuelType: vehicle.model?.fuelType || 'Unknown',
@@ -155,15 +155,15 @@ export class DynamicPricingService {
           brand: v.model?.brand?.name || 'Unknown',
           model: v.model?.name || 'Unknown',
           year: v.year,
-          price: v.sellingPrice,
-          mileage: v.mileage,
+          price: v.sellingPrice.toNumber(),
+          mileage: v.mileage || 0,
           status: v.status,
           daysListed,
         }
       })
 
       // Calculate market statistics
-      const prices = similarVehicles.map((v) => v.sellingPrice)
+      const prices = similarVehicles.map((v) => v.sellingPrice.toNumber())
       const averageMarketPrice = Math.round(
         prices.reduce((a, b) => a + b, 0) / prices.length
       )

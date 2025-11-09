@@ -60,7 +60,7 @@ export class RotationPredictionService {
           brand: vehicle.model?.brand?.name || 'Unknown',
           model: vehicle.model?.name || 'Unknown',
           year: vehicle.year,
-          price: vehicle.sellingPrice,
+          price: vehicle.sellingPrice.toNumber(),
           mileage: vehicle.mileage || 0,
           condition: vehicle.condition,
           fuelType: vehicle.model?.fuelType || 'Unknown',
@@ -156,7 +156,7 @@ export class RotationPredictionService {
             brand: v.model?.brand?.name || 'Unknown',
             model: v.model?.name || 'Unknown',
             year: v.year,
-            price: v.sellingPrice,
+            price: v.sellingPrice.toNumber(),
             daysSold,
             soldDate: v.updatedAt.toISOString().split('T')[0],
           }
