@@ -1,0 +1,2107 @@
+// Prisma Schema for Ibticar.AI MVP
+// Generated from PRD analysis
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== ENUMS ====================
+
+enum AlertFrequency {
+  INSTANT
+  DAILY
+  WEEKLY
+}
+
+enum AlertType {
+  STOCK_LEVEL
+  PRICE_CHANGE
+  DOCUMENT_EXPIRY
+  PAYMENT_DUE
+  CUSTOM
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum AppointmentType {
+  TEST_DRIVE
+  CONSULTATION
+  DELIVERY
+  AFTER_SALES
+  OTHER
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  VIEW
+  LOGIN
+  LOGOUT
+  EXPORT
+  IMPORT
+}
+
+enum BeynPaymentStatus {
+  PENDING
+  AUTHORIZED
+  CAPTURED
+  FAILED
+  REFUNDED
+}
+
+enum BodyType {
+  SEDAN
+  SUV
+  HATCHBACK
+  COUPE
+  CONVERTIBLE
+  WAGON
+  VAN
+  PICKUP
+  MINIVAN
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  RUNNING
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum CampaignType {
+  EMAIL
+  SMS
+  SOCIAL
+  MULTI_CHANNEL
+}
+
+enum ClaimStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  SETTLED
+}
+
+enum ClaimType {
+  ACCIDENT
+  THEFT
+  FIRE
+  NATURAL_DISASTER
+  VANDALISM
+  OTHER
+}
+
+enum CommissionStatus {
+  PENDING
+  APPROVED
+  PAID
+}
+
+enum CommunicationChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH
+  IN_APP
+  PHONE
+  SOCIAL
+}
+
+enum CompanyStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum ComplaintStatus {
+  NEW
+  ACKNOWLEDGED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum ComplaintType {
+  PRODUCT
+  SERVICE
+  DELIVERY
+  BILLING
+  OTHER
+}
+
+enum CreditNoteStatus {
+  DRAFT
+  ISSUED
+  APPLIED
+  CANCELLED
+}
+
+enum Currency {
+  DZD
+  EUR
+  USD
+}
+
+enum CustomerStatus {
+  PROSPECT
+  ACTIVE
+  INACTIVE
+  VIP
+}
+
+enum CustomerType {
+  INDIVIDUAL
+  BUSINESS
+}
+
+enum DashboardType {
+  EXECUTIVE
+  SALES
+  STOCK
+  FINANCIAL
+  MARKETPLACE
+  CUSTOM
+}
+
+enum DeliveryStatus {
+  SCHEDULED
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+enum Direction {
+  INBOUND
+  OUTBOUND
+}
+
+enum DisputeStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+  CLOSED
+}
+
+enum DisputeType {
+  PRODUCT_ISSUE
+  DELIVERY
+  PAYMENT
+  SERVICE
+  OTHER
+}
+
+enum EnergyLabel {
+  A_PLUS_PLUS
+  A_PLUS
+  A
+  B
+  C
+  D
+  E
+  F
+  G
+}
+
+enum EstimateStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+enum ExecutionStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+enum FinancingStatus {
+  PENDING
+  APPROVED
+  DISBURSED
+  REPAYING
+  COMPLETED
+  DEFAULTED
+}
+
+enum FiscalReportType {
+  VAT_DECLARATION
+  TAP_DECLARATION
+  PROFIT_STATEMENT
+  ANNUAL_REPORT
+}
+
+enum FraudStatus {
+  FLAGGED
+  UNDER_REVIEW
+  CONFIRMED
+  FALSE_POSITIVE
+}
+
+enum FuelType {
+  GASOLINE
+  DIESEL
+  HYBRID
+  ELECTRIC
+  PLUGIN_HYBRID
+  LPG
+  CNG
+}
+
+enum IdType {
+  CIN
+  PASSPORT
+  DRIVER_LICENSE
+  NIF
+}
+
+enum InsuranceProductType {
+  THIRD_PARTY
+  COMPREHENSIVE
+  COLLISION
+}
+
+enum InsuranceType {
+  AUTO
+}
+
+enum InteractionType {
+  CALL
+  EMAIL
+  MEETING
+  NOTE
+  SMS
+  WHATSAPP
+  OTHER
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum InvoiceType {
+  STANDARD
+  PROFORMA
+  CREDIT_NOTE
+  DEBIT_NOTE
+}
+
+enum Language {
+  FR
+  AR
+  EN
+}
+
+enum LeadSource {
+  WEBSITE
+  PHONE
+  EMAIL
+  WALK_IN
+  REFERRAL
+  SOCIAL_MEDIA
+  ADVERTISING
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LoyaltyStatus {
+  ACTIVE
+  SUSPENDED
+  EXPIRED
+}
+
+enum LoyaltyTier {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+  PHOTO_360
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  PUSH
+  IN_APP
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  DELIVERED
+  FAILED
+  READ
+}
+
+enum NotificationType {
+  STOCK_ALERT
+  APPOINTMENT
+  PAYMENT
+  ORDER
+  MARKETING
+  SYSTEM
+  COMPLIANCE
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  READY
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentFrequency {
+  MONTHLY
+  QUARTERLY
+  SEMI_ANNUAL
+  ANNUAL
+}
+
+enum PaymentMethod {
+  CASH
+  CHECK
+  BANK_TRANSFER
+  CREDIT_CARD
+  BEYN
+  OTHER
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PolicyStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum PredictionType {
+  SALES
+  PRICE
+  DEMAND
+  ROTATION
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum PromotionStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  FAILED
+}
+
+enum PurchaseOrderStatus {
+  DRAFT
+  SENT
+  CONFIRMED
+  PARTIALLY_RECEIVED
+  RECEIVED
+  CANCELLED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  VIEWED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  CONVERTED
+}
+
+enum RecipientStatus {
+  PENDING
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  CONVERTED
+  FAILED
+  UNSUBSCRIBED
+}
+
+enum RecommendationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum RecommendationType {
+  PRICING
+  STOCK_ROTATION
+  MARKET_MATCH
+  DEAL
+}
+
+enum RecurringFrequency {
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+enum ReminderStatus {
+  SCHEDULED
+  SENT
+  CANCELLED
+}
+
+enum ReminderType {
+  FIRST
+  SECOND
+  FINAL
+  LEGAL
+}
+
+enum ReportFormat {
+  PDF
+  EXCEL
+  CSV
+  JSON
+}
+
+enum ReportType {
+  SALES
+  STOCK
+  FINANCIAL
+  CUSTOMER
+  PERFORMANCE
+  CUSTOM
+}
+
+enum ReturnStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum ReturnType {
+  CANCELLATION
+  RETURN
+  EXCHANGE
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ServiceStatus {
+  OPEN
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum ServiceType {
+  WARRANTY
+  MAINTENANCE
+  REPAIR
+  INSPECTION
+  OTHER
+}
+
+enum SimulationStatus {
+  DRAFT
+  APPROVED
+  CONVERTED
+}
+
+enum SocialPlatform {
+  FACEBOOK
+  INSTAGRAM
+  TWITTER
+  LINKEDIN
+}
+
+enum SupplierStatus {
+  ACTIVE
+  SUSPENDED
+  INACTIVE
+}
+
+enum SupplierType {
+  MANUFACTURER
+  DISTRIBUTOR
+  WHOLESALER
+  OTHER
+}
+
+enum TaxType {
+  VAT
+  TAP
+  OTHER
+}
+
+enum TeamStatus {
+  ACTIVE
+  SUSPENDED
+  INACTIVE
+}
+
+enum TeamType {
+  DEALER
+  WHOLESALER
+  IBTICAR
+}
+
+enum TransactionType {
+  EARN
+  REDEEM
+  EXPIRE
+  ADJUSTMENT
+}
+
+enum TransmissionType {
+  MANUAL
+  AUTOMATIC
+  CVT
+  SEMI_AUTO
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  SALES
+  USER
+  CUSTOMER
+}
+
+enum ValidationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum VehicleCategory {
+  SEDAN
+  SUV
+  HATCHBACK
+  COUPE
+  CONVERTIBLE
+  WAGON
+  VAN
+  TRUCK
+  OTHER
+}
+
+enum VehicleCondition {
+  NEW
+  USED_EXCELLENT
+  USED_GOOD
+  USED_FAIR
+}
+
+enum VehicleEventType {
+  PURCHASE
+  SALE
+  MAINTENANCE
+  REPAIR
+  INSPECTION
+  ACCIDENT
+  MODIFICATION
+}
+
+enum VehicleStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+  IN_TRANSIT
+  MAINTENANCE
+  ARCHIVED
+}
+
+enum WarrantyType {
+  MANUFACTURER
+  EXTENDED
+  DEALER
+}
+
+enum WorkflowStage {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  PUBLISHED
+}
+
+// ==================== MODELS ====================
+
+// Prédictions IA
+// Source: PRD-05-Module-IA
+model AIPrediction {
+  id                             String @id @default(cuid())
+  type                           PredictionType
+  entityType                     String
+  entityId                       String
+  prediction                     Json
+  confidence                     Decimal
+  features                       Json
+  actualValue                    Json?
+  accuracy                       Decimal?
+  period                         DateTime
+  createdAt                      DateTime @default(now())
+}
+
+// Recommandations IA
+// Source: PRD-05-Module-IA
+model AIRecommendation {
+  id                             String @id @default(cuid())
+  type                           RecommendationType
+  entityType                     String
+  entityId                       String
+  score                          Decimal
+  reasoning                      Json
+  recommendation                 String
+  status                         RecommendationStatus @default(PENDING)
+  acceptedAt                     DateTime?
+  rejectedAt                     DateTime?
+  rejectionReason                String?
+  createdAt                      DateTime @default(now())
+}
+
+// Service après-vente
+// Source: PRD-04-CRM
+model AfterSalesService {
+  id                             String @id @default(cuid())
+  ticketNumber                   String @unique
+  orderId                        String
+  customerId                     String
+  vehicleId                      String
+  type                           ServiceType
+  status                         ServiceStatus @default(OPEN)
+  priority                       Priority
+  subject                        String
+  description                    String
+  assignedToId                   String?
+  scheduledAt                    DateTime?
+  completedAt                    DateTime?
+  resolution                     String?
+  cost                           Decimal?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Alertes configurables
+// Source: PRD-09-Notifications
+model Alert {
+  id                             String @id @default(cuid())
+  userId                         String
+  type                           AlertType
+  name                           String
+  conditions                     Json
+  actions                        Json
+  isActive                       Boolean @default(true)
+  lastTriggeredAt                DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Rendez-vous clients
+// Source: PRD-04-CRM
+model Appointment {
+  id                             String @id @default(cuid())
+  customerId                     String
+  assignedToId                   String
+  type                           AppointmentType
+  status                         AppointmentStatus @default(SCHEDULED)
+  scheduledAt                    DateTime
+  duration                       Int
+  vehicleId                      String?
+  location                       String?
+  notes                          String?
+  reminderSent                   Boolean @default(false)
+  completedAt                    DateTime?
+  cancelledAt                    DateTime?
+  cancellationReason             String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Journal d'audit
+// Source: PRD-11-Gestion-Utilisateurs
+model AuditLog {
+  id                             String @id @default(cuid())
+  userId                         String?
+  action                         AuditAction
+  entityType                     String
+  entityId                       String?
+  changes                        Json?
+  ipAddress                      String?
+  userAgent                      String?
+  metadata                       Json?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Financement de stock B2B
+// Source: PRD-07-Gestion-Fournisseurs
+model B2BFinancing {
+  id                             String @id @default(cuid())
+  teamId                         String
+  supplierId                     String
+  purchaseOrderId                String
+  amount                         Decimal
+  interestRate                   Decimal
+  term                           Int
+  status                         FinancingStatus @default(PENDING)
+  approvedAt                     DateTime?
+  disbursedAt                    DateTime?
+  repaymentSchedule              Json
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Comptes bancaires
+// Source: PRD-02-Module-Comptable
+model BankAccount {
+  id                             String @id @default(cuid())
+  teamId                         String
+  bankName                       String
+  accountNumber                  String
+  rib                            String
+  swift                          String?
+  currency                       Currency @default(DZD)
+  balance                        Decimal @default(0)
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Transactions bancaires
+// Source: PRD-02-Module-Comptable
+model BankTransaction {
+  id                             String @id @default(cuid())
+  bankAccountId                  String
+  type                           TransactionType
+  amount                         Decimal
+  currency                       Currency @default(DZD)
+  reference                      String?
+  description                    String
+  date                           DateTime
+  paymentId                      String?
+  reconciled                     Boolean @default(false)
+  reconciledAt                   DateTime?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Paiements via Beyn
+// Source: PRD-02-Module-Comptable
+model BeynPayment {
+  id                             String @id @default(cuid())
+  paymentId                      String @unique
+  beynTransactionId              String?
+  status                         BeynPaymentStatus
+  amount                         Decimal
+  currency                       Currency @default(DZD)
+  merchantId                     String
+  customerId                     String
+  metadata                       Json?
+  webhookData                    Json?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Marques de véhicules
+// Source: PRD-06-Catalogue-Vehicules
+model Brand {
+  id                             String @id @default(cuid())
+  name                           String @unique
+  slug                           String @unique
+  logo                           String?
+  country                        String?
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Destinataires de campagnes
+// Source: PRD-04-CRM
+model CampaignRecipient {
+  id                             String @id @default(cuid())
+  campaignId                     String
+  customerId                     String
+  status                         RecipientStatus
+  sentAt                         DateTime?
+  openedAt                       DateTime?
+  clickedAt                      DateTime?
+  convertedAt                    DateTime?
+  unsubscribedAt                 DateTime?
+
+  // Relations
+}
+
+// Conversations chatbot
+// Source: PRD-05-Module-IA
+model ChatbotConversation {
+  id                             String @id @default(cuid())
+  sessionId                      String
+  customerId                     String?
+  userId                         String?
+  channel                        CommunicationChannel
+  language                       Language
+  startedAt                      DateTime @default(now())
+  endedAt                        DateTime?
+  satisfaction                   Int?
+  handedOffToHuman               Boolean @default(false)
+  handedOffAt                    DateTime?
+
+  // Relations
+}
+
+// Messages chatbot
+// Source: PRD-05-Module-IA
+model ChatbotMessage {
+  id                             String @id @default(cuid())
+  conversationId                 String
+  role                           MessageRole
+  content                        String
+  intent                         String?
+  confidence                     Decimal?
+  entities                       Json?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Déclarations de sinistres
+// Source: PRD-12-Module-Assurance
+model Claim {
+  id                             String @id @default(cuid())
+  claimNumber                    String @unique
+  insurancePolicyId              String
+  customerId                     String
+  vehicleId                      String
+  type                           ClaimType
+  status                         ClaimStatus @default(SUBMITTED)
+  incidentDate                   DateTime
+  description                    String
+  estimatedAmount                Decimal?
+  approvedAmount                 Decimal?
+  documents                      Json?
+  submittedAt                    DateTime @default(now())
+  processedAt                    DateTime?
+  settledAt                      DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Enregistrements de commissions
+// Source: PRD-12-Module-Assurance
+model CommissionRecord {
+  id                             String @id @default(cuid())
+  insurancePolicyId              String
+  teamId                         String
+  userId                         String
+  amount                         Decimal
+  rate                           Decimal
+  status                         CommissionStatus @default(PENDING)
+  paidAt                         DateTime?
+  period                         DateTime
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Comparaisons de véhicules
+// Source: PRD-03-Marketplace
+model Comparison {
+  id                             String @id @default(cuid())
+  customerId                     String
+  vehicles                       Json
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Réclamations
+// Source: PRD-04-CRM
+model Complaint {
+  id                             String @id @default(cuid())
+  complaintNumber                String @unique
+  customerId                     String
+  orderId                        String?
+  type                           ComplaintType
+  status                         ComplaintStatus @default(NEW)
+  priority                       Priority
+  subject                        String
+  description                    String
+  assignedToId                   String?
+  resolution                     String?
+  resolvedAt                     DateTime?
+  satisfactionRating             Int?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Avoirs (remboursements)
+// Source: PRD-02-Module-Comptable
+model CreditNote {
+  id                             String @id @default(cuid())
+  creditNoteNumber               String @unique
+  invoiceId                      String
+  customerId                     String
+  amount                         Decimal
+  currency                       Currency @default(DZD)
+  reason                         String
+  status                         CreditNoteStatus @default(DRAFT)
+  issueDate                      DateTime @default(now())
+  appliedAt                      DateTime?
+  notes                          String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Clients (CRM)
+// Source: PRD-04-CRM
+model Customer {
+  id                             String @id @default(cuid())
+  userId                         String? @unique
+  type                           CustomerType
+  firstName                      String
+  lastName                       String
+  email                          String @unique
+  phone                          String
+  address                        String?
+  city                           String?
+  wilaya                         String?
+  postalCode                     String?
+  dateOfBirth                    DateTime?
+  idType                         IdType?
+  idNumber                       String?
+  profession                     String?
+  companyName                    String?
+  taxId                          String?
+  status                         CustomerStatus @default(PROSPECT)
+  source                         String?
+  tags                           Json?
+  preferences                    Json?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Tableaux de bord personnalisés
+// Source: PRD-08-Reporting-Analytics
+model Dashboard {
+  id                             String @id @default(cuid())
+  name                           String
+  type                           DashboardType
+  layout                         Json
+  widgets                        Json
+  filters                        Json?
+  createdById                    String
+  isPublic                       Boolean @default(false)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Réceptions de livraisons
+// Source: PRD-07-Gestion-Fournisseurs
+model Delivery {
+  id                             String @id @default(cuid())
+  deliveryNumber                 String @unique
+  purchaseOrderId                String
+  supplierId                     String
+  status                         DeliveryStatus @default(SCHEDULED)
+  scheduledDate                  DateTime
+  actualDate                     DateTime?
+  receivedById                   String?
+  notes                          String?
+  documents                      Json?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Litiges
+// Source: PRD-10-Retours-Annulations
+model Dispute {
+  id                             String @id @default(cuid())
+  disputeNumber                  String @unique
+  returnId                       String?
+  orderId                        String?
+  customerId                     String
+  type                           DisputeType
+  status                         DisputeStatus @default(OPEN)
+  priority                       Priority
+  subject                        String
+  description                    String
+  assignedToId                   String?
+  resolution                     String?
+  resolvedAt                     DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Véhicules favoris
+// Source: PRD-03-Marketplace
+model Favorite {
+  id                             String @id @default(cuid())
+  customerId                     String
+  vehicleId                      String
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Simulations de financement
+// Source: PRD-03-Marketplace
+model FinancingSimulation {
+  id                             String @id @default(cuid())
+  customerId                     String
+  vehicleId                      String
+  vehiclePrice                   Decimal
+  downPayment                    Decimal
+  loanAmount                     Decimal
+  interestRate                   Decimal
+  term                           Int
+  monthlyPayment                 Decimal
+  totalPayment                   Decimal
+  status                         SimulationStatus @default(DRAFT)
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Rapports fiscaux
+// Source: PRD-02-Module-Comptable
+model FiscalReport {
+  id                             String @id @default(cuid())
+  teamId                         String
+  type                           FiscalReportType
+  period                         DateTime
+  data                           Json
+  generatedAt                    DateTime @default(now())
+  submittedAt                    DateTime?
+
+  // Relations
+}
+
+// Détection de fraudes
+// Source: PRD-05-Module-IA
+model FraudDetection {
+  id                             String @id @default(cuid())
+  entityType                     String
+  entityId                       String
+  riskScore                      Decimal
+  riskLevel                      RiskLevel
+  indicators                     Json
+  status                         FraudStatus @default(FLAGGED)
+  reviewedAt                     DateTime?
+  reviewedById                   String?
+  resolution                     String?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Compagnies d'assurance
+// Source: PRD-12-Module-Assurance
+model InsuranceCompany {
+  id                             String @id @default(cuid())
+  name                           String
+  code                           String @unique
+  type                           InsuranceType
+  status                         CompanyStatus @default(ACTIVE)
+  email                          String
+  phone                          String
+  address                        String?
+  city                           String?
+  wilaya                         String?
+  licenseNumber                  String
+  apiEndpoint                    String?
+  apiKey                         String?
+  commissionRate                 Decimal
+  rating                         Decimal?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Polices d'assurance actives
+// Source: PRD-12-Module-Assurance
+model InsurancePolicy {
+  id                             String @id @default(cuid())
+  policyNumber                   String @unique
+  insuranceQuoteId               String
+  customerId                     String
+  vehicleId                      String
+  insuranceCompanyId             String
+  status                         PolicyStatus @default(ACTIVE)
+  startDate                      DateTime
+  endDate                        DateTime
+  premium                        Decimal
+  paymentFrequency               PaymentFrequency
+  coverage                       Json
+  documents                      Json?
+  cancelledAt                    DateTime?
+  cancellationReason             String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Produits d'assurance
+// Source: PRD-12-Module-Assurance
+model InsuranceProduct {
+  id                             String @id @default(cuid())
+  insuranceCompanyId             String
+  name                           String
+  type                           InsuranceProductType
+  coverage                       Json
+  basePrice                      Decimal
+  pricing                        Json
+  terms                          String?
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Devis d'assurance
+// Source: PRD-12-Module-Assurance
+model InsuranceQuote {
+  id                             String @id @default(cuid())
+  quoteNumber                    String @unique
+  customerId                     String
+  vehicleId                      String
+  insuranceCompanyId             String
+  insuranceProductId             String
+  status                         QuoteStatus @default(DRAFT)
+  riskScore                      Decimal?
+  premium                        Decimal
+  coverage                       Json
+  validUntil                     DateTime
+  acceptedAt                     DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Historique des interactions clients
+// Source: PRD-04-CRM
+model Interaction {
+  id                             String @id @default(cuid())
+  customerId                     String
+  userId                         String
+  type                           InteractionType
+  channel                        CommunicationChannel
+  subject                        String?
+  content                        String
+  direction                      Direction
+  duration                       Int?
+  attachments                    Json?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Factures
+// Source: PRD-02-Module-Comptable
+model Invoice {
+  id                             String @id @default(cuid())
+  invoiceNumber                  String @unique
+  quoteId                        String?
+  customerId                     String
+  teamId                         String
+  createdById                    String
+  status                         InvoiceStatus @default(DRAFT)
+  type                           InvoiceType @default(STANDARD)
+  issueDate                      DateTime @default(now())
+  dueDate                        DateTime
+  subtotal                       Decimal
+  taxAmount                      Decimal
+  discountAmount                 Decimal @default(0)
+  total                          Decimal
+  amountPaid                     Decimal @default(0)
+  amountDue                      Decimal
+  currency                       Currency @default(DZD)
+  terms                          String?
+  notes                          String?
+  sentAt                         DateTime?
+  paidAt                         DateTime?
+  cancelledAt                    DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Lignes de facture
+// Source: PRD-02-Module-Comptable
+model InvoiceItem {
+  id                             String @id @default(cuid())
+  invoiceId                      String
+  description                    String
+  quantity                       Int @default(1)
+  unitPrice                      Decimal
+  taxRate                        Decimal
+  discountRate                   Decimal @default(0)
+  total                          Decimal
+  vehicleId                      String?
+  order                          Int @default(0)
+
+  // Relations
+}
+
+// Prospects en cours de prospection
+// Source: PRD-04-CRM
+model Lead {
+  id                             String @id @default(cuid())
+  customerId                     String
+  assignedToId                   String
+  source                         LeadSource
+  status                         LeadStatus @default(NEW)
+  score                          Int?
+  interestedVehicleId            String?
+  budget                         Decimal?
+  timeline                       String?
+  notes                          String?
+  lastContactDate                DateTime?
+  nextFollowUpDate               DateTime?
+  convertedAt                    DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Cartes de fidélité
+// Source: PRD-04-CRM
+model LoyaltyCard {
+  id                             String @id @default(cuid())
+  customerId                     String @unique
+  cardNumber                     String @unique
+  tier                           LoyaltyTier @default(BRONZE)
+  points                         Int @default(0)
+  pointsEarned                   Int @default(0)
+  pointsRedeemed                 Int @default(0)
+  status                         LoyaltyStatus @default(ACTIVE)
+  issuedAt                       DateTime @default(now())
+  expiresAt                      DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Transactions de fidélité
+// Source: PRD-04-CRM
+model LoyaltyTransaction {
+  id                             String @id @default(cuid())
+  loyaltyCardId                  String
+  type                           TransactionType
+  points                         Int
+  description                    String
+  referenceId                    String?
+  referenceType                  String?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Campagnes marketing
+// Source: PRD-04-CRM
+model MarketingCampaign {
+  id                             String @id @default(cuid())
+  name                           String
+  type                           CampaignType
+  status                         CampaignStatus @default(DRAFT)
+  channel                        CommunicationChannel
+  startDate                      DateTime
+  endDate                        DateTime?
+  targetAudience                 Json?
+  message                        String
+  budget                         Decimal?
+  sent                           Int @default(0)
+  opened                         Int @default(0)
+  clicked                        Int @default(0)
+  converted                      Int @default(0)
+  createdById                    String
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Alertes nouveautés marketplace
+// Source: PRD-03-Marketplace
+model MarketplaceAlert {
+  id                             String @id @default(cuid())
+  customerId                     String
+  name                           String
+  criteria                       Json
+  frequency                      AlertFrequency
+  isActive                       Boolean @default(true)
+  lastSentAt                     DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Notifications
+// Source: PRD-09-Notifications
+model Notification {
+  id                             String @id @default(cuid())
+  userId                         String
+  type                           NotificationType
+  channel                        NotificationChannel
+  priority                       Priority @default(MEDIUM)
+  title                          String
+  message                        String
+  data                           Json?
+  status                         NotificationStatus @default(PENDING)
+  readAt                         DateTime?
+  sentAt                         DateTime?
+  failedAt                       DateTime?
+  failureReason                  String?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Préférences de notifications
+// Source: PRD-09-Notifications
+model NotificationPreference {
+  id                             String @id @default(cuid())
+  userId                         String
+  type                           NotificationType
+  email                          Boolean @default(true)
+  sms                            Boolean @default(true)
+  push                           Boolean @default(true)
+  inApp                          Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Modèles de notifications
+// Source: PRD-09-Notifications
+model NotificationTemplate {
+  id                             String @id @default(cuid())
+  code                           String @unique
+  name                           String
+  type                           NotificationType
+  channel                        NotificationChannel
+  language                       Language
+  subject                        String?
+  template                       String
+  variables                      Json?
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+}
+
+// Commandes de véhicules
+// Source: PRD-03-Marketplace, PRD-10-Retours-Annulations
+model Order {
+  id                             String @id @default(cuid())
+  orderNumber                    String @unique
+  customerId                     String
+  vehicleId                      String
+  invoiceId                      String?
+  status                         OrderStatus @default(PENDING)
+  orderDate                      DateTime @default(now())
+  deliveryDate                   DateTime?
+  totalAmount                    Decimal
+  currency                       Currency @default(DZD)
+  notes                          String?
+  completedAt                    DateTime?
+  cancelledAt                    DateTime?
+  cancellationReason             String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Paiements et acomptes
+// Source: PRD-02-Module-Comptable
+model Payment {
+  id                             String @id @default(cuid())
+  paymentNumber                  String @unique
+  invoiceId                      String
+  customerId                     String
+  amount                         Decimal
+  currency                       Currency @default(DZD)
+  method                         PaymentMethod
+  status                         PaymentStatus @default(PENDING)
+  transactionId                  String?
+  reference                      String?
+  paymentDate                    DateTime @default(now())
+  notes                          String?
+  processedAt                    DateTime?
+  failedAt                       DateTime?
+  failureReason                  String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Relances automatiques
+// Source: PRD-02-Module-Comptable
+model PaymentReminder {
+  id                             String @id @default(cuid())
+  invoiceId                      String
+  customerId                     String
+  type                           ReminderType
+  status                         ReminderStatus
+  scheduledAt                    DateTime
+  sentAt                         DateTime?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Permissions granulaires
+// Source: PRD-11-Gestion-Utilisateurs
+model Permission {
+  id                             String @id @default(cuid())
+  code                           String @unique
+  name                           String
+  description                    String?
+  module                         String
+  action                         String
+  resource                       String
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Commandes fournisseurs
+// Source: PRD-07-Gestion-Fournisseurs
+model PurchaseOrder {
+  id                             String @id @default(cuid())
+  orderNumber                    String @unique
+  supplierId                     String
+  teamId                         String
+  createdById                    String
+  status                         PurchaseOrderStatus @default(DRAFT)
+  orderDate                      DateTime @default(now())
+  expectedDeliveryDate           DateTime?
+  actualDeliveryDate             DateTime?
+  subtotal                       Decimal
+  taxAmount                      Decimal
+  total                          Decimal
+  currency                       Currency @default(DZD)
+  terms                          String?
+  notes                          String?
+  receivedAt                     DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Lignes de commande fournisseur
+// Source: PRD-07-Gestion-Fournisseurs
+model PurchaseOrderItem {
+  id                             String @id @default(cuid())
+  purchaseOrderId                String
+  description                    String
+  quantity                       Int
+  unitPrice                      Decimal
+  taxRate                        Decimal
+  total                          Decimal
+  receivedQuantity               Int @default(0)
+  vehicleModelId                 String?
+  order                          Int @default(0)
+
+  // Relations
+}
+
+// Devis clients
+// Source: PRD-02-Module-Comptable
+model Quote {
+  id                             String @id @default(cuid())
+  quoteNumber                    String @unique
+  customerId                     String
+  teamId                         String
+  createdById                    String
+  status                         QuoteStatus @default(DRAFT)
+  validUntil                     DateTime
+  vehicleId                      String?
+  subtotal                       Decimal
+  taxAmount                      Decimal
+  discountAmount                 Decimal @default(0)
+  total                          Decimal
+  currency                       Currency @default(DZD)
+  terms                          String?
+  notes                          String?
+  convertedToInvoiceId           String? @unique
+  convertedAt                    DateTime?
+  sentAt                         DateTime?
+  viewedAt                       DateTime?
+  acceptedAt                     DateTime?
+  rejectedAt                     DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Lignes de devis
+// Source: PRD-02-Module-Comptable
+model QuoteItem {
+  id                             String @id @default(cuid())
+  quoteId                        String
+  description                    String
+  quantity                       Int @default(1)
+  unitPrice                      Decimal
+  taxRate                        Decimal
+  discountRate                   Decimal @default(0)
+  total                          Decimal
+  vehicleId                      String?
+  order                          Int @default(0)
+
+  // Relations
+}
+
+// Factures récurrentes
+// Source: PRD-02-Module-Comptable
+model RecurringInvoice {
+  id                             String @id @default(cuid())
+  customerId                     String
+  teamId                         String
+  frequency                      RecurringFrequency
+  nextInvoiceDate                DateTime
+  lastInvoiceDate                DateTime?
+  endDate                        DateTime?
+  template                       Json
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Rapports personnalisés
+// Source: PRD-08-Reporting-Analytics
+model Report {
+  id                             String @id @default(cuid())
+  name                           String
+  type                           ReportType
+  description                    String?
+  parameters                     Json
+  schedule                       Json?
+  format                         ReportFormat
+  createdById                    String
+  isPublic                       Boolean @default(false)
+  lastRunAt                      DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Exécutions de rapports
+// Source: PRD-08-Reporting-Analytics
+model ReportExecution {
+  id                             String @id @default(cuid())
+  reportId                       String
+  status                         ExecutionStatus
+  parameters                     Json
+  resultUrl                      String?
+  startedAt                      DateTime @default(now())
+  completedAt                    DateTime?
+  error                          String?
+
+  // Relations
+}
+
+// Retours et annulations
+// Source: PRD-10-Retours-Annulations
+model Return {
+  id                             String @id @default(cuid())
+  returnNumber                   String @unique
+  orderId                        String
+  customerId                     String
+  vehicleId                      String
+  type                           ReturnType
+  status                         ReturnStatus @default(REQUESTED)
+  reason                         String
+  description                    String?
+  requestDate                    DateTime @default(now())
+  approvedAt                     DateTime?
+  completedAt                    DateTime?
+  refundAmount                   Decimal?
+  refundMethod                   PaymentMethod?
+  inspectionNotes                String?
+  resolutionNotes                String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Avis et évaluations clients
+// Source: PRD-03-Marketplace
+model Review {
+  id                             String @id @default(cuid())
+  customerId                     String
+  vehicleId                      String?
+  orderId                        String?
+  rating                         Int
+  title                          String?
+  comment                        String?
+  pros                           String?
+  cons                           String?
+  status                         ReviewStatus @default(PENDING)
+  isVerified                     Boolean @default(false)
+  publishedAt                    DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Rôles avec permissions
+// Source: PRD-11-Gestion-Utilisateurs
+model Role {
+  id                             String @id @default(cuid())
+  name                           String @unique
+  description                    String?
+  isSystem                       Boolean @default(false)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Association rôles-permissions
+// Source: PRD-11-Gestion-Utilisateurs
+model RolePermission {
+  roleId                         String
+  permissionId                   String
+
+  // Relations
+}
+
+// Sessions utilisateurs
+// Source: PRD-11-Gestion-Utilisateurs
+model Session {
+  id                             String @id @default(cuid())
+  userId                         String
+  token                          String @unique
+  ipAddress                      String
+  userAgent                      String
+  expiresAt                      DateTime
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Promotions réseaux sociaux
+// Source: PRD-03-Marketplace
+model SocialPromotion {
+  id                             String @id @default(cuid())
+  vehicleId                      String
+  platform                       SocialPlatform
+  status                         PromotionStatus
+  scheduledAt                    DateTime?
+  publishedAt                    DateTime?
+  postUrl                        String?
+  content                        String
+  mediaUrls                      Json
+  reach                          Int?
+  engagement                     Int?
+  clicks                         Int?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Fournisseurs
+// Source: PRD-07-Gestion-Fournisseurs
+model Supplier {
+  id                             String @id @default(cuid())
+  name                           String
+  code                           String @unique
+  type                           SupplierType
+  status                         SupplierStatus @default(ACTIVE)
+  email                          String
+  phone                          String
+  address                        String?
+  city                           String?
+  country                        String?
+  taxId                          String?
+  contactPerson                  String?
+  paymentTerms                   String?
+  rating                         Decimal?
+  notes                          String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Factures fournisseurs
+// Source: PRD-07-Gestion-Fournisseurs
+model SupplierInvoice {
+  id                             String @id @default(cuid())
+  invoiceNumber                  String @unique
+  supplierId                     String
+  purchaseOrderId                String?
+  status                         InvoiceStatus @default(PENDING)
+  issueDate                      DateTime
+  dueDate                        DateTime
+  subtotal                       Decimal
+  taxAmount                      Decimal
+  total                          Decimal
+  amountPaid                     Decimal @default(0)
+  currency                       Currency @default(DZD)
+  paidAt                         DateTime?
+  notes                          String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Performance des fournisseurs
+// Source: PRD-07-Gestion-Fournisseurs
+model SupplierPerformance {
+  id                             String @id @default(cuid())
+  supplierId                     String
+  period                         DateTime
+  deliveryScore                  Decimal
+  qualityScore                   Decimal
+  priceScore                     Decimal
+  overallScore                   Decimal
+  totalOrders                    Int
+  onTimeDeliveries               Int
+  defectRate                     Decimal
+  notes                          String?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Configuration TVA Algérie
+// Source: PRD-02-Module-Comptable
+model TaxConfiguration {
+  id                             String @id @default(cuid())
+  name                           String
+  rate                           Decimal
+  type                           TaxType
+  applicableTo                   String
+  startDate                      DateTime
+  endDate                        DateTime?
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+}
+
+// Équipes/concessions
+// Source: PRD-11-Gestion-Utilisateurs, PRD-01-Gestion-Stock
+model Team {
+  id                             String @id @default(cuid())
+  name                           String
+  type                           TeamType
+  managerId                      String
+  status                         TeamStatus @default(ACTIVE)
+  code                           String @unique
+  address                        String?
+  city                           String?
+  wilaya                         String?
+  phone                          String?
+  email                          String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Estimations de reprise
+// Source: PRD-03-Marketplace
+model TradeInEstimate {
+  id                             String @id @default(cuid())
+  customerId                     String
+  vehicleModelId                 String
+  year                           Int
+  mileage                        Int
+  condition                      VehicleCondition
+  estimatedValue                 Decimal
+  validUntil                     DateTime
+  status                         EstimateStatus @default(PENDING)
+  notes                          String?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Utilisateurs de la plateforme
+// Source: PRD-11-Gestion-Utilisateurs
+model User {
+  id                             String @id @default(cuid())
+  email                          String @unique
+  passwordHash                   String
+  role                           UserRole @default(USER)
+  firstName                      String
+  lastName                       String
+  phone                          String?
+  preferredLanguage              Language @default(FR)
+  isActive                       Boolean @default(true)
+  lastLoginAt                    DateTime?
+  emailVerifiedAt                DateTime?
+  phoneVerifiedAt                DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Rôles des utilisateurs
+// Source: PRD-11-Gestion-Utilisateurs
+model UserRole {
+  userId                         String
+  roleId                         String
+  assignedAt                     DateTime @default(now())
+
+  // Relations
+}
+
+// Véhicules en stock
+// Source: PRD-01-Gestion-Stock, PRD-06-Catalogue-Vehicules
+model Vehicle {
+  id                             String @id @default(cuid())
+  vin                            String @unique
+  vehicleModelId                 String
+  teamId                         String
+  status                         VehicleStatus @default(AVAILABLE)
+  condition                      VehicleCondition
+  mileage                        Int?
+  year                           Int
+  color                          String
+  interiorColor                  String?
+  purchasePrice                  Decimal
+  sellingPrice                   Decimal
+  currency                       Currency @default(DZD)
+  purchaseDate                   DateTime?
+  location                       String?
+  features                       Json?
+  notes                          String?
+  publishedAt                    DateTime?
+  soldAt                         DateTime?
+  archivedAt                     DateTime?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Configurations de véhicules neufs
+// Source: PRD-06-Catalogue-Vehicules
+model VehicleConfiguration {
+  id                             String @id @default(cuid())
+  vehicleModelId                 String
+  name                           String
+  trim                           String
+  basePrice                      Decimal
+  options                        Json
+  totalPrice                     Decimal
+  availability                   String?
+  deliveryTime                   Int?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Historique des véhicules
+// Source: PRD-06-Catalogue-Vehicules
+model VehicleHistory {
+  id                             String @id @default(cuid())
+  vehicleId                      String
+  eventType                      VehicleEventType
+  eventDate                      DateTime
+  description                    String
+  performedBy                    String?
+  documents                      Json?
+  cost                           Decimal?
+  mileage                        Int?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}
+
+// Photos et vidéos des véhicules
+// Source: PRD-06-Catalogue-Vehicules
+model VehicleMedia {
+  id                             String @id @default(cuid())
+  vehicleId                      String
+  type                           MediaType
+  url                            String
+  thumbnailUrl                   String?
+  order                          Int @default(0)
+  is360                          Boolean @default(false)
+  caption                        String?
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Modèles de véhicules (référentiel constructeurs)
+// Source: PRD-06-Catalogue-Vehicules
+model VehicleModel {
+  id                             String @id @default(cuid())
+  brandId                        String
+  name                           String
+  slug                           String @unique
+  category                       VehicleCategory
+  bodyType                       BodyType
+  fuelType                       FuelType
+  transmission                   TransmissionType
+  engineCapacity                 Int?
+  horsePower                     Int?
+  co2Emission                    Int?
+  energyLabel                    EnergyLabel?
+  seats                          Int?
+  doors                          Int?
+  specifications                 Json?
+  translations                   Json?
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Garanties
+// Source: PRD-07-Gestion-Fournisseurs
+model Warranty {
+  id                             String @id @default(cuid())
+  vehicleId                      String
+  supplierId                     String?
+  type                           WarrantyType
+  startDate                      DateTime
+  endDate                        DateTime
+  coverage                       String
+  terms                          String?
+  documents                      Json?
+  isActive                       Boolean @default(true)
+  createdAt                      DateTime @default(now())
+  updatedAt                      DateTime @updatedAt
+
+  // Relations
+}
+
+// Validations workflow
+// Source: PRD-01-Gestion-Stock, PRD-05-Module-IA
+model WorkflowValidation {
+  id                             String @id @default(cuid())
+  entityType                     String
+  entityId                       String
+  workflowStage                  WorkflowStage
+  status                         ValidationStatus
+  validatedById                  String?
+  validatedAt                    DateTime?
+  comments                       String?
+  aiScore                        Decimal?
+  aiRecommendation               String?
+  createdAt                      DateTime @default(now())
+
+  // Relations
+}

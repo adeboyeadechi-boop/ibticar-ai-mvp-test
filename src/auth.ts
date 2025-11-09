@@ -1,25 +1,27 @@
-// src/auth.ts
+// src/auth.ts - NextAuth v4 configuration
 
-import NextAuth from "next-auth"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import Credentials from "next-auth/providers/credentials"
-import prisma from "@/prisma/client" // <-- AJOUTEZ
+import { NextAuthOptions } from "next-auth"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import CredentialsProvider from "next-auth/providers/credentials"
+import prisma from "@/prisma/client"
 import bcrypt from "bcrypt"
+import { getServerSession } from "next-auth/next"
 
-
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" }, // Nous utilisons des JWT
-  trustHost: true, // IMPORTANT pour le déploiement découplé
+  session: { strategy: "jwt" },
   providers: [
-    Credentials({
+    CredentialsProvider({
       name: "Email et mot de passe",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Mot de passe", type: "password" }
       },
       async authorize(credentials) {
-        if (typeof credentials.email !== 'string' || typeof credentials.password !== 'string') {
+        console.log('🔐 Authorize called with:', { email: credentials?.email, hasPassword: !!credentials?.password })
+
+        if (!credentials?.email || !credentials?.password) {
+          console.log('❌ Missing credentials')
           return null
         }
 
@@ -27,35 +29,42 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           where: { email: credentials.email }
         })
 
-        if (!user || !user.passwordHash) {
-          // L'utilisateur n'existe pas ou n'a pas de mot de passe (ex: compte social)
+        if (!user) {
+          console.log('❌ User not found')
           return null
         }
 
-        // Vérifier le mot de passe
+        if (!user.passwordHash) {
+          console.log('❌ User has no password hash')
+          return null
+        }
+
         const isPasswordValid = await bcrypt.compare(credentials.password, user.passwordHash)
+        console.log('🔑 Password validation:', isPasswordValid)
 
         if (isPasswordValid) {
-          // Mot de passe correct !
-          return user
-        } else {
-          // Mot de passe incorrect
-          return null
+          console.log('✅ Authentication successful for:', user.email)
+          return {
+            id: user.id,
+            email: user.email,
+            role: user.role,
+            name: `${user.firstName} ${user.lastName}`
+          }
         }
+
+        console.log('❌ Invalid password')
+        return null
       }
     })
-    // ... Vous pouvez ajouter d'autres providers (Google, Facebook...) ici
   ],
   callbacks: {
-    // Ce callback ajoute l'ID et le rôle au JWT
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
-        token.role = (user as any).role // Le type 'User' de base n'a pas 'role'
+        token.role = (user as any).role
       }
       return token
     },
-    // Ce callback ajoute l'ID et le rôle à l'objet session
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string
@@ -63,5 +72,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return session
     }
-  }
-})
+  },
+  pages: {
+    signIn: '/auth/signin',
+  },
+}
+
+// Helper function to get session in app directory
+export function auth() {
+  return getServerSession(authOptions)
+}

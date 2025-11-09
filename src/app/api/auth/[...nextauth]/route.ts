@@ -1,4 +1,8 @@
-// src/app/api/auth/[...nextauth]/route.ts
+// src/app/api/auth/[...nextauth]/route.ts - NextAuth v4
 
-// Exporte les handlers GET et POST depuis notre config auth
-export { handlers as GET, handlers as POST } from "@/auth"
+import NextAuth from "next-auth"
+import { authOptions } from "@/auth"
+
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }
