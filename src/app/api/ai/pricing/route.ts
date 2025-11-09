@@ -6,7 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/auth'
+import { getAuthenticatedUser } from '@/lib/auth-helpers'
 import { checkPermission } from '@/lib/rbac'
 import { initializeAI } from '@/lib/ai/client'
 import { DynamicPricingService } from '@/lib/ai/services'
@@ -20,15 +20,13 @@ initializeAI()
  */
 export async function POST(req: NextRequest) {
   try {
-    // Check authentication
-    const session = await auth()
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    // Check authentication (supports NextAuth AND Bearer token)
+    const { user, error } = await getAuthenticatedUser(req)
+    if (error) return error
 
     // Check permission
     const hasPermission = await checkPermission(
-      session.user.id,
+      user.id,
       'ai:pricing'
     )
     if (!hasPermission) {
@@ -79,15 +77,13 @@ export async function POST(req: NextRequest) {
  */
 export async function GET(req: NextRequest) {
   try {
-    // Check authentication
-    const session = await auth()
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    // Check authentication (supports NextAuth AND Bearer token)
+    const { user, error } = await getAuthenticatedUser(req)
+    if (error) return error
 
     // Check permission
     const hasPermission = await checkPermission(
-      session.user.id,
+      user.id,
       'ai:pricing'
     )
     if (!hasPermission) {
@@ -138,19 +134,17 @@ export async function GET(req: NextRequest) {
  */
 export async function PATCH(req: NextRequest) {
   try {
-    // Check authentication
-    const session = await auth()
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    // Check authentication (supports NextAuth AND Bearer token)
+    const { user, error } = await getAuthenticatedUser(req)
+    if (error) return error
 
     // Check permission (requires both pricing and vehicle update permissions)
     const hasPricingPermission = await checkPermission(
-      session.user.id,
+      user.id,
       'ai:pricing'
     )
     const hasVehiclePermission = await checkPermission(
-      session.user.id,
+      user.id,
       'vehicles:update'
     )
 
