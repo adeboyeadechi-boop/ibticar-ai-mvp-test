@@ -11,9 +11,10 @@ import { checkPermission } from '@/lib/rbac'
 // GET /api/roles/[id] - Get a specific role with its permissions and user count
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
@@ -24,7 +25,7 @@ export async function GET(
     }
 
     const role = await prisma.role.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         permissions: {
           include: {
@@ -72,9 +73,10 @@ export async function GET(
 // PATCH /api/roles/[id] - Update a role
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
@@ -89,7 +91,7 @@ export async function PATCH(
 
     // Check if role exists
     const existingRole = await prisma.role.findUnique({
-      where: { id: params.id },
+      where: { id },
     })
 
     if (!existingRole) {
@@ -119,7 +121,7 @@ export async function PATCH(
     }
 
     const updatedRole = await prisma.role.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...(name && { name }),
         ...(description !== undefined && { description }),
@@ -147,9 +149,10 @@ export async function PATCH(
 // DELETE /api/roles/[id] - Delete a role
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
@@ -161,7 +164,7 @@ export async function DELETE(
 
     // Check if role exists
     const role = await prisma.role.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         _count: {
           select: {
@@ -195,7 +198,7 @@ export async function DELETE(
 
     // Delete role (cascade will delete role permissions)
     await prisma.role.delete({
-      where: { id: params.id },
+      where: { id },
     })
 
     return NextResponse.json({

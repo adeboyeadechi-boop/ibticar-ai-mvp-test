@@ -11,14 +11,15 @@ import { checkPermission, clearUserPermissionsCache } from '@/lib/rbac'
 // GET /api/users/[id]/roles - Get all roles for a user
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
     // Check permission (users can view their own roles, or need users:read permission)
-    const isSelf = user.id === params.id
+    const isSelf = user.id === id
     if (!isSelf) {
       const hasPermission = await checkPermission(user.id, 'users:read')
       if (!hasPermission) {
@@ -28,7 +29,7 @@ export async function GET(
 
     // Check if user exists
     const targetUser = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id: id },
       select: { id: true, email: true, firstName: true, lastName: true },
     })
 
@@ -38,7 +39,7 @@ export async function GET(
 
     // Fetch user's roles with permissions
     const userRoles = await prisma.usersOnRoles.findMany({
-      where: { userId: params.id },
+      where: { userId: id },
       include: {
         role: {
           include: {
@@ -90,9 +91,10 @@ export async function GET(
 // POST /api/users/[id]/roles - Assign roles to a user
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
@@ -114,7 +116,7 @@ export async function POST(
 
     // Check if user exists
     const targetUser = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     if (!targetUser) {
@@ -142,7 +144,7 @@ export async function POST(
       prisma.usersOnRoles.upsert({
         where: {
           userId_roleId: {
-            userId: params.id,
+            userId: id,
             roleId,
           },
         },
@@ -150,7 +152,7 @@ export async function POST(
           assignedAt: new Date(),
         },
         create: {
-          userId: params.id,
+          userId: id,
           roleId,
         },
       })
@@ -159,11 +161,11 @@ export async function POST(
     await prisma.$transaction(operations)
 
     // Clear permissions cache for this user
-    clearUserPermissionsCache(params.id)
+    clearUserPermissionsCache(id)
 
     // Fetch updated user roles
     const updatedUserRoles = await prisma.usersOnRoles.findMany({
-      where: { userId: params.id },
+      where: { userId: id },
       include: {
         role: {
           include: {
@@ -197,9 +199,10 @@ export async function POST(
 // DELETE /api/users/[id]/roles - Revoke roles from a user
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const { user, error } = await getAuthenticatedUser(request)
     if (error) return error
 
@@ -221,7 +224,7 @@ export async function DELETE(
 
     // Check if user exists
     const targetUser = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     if (!targetUser) {
@@ -229,7 +232,7 @@ export async function DELETE(
     }
 
     // Prevent users from removing their own roles
-    if (user.id === params.id) {
+    if (user.id === id) {
       return NextResponse.json(
         { error: 'Cannot remove your own roles' },
         { status: 403 }
@@ -239,7 +242,7 @@ export async function DELETE(
     // Revoke roles
     const result = await prisma.usersOnRoles.deleteMany({
       where: {
-        userId: params.id,
+        userId: id,
         roleId: {
           in: roleIds,
         },
@@ -247,11 +250,11 @@ export async function DELETE(
     })
 
     // Clear permissions cache for this user
-    clearUserPermissionsCache(params.id)
+    clearUserPermissionsCache(id)
 
     // Fetch remaining roles
     const remainingRoles = await prisma.usersOnRoles.findMany({
-      where: { userId: params.id },
+      where: { userId: id },
       include: {
         role: {
           include: {
