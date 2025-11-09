@@ -110,3 +110,5 @@ docker-compose.local.yml
 .cache/
 .parcel-cache/
 .babel-cache/
+
+/src/generated/prisma

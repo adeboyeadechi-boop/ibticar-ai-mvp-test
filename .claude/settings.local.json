@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(node --version)",
+      "Bash(node ./hooks/read_hook.js:*)",
+      "Bash(pip install:*)",
+      "Bash(python extract_docx.py:*)",
+      "Bash(python analyze_database_schema.py:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(npx dotenv:*)",
+      "Bash(docker exec:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run db:seed:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(taskkill:*)",
+      "Bash(nul)",
+      "Bash(pkill:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm run dev:*)",
+      "Bash(node test-auth.mjs:*)",
+      "Bash(/tmp/signin.json)",
+      "Bash(node:*)",
+      "Bash(printf:*)",
+      "Bash(/tmp/signin2.json)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(timeout /t 2 /nobreak)",
+      "Bash(timeout /t 3 /nobreak)",
+      "Bash(cmd //c \"taskkill //PID 12536 //F\")",
+      "Bash(ngrok version:*)",
+      "Bash(del nul)",
+      "Bash(git check-ignore:*)",
+      "Bash(git ls-tree:*)"
+    ]
+  }
+}
