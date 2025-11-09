@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getAuthenticatedUser } from '@/lib/auth-helpers'
 import { verifyTOTP } from '@/lib/totp'
 import prisma from '@/prisma/client'
+import { Prisma } from '@/generated/prisma'
 import bcrypt from 'bcrypt'
 
 export async function POST(request: NextRequest) {
@@ -81,7 +82,7 @@ export async function POST(request: NextRequest) {
       data: {
         twoFactorEnabled: false,
         twoFactorSecret: null,
-        twoFactorBackupCodes: null,
+        twoFactorBackupCodes: Prisma.JsonNull,
       },
     })
 
