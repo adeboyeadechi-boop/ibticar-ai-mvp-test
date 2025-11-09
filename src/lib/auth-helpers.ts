@@ -91,7 +91,7 @@ export async function requirePermission(permissionCode: string, request?: NextRe
   const userRoles = await prisma.usersOnRoles.findMany({
     where: { userId: user!.id },
     include: {
-      roleId: true,
+      role: true,
     },
   })
 

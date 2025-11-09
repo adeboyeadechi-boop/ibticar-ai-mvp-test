@@ -94,13 +94,19 @@ export interface RotationPredictionRequest {
 
 export interface RotationPrediction {
   vehicleId: string
-  predictedDaysToSell: number
+  predictedDays: number
   confidence: number // 0-1
-  factors: {
+  reasoning: string
+  influencingFactors: {
     positive: string[]
     negative: string[]
   }
   recommendations: string[]
+  priceAdjustmentSuggestion?: {
+    action: 'reduce' | 'increase' | 'maintain'
+    reasoning: string
+  }
+  comparisonToMarket: string
   riskLevel: 'low' | 'medium' | 'high'
 }
 
@@ -116,21 +122,47 @@ export interface DynamicPricingRequest {
   daysInStock?: number
   targetMargin?: number
   includeMarketAnalysis?: boolean
-  businessObjectives?: string
+  businessObjectives?: {
+    targetMargin?: number
+    urgencyLevel?: 'low' | 'medium' | 'high'
+    targetRotationDays?: number
+    minimumAcceptablePrice?: number
+  }
 }
 
 export interface DynamicPricingRecommendation {
   vehicleId: string
   currentPrice: number
-  recommendedPrice: number
-  priceChange: number
-  priceChangePercentage: number
-  reasoning: string
-  expectedImpact: {
-    onSaleSpeed: string
-    onMargin: string
+  recommendations: {
+    optimal: {
+      price: number
+      confidence: number
+      reasoning: string
+      expectedDaysToSell: number
+      profitMargin: number
+    }
+    quick_sale: {
+      price: number
+      confidence: number
+      reasoning: string
+      expectedDaysToSell: number
+      profitMargin: number
+    }
+    maximum_profit: {
+      price: number
+      confidence: number
+      reasoning: string
+      expectedDaysToSell: number
+      profitMargin: number
+    }
   }
-  confidence: number // 0-1
+  marketPosition: string
+  adjustmentRecommendation: {
+    action: 'reduce' | 'increase' | 'maintain'
+    reasoning: string
+  }
+  pricingStrategy: string
+  riskAnalysis: string
 }
 
 // AI Error Types

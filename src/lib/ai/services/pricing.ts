@@ -10,6 +10,7 @@ import type {
 } from '../types'
 import { PRICING_SYSTEM_PROMPT, buildPricingPrompt } from '../prompts/pricing'
 import prisma from '@/prisma/client'
+import { RecommendationType, RecommendationStatus } from '@/generated/prisma'
 
 export class DynamicPricingService {
   /**
@@ -197,11 +198,11 @@ export class DynamicPricingService {
 
       await prisma.aIRecommendation.create({
         data: {
-          vehicleId,
-          type: 'PRICE_OPTIMIZATION',
-          confidence: optimalRec.confidence,
-          reasoning: optimalRec.reasoning,
-          metadata: {
+          entityType: 'Vehicle',
+          entityId: vehicleId,
+          type: RecommendationType.PRICING,
+          score: optimalRec.confidence,
+          reasoning: {
             currentPrice: recommendation.currentPrice,
             recommendedPrice: optimalRec.price,
             expectedDaysToSell: optimalRec.expectedDaysToSell,
@@ -212,7 +213,8 @@ export class DynamicPricingService {
             pricingStrategy: recommendation.pricingStrategy,
             riskAnalysis: recommendation.riskAnalysis,
           },
-          status: 'PENDING',
+          recommendation: optimalRec.reasoning,
+          status: RecommendationStatus.PENDING,
         },
       })
     } catch (error) {
@@ -227,8 +229,9 @@ export class DynamicPricingService {
   async getStoredRecommendations(vehicleId: string, limit: number = 5) {
     return prisma.aIRecommendation.findMany({
       where: {
-        vehicleId,
-        type: 'PRICE_OPTIMIZATION',
+        entityType: 'Vehicle',
+        entityId: vehicleId,
+        type: RecommendationType.PRICING,
       },
       orderBy: {
         createdAt: 'desc',
@@ -252,13 +255,13 @@ export class DynamicPricingService {
         where: { id: recommendationId },
       })
 
-      if (!recommendation || recommendation.vehicleId !== vehicleId) {
+      if (!recommendation || recommendation.entityId !== vehicleId) {
         throw new Error('Recommendation not found or does not match vehicle')
       }
 
-      // Extract price from metadata
-      const metadata = recommendation.metadata as any
-      const scenarios = metadata?.allScenarios
+      // Extract price from reasoning JSON
+      const reasoningData = recommendation.reasoning as any
+      const scenarios = reasoningData?.allScenarios
 
       if (!scenarios || !scenarios[scenario]) {
         throw new Error(`Scenario '${scenario}' not found in recommendation`)
@@ -274,18 +277,18 @@ export class DynamicPricingService {
         },
       })
 
-      // Mark recommendation as implemented
+      // Mark recommendation as accepted
       await prisma.aIRecommendation.update({
         where: { id: recommendationId },
         data: {
-          status: 'IMPLEMENTED',
+          status: RecommendationStatus.ACCEPTED,
         },
       })
 
       return {
         vehicle: updatedVehicle,
         appliedScenario: scenario,
-        oldPrice: metadata.currentPrice,
+        oldPrice: reasoningData.currentPrice,
         newPrice,
       }
     } catch (error) {

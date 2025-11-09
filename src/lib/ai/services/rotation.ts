@@ -10,6 +10,7 @@ import {
   buildRotationPrompt,
 } from '../prompts/rotation'
 import prisma from '@/prisma/client'
+import { RecommendationType, RecommendationStatus } from '@/generated/prisma'
 
 export class RotationPredictionService {
   /**
@@ -40,7 +41,7 @@ export class RotationPredictionService {
         vehicle.model?.brand?.name || 'Unknown',
         vehicle.model?.name || 'Unknown',
         vehicle.year,
-        vehicle.sellingPrice
+        vehicle.sellingPrice.toNumber()
       )
 
       // 3. Assess current market conditions
@@ -237,11 +238,11 @@ export class RotationPredictionService {
     try {
       await prisma.aIRecommendation.create({
         data: {
-          vehicleId,
-          type: 'ROTATION_PREDICTION',
-          confidence: prediction.confidence,
-          reasoning: prediction.reasoning,
-          metadata: {
+          entityType: 'Vehicle',
+          entityId: vehicleId,
+          type: RecommendationType.STOCK_ROTATION,
+          score: prediction.confidence,
+          reasoning: {
             predictedDays: prediction.predictedDays,
             riskLevel: prediction.riskLevel,
             influencingFactors: prediction.influencingFactors,
@@ -249,7 +250,8 @@ export class RotationPredictionService {
             priceAdjustmentSuggestion: prediction.priceAdjustmentSuggestion,
             comparisonToMarket: prediction.comparisonToMarket,
           },
-          status: 'PENDING',
+          recommendation: prediction.reasoning,
+          status: RecommendationStatus.PENDING,
         },
       })
     } catch (error) {
@@ -264,8 +266,9 @@ export class RotationPredictionService {
   async getStoredPredictions(vehicleId: string, limit: number = 5) {
     return prisma.aIRecommendation.findMany({
       where: {
-        vehicleId,
-        type: 'ROTATION_PREDICTION',
+        entityType: 'Vehicle',
+        entityId: vehicleId,
+        type: RecommendationType.STOCK_ROTATION,
       },
       orderBy: {
         createdAt: 'desc',
