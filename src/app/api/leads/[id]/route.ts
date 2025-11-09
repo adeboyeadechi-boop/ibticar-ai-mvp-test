@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/prisma/client'
+import { LeadStatus } from '@/generated/prisma'
 import { getAuthenticatedUser } from '@/lib/auth-helpers'
 
 type Params = {
@@ -219,8 +220,8 @@ export async function DELETE(request: NextRequest, { params }: Params) {
       return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
     }
 
-    // Ne pas supprimer un lead converti
-    if (existingLead.status === 'CONVERTED') {
+    // Ne pas supprimer un lead converti (gagné)
+    if (existingLead.status === LeadStatus.WON) {
       return NextResponse.json(
         { error: 'Cannot delete a converted lead' },
         { status: 400 }
