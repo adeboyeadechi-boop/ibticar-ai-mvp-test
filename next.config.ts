@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
 
+  // Use standalone output for better serverless deployment
+  output: 'standalone',
+
   // CORS configuration for Lovable integration
   async headers() {
     return [

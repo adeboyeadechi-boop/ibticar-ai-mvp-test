@@ -99,7 +99,7 @@ docker-compose.local.yml
 #  DEPLOYMENT
 # =======================================
 .vercel
-implementation/
+implementations/
 # =======================================
 # MISC
 # =======================================
