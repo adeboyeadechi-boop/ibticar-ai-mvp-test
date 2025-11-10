@@ -25,7 +25,7 @@
     "db:studio": "npx prisma studio"
   },
   "prisma": {
-    "seed": "tsx prisma/seed-full.ts"
+    "seed": "tsx prisma/seed-complete.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.68.0",

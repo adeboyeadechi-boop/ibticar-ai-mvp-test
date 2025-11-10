@@ -10,20 +10,23 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('🌱 Starting complete database seed with test data...')
 
-  // Clean existing data
+  // Clean existing data (using DELETE for Vercel compatibility)
   console.log('🧹 Cleaning existing data...')
-  await prisma.$executeRaw`TRUNCATE TABLE "User" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Team" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Role" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Permission" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Brand" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "VehicleModel" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Vehicle" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Customer" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Lead" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "Supplier" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "TaxConfiguration" CASCADE`
-  await prisma.$executeRaw`TRUNCATE TABLE "NotificationTemplate" CASCADE`
+  await prisma.notificationTemplate.deleteMany({})
+  await prisma.lead.deleteMany({})
+  await prisma.customer.deleteMany({})
+  await prisma.vehicle.deleteMany({})
+  await prisma.vehicleModel.deleteMany({})
+  await prisma.brand.deleteMany({})
+  await prisma.supplier.deleteMany({})
+  await prisma.taxConfiguration.deleteMany({})
+  await prisma.session.deleteMany({})
+  await prisma.usersOnRoles.deleteMany({})
+  await prisma.rolePermission.deleteMany({})
+  await prisma.permission.deleteMany({})
+  await prisma.role.deleteMany({})
+  await prisma.user.deleteMany({})
+  await prisma.team.deleteMany({})
 
   // 1. Create Roles
   console.log('👥 Creating roles...')
