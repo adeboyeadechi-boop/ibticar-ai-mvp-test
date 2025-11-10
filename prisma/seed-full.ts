@@ -1,7 +1,7 @@
-// Full seed with TRUNCATE - Initializes DB with all test data from bdd_init.txt
+// Full seed with TRUNCATE - Initializes DB with test data matching actual schema
 // WARNING: This will DELETE all existing data!
 
-import { PrismaClient, NotificationType, NotificationChannel, TeamType, TaxType, FuelType, Transmission, VehicleCondition, VehicleStatus, CustomerType, CustomerStatus, LeadStatus, LeadSource, SupplierType, SupplierStatus } from '../src/generated/prisma'
+import { PrismaClient, NotificationType, NotificationChannel, TeamType, TaxType, FuelType, TransmissionType, VehicleCondition, VehicleStatus, CustomerType, CustomerStatus, LeadStatus, LeadSource, SupplierType, SupplierStatus } from '../src/generated/prisma'
 import * as bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
@@ -25,7 +25,7 @@ async function truncateAllTables() {
     await prisma.$executeRawUnsafe('TRUNCATE TABLE "VehicleMedia" CASCADE')
     await prisma.$executeRawUnsafe('TRUNCATE TABLE "Vehicle" CASCADE')
     await prisma.$executeRawUnsafe('TRUNCATE TABLE "VehicleModel" CASCADE')
-    await prisma.$executeRawUnsafe('TRUNCATE TABLE "VehicleBrand" CASCADE')
+    await prisma.$executeRawUnsafe('TRUNCATE TABLE "Brand" CASCADE')
     await prisma.$executeRawUnsafe('TRUNCATE TABLE "Supplier" CASCADE')
     await prisma.$executeRawUnsafe('TRUNCATE TABLE "TaxConfiguration" CASCADE')
     await prisma.$executeRawUnsafe('TRUNCATE TABLE "UsersOnRoles" CASCADE')
@@ -45,7 +45,7 @@ async function truncateAllTables() {
 async function main() {
   console.log('\n' + '='.repeat(60))
   console.log('🌱 FULL DATABASE SEED - WITH TRUNCATE')
-  console.log('📄 Data source: bdd_init.txt')
+  console.log('📄 Based on actual Prisma schema')
   console.log('='.repeat(60) + '\n')
 
   // TRUNCATE all tables
@@ -242,7 +242,7 @@ async function main() {
 
   console.log('✓ 3 teams created')
 
-  // 5. Create Users (all 5 from bdd_init.txt)
+  // 5. Create Users (all 5 accounts)
   console.log('👤 Creating users...')
   const hashedPassword = await bcrypt.hash('Password123!', 10)
 
@@ -354,42 +354,42 @@ async function main() {
 
   console.log('✓ Users linked to roles')
 
-  // 6. Create Vehicle Brands (10 from bdd_init.txt)
-  console.log('🚗 Creating vehicle brands...')
-  const renault = await prisma.vehicleBrand.create({
+  // 6. Create Brands (10 brands)
+  console.log('🚗 Creating brands...')
+  const renault = await prisma.brand.create({
     data: { name: 'Renault', slug: 'renault', country: 'France' },
   })
-  const peugeot = await prisma.vehicleBrand.create({
+  const peugeot = await prisma.brand.create({
     data: { name: 'Peugeot', slug: 'peugeot', country: 'France' },
   })
-  const volkswagen = await prisma.vehicleBrand.create({
+  const volkswagen = await prisma.brand.create({
     data: { name: 'Volkswagen', slug: 'volkswagen', country: 'Allemagne' },
   })
-  const toyota = await prisma.vehicleBrand.create({
+  const toyota = await prisma.brand.create({
     data: { name: 'Toyota', slug: 'toyota', country: 'Japon' },
   })
-  const hyundai = await prisma.vehicleBrand.create({
+  const hyundai = await prisma.brand.create({
     data: { name: 'Hyundai', slug: 'hyundai', country: 'Corée du Sud' },
   })
-  const kia = await prisma.vehicleBrand.create({
+  const kia = await prisma.brand.create({
     data: { name: 'Kia', slug: 'kia', country: 'Corée du Sud' },
   })
-  const seat = await prisma.vehicleBrand.create({
+  const seat = await prisma.brand.create({
     data: { name: 'Seat', slug: 'seat', country: 'Espagne' },
   })
-  const skoda = await prisma.vehicleBrand.create({
+  const skoda = await prisma.brand.create({
     data: { name: 'Skoda', slug: 'skoda', country: 'République Tchèque' },
   })
-  const mercedes = await prisma.vehicleBrand.create({
+  const mercedes = await prisma.brand.create({
     data: { name: 'Mercedes-Benz', slug: 'mercedes-benz', country: 'Allemagne' },
   })
-  const bmw = await prisma.vehicleBrand.create({
+  const bmw = await prisma.brand.create({
     data: { name: 'BMW', slug: 'bmw', country: 'Allemagne' },
   })
 
   console.log('✓ 10 brands created')
 
-  // 7. Create Vehicle Models (7 from bdd_init.txt)
+  // 7. Create Vehicle Models (7 models)
   console.log('🏎️  Creating vehicle models...')
   const clio5 = await prisma.vehicleModel.create({
     data: {
@@ -399,7 +399,7 @@ async function main() {
       category: 'HATCHBACK',
       bodyType: 'HATCHBACK',
       fuelType: FuelType.GASOLINE,
-      transmission: Transmission.MANUAL,
+      transmission: TransmissionType.MANUAL,
       engineCapacity: 1000,
       horsePower: 100,
       co2Emission: 120,
@@ -416,7 +416,7 @@ async function main() {
       category: 'SUV',
       bodyType: 'SUV',
       fuelType: FuelType.DIESEL,
-      transmission: Transmission.AUTOMATIC,
+      transmission: TransmissionType.AUTOMATIC,
       engineCapacity: 1500,
       horsePower: 115,
       co2Emission: 130,
@@ -433,7 +433,7 @@ async function main() {
       category: 'SEDAN',
       bodyType: 'SEDAN',
       fuelType: FuelType.DIESEL,
-      transmission: Transmission.MANUAL,
+      transmission: TransmissionType.MANUAL,
       engineCapacity: 1500,
       horsePower: 110,
       co2Emission: 125,
@@ -450,7 +450,7 @@ async function main() {
       category: 'HATCHBACK',
       bodyType: 'HATCHBACK',
       fuelType: FuelType.GASOLINE,
-      transmission: Transmission.MANUAL,
+      transmission: TransmissionType.MANUAL,
       engineCapacity: 1200,
       horsePower: 110,
       co2Emission: 115,
@@ -467,7 +467,7 @@ async function main() {
       category: 'SUV',
       bodyType: 'SUV',
       fuelType: FuelType.DIESEL,
-      transmission: Transmission.AUTOMATIC,
+      transmission: TransmissionType.AUTOMATIC,
       engineCapacity: 1600,
       horsePower: 130,
       co2Emission: 135,
@@ -484,7 +484,7 @@ async function main() {
       category: 'SEDAN',
       bodyType: 'SEDAN',
       fuelType: FuelType.HYBRID,
-      transmission: Transmission.AUTOMATIC,
+      transmission: TransmissionType.AUTOMATIC,
       engineCapacity: 1800,
       horsePower: 122,
       co2Emission: 95,
@@ -501,7 +501,7 @@ async function main() {
       category: 'HATCHBACK',
       bodyType: 'HATCHBACK',
       fuelType: FuelType.GASOLINE,
-      transmission: Transmission.MANUAL,
+      transmission: TransmissionType.MANUAL,
       engineCapacity: 1000,
       horsePower: 84,
       co2Emission: 118,
@@ -512,7 +512,7 @@ async function main() {
 
   console.log('✓ 7 models created')
 
-  // 8. Create Vehicles (5 from bdd_init.txt)
+  // 8. Create Vehicles (5 vehicles)
   console.log('🚙 Creating vehicles in stock...')
   await prisma.vehicle.create({
     data: {
@@ -529,7 +529,6 @@ async function main() {
       sellingPrice: 2950000,
       currency: 'DZD',
       purchaseDate: new Date('2024-01-15'),
-      registrationNumber: '16-12345-16',
       location: 'Showroom Alger Centre',
       notes: 'Véhicule neuf',
     },
@@ -550,7 +549,6 @@ async function main() {
       sellingPrice: 3750000,
       currency: 'DZD',
       purchaseDate: new Date('2024-02-01'),
-      registrationNumber: '16-23456-16',
       location: 'Showroom Alger Centre',
       notes: 'Véhicule neuf',
     },
@@ -571,7 +569,6 @@ async function main() {
       sellingPrice: 3300000,
       currency: 'DZD',
       purchaseDate: new Date('2024-02-10'),
-      registrationNumber: '16-34567-16',
       location: 'Showroom Alger Centre',
       notes: 'Réservé',
     },
@@ -592,7 +589,6 @@ async function main() {
       sellingPrice: 2850000,
       currency: 'DZD',
       purchaseDate: new Date('2024-01-20'),
-      registrationNumber: '31-45678-31',
       location: 'Showroom Oran',
       notes: 'Véhicule neuf',
     },
@@ -604,7 +600,7 @@ async function main() {
       vehicleModelId: peugeot3008.id,
       teamId: oranTeam.id,
       status: VehicleStatus.AVAILABLE,
-      condition: VehicleCondition.USED,
+      condition: VehicleCondition.USED_GOOD,
       year: 2023,
       mileage: 12000,
       color: 'Noir Perla Nera',
@@ -613,7 +609,6 @@ async function main() {
       sellingPrice: 3950000,
       currency: 'DZD',
       purchaseDate: new Date('2023-12-15'),
-      registrationNumber: '31-56789-31',
       location: 'Showroom Oran',
       notes: 'Occasion récente',
     },
@@ -621,7 +616,7 @@ async function main() {
 
   console.log('✓ 5 vehicles created')
 
-  // 9. Create Customers (4 from bdd_init.txt)
+  // 9. Create Customers (4 customers - matching actual schema)
   console.log('👥 Creating customers...')
   const customer1 = await prisma.customer.create({
     data: {
@@ -636,8 +631,6 @@ async function main() {
       postalCode: '16000',
       status: CustomerStatus.ACTIVE,
       source: 'Website',
-      notes: 'Cliente fidèle, 2ème achat',
-      assignedToId: sales.id,
     },
   })
 
@@ -654,14 +647,14 @@ async function main() {
       postalCode: '31000',
       status: CustomerStatus.ACTIVE,
       source: 'Referral',
-      notes: 'Recherche SUV',
-      assignedToId: sales.id,
     },
   })
 
   const customer3 = await prisma.customer.create({
     data: {
       type: CustomerType.BUSINESS,
+      firstName: 'Contact',
+      lastName: 'Transport',
       companyName: 'SARL Transport',
       email: 'contact@transport-sarl.dz',
       phone: '+213 21 55 44 33',
@@ -669,11 +662,9 @@ async function main() {
       city: 'Alger',
       wilaya: 'Alger',
       postalCode: '16050',
-      nif: '123456789012345',
+      taxId: '123456789012345',
       status: CustomerStatus.ACTIVE,
       source: 'Phone',
-      notes: 'Achat en flotte, 5 véhicules',
-      assignedToId: manager.id,
     },
   })
 
@@ -690,20 +681,17 @@ async function main() {
       postalCode: '25000',
       status: CustomerStatus.PROSPECT,
       source: 'Walk-in',
-      notes: 'Premier achat',
-      assignedToId: sales.id,
     },
   })
 
   console.log('✓ 4 customers created')
 
-  // 10. Create Leads (4 from bdd_init.txt)
+  // 10. Create Leads (4 leads - matching actual schema)
   console.log('📊 Creating leads...')
   await prisma.lead.create({
     data: {
       customerId: customer1.id,
       assignedToId: sales.id,
-      teamId: algerTeam.id,
       source: LeadSource.WEBSITE,
       status: LeadStatus.NEW,
       score: 60,
@@ -717,7 +705,6 @@ async function main() {
     data: {
       customerId: customer2.id,
       assignedToId: sales.id,
-      teamId: oranTeam.id,
       source: LeadSource.REFERRAL,
       status: LeadStatus.CONTACTED,
       score: 70,
@@ -731,7 +718,6 @@ async function main() {
     data: {
       customerId: customer3.id,
       assignedToId: manager.id,
-      teamId: algerTeam.id,
       source: LeadSource.PHONE,
       status: LeadStatus.QUALIFIED,
       score: 90,
@@ -745,7 +731,6 @@ async function main() {
     data: {
       customerId: customer4.id,
       assignedToId: sales.id,
-      teamId: algerTeam.id,
       source: LeadSource.WALK_IN,
       status: LeadStatus.NEW,
       score: 50,
@@ -757,7 +742,7 @@ async function main() {
 
   console.log('✓ 4 leads created')
 
-  // 11. Create Suppliers (2 from bdd_init.txt)
+  // 11. Create Suppliers (2 suppliers)
   console.log('🏭 Creating suppliers...')
   await prisma.supplier.create({
     data: {
@@ -789,7 +774,7 @@ async function main() {
 
   console.log('✓ 2 suppliers created')
 
-  // 12. Create Tax Configurations (3 from bdd_init.txt)
+  // 12. Create Tax Configurations (3 taxes)
   console.log('💰 Creating tax configurations...')
   await prisma.taxConfiguration.create({
     data: {
@@ -826,64 +811,6 @@ async function main() {
 
   console.log('✓ 3 tax configurations created')
 
-  // 13. Create Notification Templates (5 from bdd_init.txt)
-  console.log('📧 Creating notification templates...')
-  await prisma.notificationTemplate.create({
-    data: {
-      name: 'Email de bienvenue',
-      type: NotificationType.WELCOME_EMAIL,
-      channel: NotificationChannel.EMAIL,
-      subject: 'Bienvenue chez Ibticar.AI',
-      body: 'Bonjour {{firstName}}, bienvenue chez Ibticar.AI!',
-      isActive: true,
-    },
-  })
-
-  await prisma.notificationTemplate.create({
-    data: {
-      name: 'Confirmation de commande',
-      type: NotificationType.ORDER_CONFIRMATION,
-      channel: NotificationChannel.EMAIL,
-      subject: 'Confirmation de votre commande',
-      body: 'Votre commande {{orderId}} a été confirmée.',
-      isActive: true,
-    },
-  })
-
-  await prisma.notificationTemplate.create({
-    data: {
-      name: 'Rappel de paiement',
-      type: NotificationType.PAYMENT_REMINDER,
-      channel: NotificationChannel.EMAIL,
-      subject: 'Rappel de paiement',
-      body: 'Un paiement de {{amount}} DZD est en attente.',
-      isActive: true,
-    },
-  })
-
-  await prisma.notificationTemplate.create({
-    data: {
-      name: 'Prospect assigné',
-      type: NotificationType.LEAD_ASSIGNED,
-      channel: NotificationChannel.SMS,
-      body: 'Un nouveau prospect vous a été assigné: {{leadName}}',
-      isActive: true,
-    },
-  })
-
-  await prisma.notificationTemplate.create({
-    data: {
-      name: 'Véhicule disponible',
-      type: NotificationType.VEHICLE_AVAILABLE,
-      channel: NotificationChannel.EMAIL,
-      subject: 'Nouveau véhicule disponible',
-      body: 'Le véhicule {{vehicleName}} est maintenant disponible.',
-      isActive: true,
-    },
-  })
-
-  console.log('✓ 5 notification templates created')
-
   // Summary
   console.log('\n' + '='.repeat(60))
   console.log('✅ FULL SEED COMPLETED SUCCESSFULLY!')
@@ -900,7 +827,6 @@ async function main() {
   console.log(`   - Leads: 4`)
   console.log(`   - Suppliers: 2`)
   console.log(`   - Tax Configs: 3`)
-  console.log(`   - Notification Templates: 5`)
 
   console.log('\n👤 Test accounts (password: Password123!):')
   console.log(`   - superadmin@ibticar.ai (SUPER_ADMIN)`)
