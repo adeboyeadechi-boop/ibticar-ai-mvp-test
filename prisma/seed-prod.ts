@@ -299,6 +299,43 @@ async function main() {
     data: { managerId: admin.id },
   })
 
+  // 5b. Link users to their roles
+  console.log('🔗 Linking users to roles...')
+  await prisma.usersOnRoles.create({
+    data: {
+      userId: superAdmin.id,
+      roleId: superAdminRole.id,
+    },
+  })
+
+  await prisma.usersOnRoles.create({
+    data: {
+      userId: admin.id,
+      roleId: adminRole.id,
+    },
+  })
+
+  await prisma.usersOnRoles.create({
+    data: {
+      userId: manager.id,
+      roleId: managerRole.id,
+    },
+  })
+
+  await prisma.usersOnRoles.create({
+    data: {
+      userId: sales.id,
+      roleId: salesRole.id,
+    },
+  })
+
+  await prisma.usersOnRoles.create({
+    data: {
+      userId: user.id,
+      roleId: userRole.id,
+    },
+  })
+
   // 6. Create Vehicle Brands
   console.log('🚗 Creating vehicle brands...')
   const brands = [
