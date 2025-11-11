@@ -8,19 +8,7 @@
   "crons": [
     {
       "path": "/api/alerts/check",
-      "schedule": "0 */6 * * *"
-    },
-    {
-      "path": "/api/appointments/reminders",
-      "schedule": "0 9 * * *"
-    },
-    {
-      "path": "/api/campaigns/send",
-      "schedule": "*/15 * * * *"
-    },
-    {
-      "path": "/api/marketplace/sync",
-      "schedule": "0 */4 * * *"
+      "schedule": "0 0 * * *"
     }
   ]
 }
