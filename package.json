@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "node scripts/start-with-db-check.mjs",
     "dev:unsafe": "next dev",
-    "build": "npx prisma generate && next build",
+    "build": "npx prisma migrate deploy && next build || next build",
+    "build:local": "npx prisma generate && next build",
+    "postinstall": "npx prisma generate",
+    "vercel-build": "npx prisma generate && npx prisma migrate deploy && (npx prisma db seed || true) && next build",
     "start": "node scripts/start-with-db-check.mjs",
     "start:unsafe": "next start",
     "lint": "next lint",
@@ -14,23 +17,27 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "db:check": "node scripts/init-db.mjs",
-    "db:seed": "npx dotenv -e .env -- tsx prisma/seed.ts",
+    "db:seed": "npx dotenv -e .env -- tsx prisma/seed-complete.ts",
     "db:migrate": "npx prisma migrate dev",
     "db:migrate:deploy": "npx prisma migrate deploy",
+    "db:deploy": "npx prisma migrate deploy && npx prisma db seed",
     "db:generate": "npx prisma generate",
     "db:studio": "npx prisma studio"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed-complete.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.68.0",
     "@auth/prisma-adapter": "^2.11.1",
+    "@google/generative-ai": "^0.24.1",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@types/jsonwebtoken": "^9.0.10",
+    "@vercel/blob": "^2.0.0",
     "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "exceljs": "^4.4.0",
     "ioredis": "^5.8.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.553.0",

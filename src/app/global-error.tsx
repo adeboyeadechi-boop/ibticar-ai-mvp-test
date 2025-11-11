@@ -1,9 +1,5 @@
 'use client'
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic'
-export const dynamicParams = true
-
 export default function GlobalError({
   error,
   reset,
@@ -13,10 +9,6 @@ export default function GlobalError({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <title>Error - Ibticar.AI</title>
-      </head>
       <body>
         <div style={{ padding: '2rem', fontFamily: 'system-ui, sans-serif' }}>
           <h2>Something went wrong!</h2>

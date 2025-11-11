@@ -35,7 +35,26 @@
       "Bash(git ls-tree:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(next build)"
+      "Bash(next build)",
+      "Bash(bash:*)",
+      "Bash(BASE_URL=\"https://ibticar-ai-mvp-test-3mtyicgk4-adechi-adeboyes-projects.vercel.app\":*)",
+      "Bash(echo:*)",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWhzNWxyajcwMDBzano2cjA3enNpNW90IiwiZW1haWwiOiJzdXBlcmFkbWluQGlidGljYXIuYWkiLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3NjI3MjAyMzUsImV4cCI6MTc2MjcyMTEzNX0.8pIjlHrxdRt0rnw6pOsUhd-i4nd2nBjO9sZ9cyCEXAo\")",
+      "Bash(BASE_URL=\"https://ibticar-ai-mvp-test-2s0ip5fbt-adechi-adeboyes-projects.vercel.app\" bash test-complete-final.sh)",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWhzNWxyajcwMDBzano2cjA3enNpNW90IiwiZW1haWwiOiJzdXBlcmFkbWluQGlidGljYXIuYWkiLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3NjI3Mjk4NTQsImV4cCI6MTc2MjczMDc1NH0.uhpnCVUOSs14MiqndJUKRELmeOw-9kCqIAFGHjXVVyc\")",
+      "Bash(npx tsc:*)",
+      "Bash(mvp_checklist_extracted.txt)",
+      "Bash(test -f:*)",
+      "Bash(test:*)",
+      "Bash(PRD_SUMMARY.txt)",
+      "Bash(npm run build:local:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 60 bash -c \"npm run build 2>&1 | grep -A 5 ''Failed to compile''\")",
+      "Bash(DATABASE_URL=\"postgresql://dummy:dummy@localhost:5432/dummy\" npx prisma generate:*)",
+      "Bash(npm run lint)",
+      "Bash(npx next lint:*)",
+      "Bash(npx eslint:*)",
+      "Bash(/dev/null)"
     ]
   }
 }

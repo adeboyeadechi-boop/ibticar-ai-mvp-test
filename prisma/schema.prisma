@@ -994,7 +994,9 @@ model Brand {
   name      String   @unique
   slug      String   @unique
   logo      String?
+  logoUrl   String?
   country   String?
+  website   String?
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1144,6 +1146,8 @@ model CreditNote {
   updatedAt        DateTime         @updatedAt
 
   // Relations
+  invoice  Invoice  @relation(fields: [invoiceId], references: [id])
+  customer Customer @relation(fields: [customerId], references: [id])
 }
 
 // Clients (CRM)
@@ -1174,6 +1178,19 @@ model Customer {
   updatedAt   DateTime       @updatedAt
 
   // Relations
+  invoices         Invoice[]
+  quotes           Quote[]
+  payments         Payment[]
+  creditNotes      CreditNote[]
+  orders           Order[]
+  marketplaceAlerts MarketplaceAlert[]
+  leads            Lead[]
+  favorites        Favorite[]
+  financingSimulations FinancingSimulation[]
+  reviews          Review[]
+  tradeInEstimates TradeInEstimate[]
+  paymentReminders PaymentReminder[]
+  recurringInvoices RecurringInvoice[] @relation("RecurringInvoiceCustomer")
 }
 
 // Tableaux de bord personnalisés
@@ -1243,6 +1260,8 @@ model Favorite {
   createdAt  DateTime @default(now())
 
   // Relations
+  customer Customer @relation(fields: [customerId], references: [id])
+  vehicle  Vehicle  @relation("VehicleFavorites", fields: [vehicleId], references: [id])
 }
 
 // Simulations de financement
@@ -1262,6 +1281,8 @@ model FinancingSimulation {
   createdAt      DateTime         @default(now())
 
   // Relations
+  customer Customer @relation(fields: [customerId], references: [id])
+  vehicle  Vehicle  @relation("VehicleFinancingSimulations", fields: [vehicleId], references: [id])
 }
 
 // Rapports fiscaux
@@ -1430,6 +1451,15 @@ model Invoice {
   updatedAt      DateTime      @updatedAt
 
   // Relations
+  customer    Customer          @relation(fields: [customerId], references: [id])
+  team        Team              @relation("TeamInvoices", fields: [teamId], references: [id])
+  createdBy   User              @relation("CreatedInvoices", fields: [createdById], references: [id])
+  quote       Quote?            @relation("QuoteInvoices", fields: [quoteId], references: [id])
+  items       InvoiceItem[]
+  payments    Payment[]
+  creditNotes CreditNote[]
+  convertedQuote Quote?         @relation("QuoteConversion")
+  paymentReminders PaymentReminder[]
 }
 
 // Lignes de facture
@@ -1447,6 +1477,8 @@ model InvoiceItem {
   order        Int     @default(0)
 
   // Relations
+  invoice Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  vehicle Vehicle? @relation("InvoiceItemVehicles", fields: [vehicleId], references: [id])
 }
 
 // Prospects en cours de prospection
@@ -1469,6 +1501,9 @@ model Lead {
   updatedAt           DateTime   @updatedAt
 
   // Relations
+  customer          Customer @relation(fields: [customerId], references: [id])
+  assignedTo        User     @relation("AssignedLeads", fields: [assignedToId], references: [id])
+  interestedVehicle Vehicle? @relation(fields: [interestedVehicleId], references: [id])
 }
 
 // Cartes de fidélité
@@ -1543,6 +1578,7 @@ model MarketplaceAlert {
   updatedAt  DateTime       @updatedAt
 
   // Relations
+  customer Customer @relation(fields: [customerId], references: [id])
 }
 
 // Notifications
@@ -1620,6 +1656,8 @@ model Order {
   updatedAt          DateTime    @updatedAt
 
   // Relations
+  customer Customer @relation(fields: [customerId], references: [id])
+  reviews  Review[]
 }
 
 // Paiements et acomptes
@@ -1644,6 +1682,8 @@ model Payment {
   updatedAt     DateTime      @updatedAt
 
   // Relations
+  invoice  Invoice  @relation(fields: [invoiceId], references: [id])
+  customer Customer @relation(fields: [customerId], references: [id])
 }
 
 // Relances automatiques
@@ -1659,6 +1699,8 @@ model PaymentReminder {
   createdAt   DateTime       @default(now())
 
   // Relations
+  invoice  Invoice  @relation(fields: [invoiceId], references: [id])
+  customer Customer @relation(fields: [customerId], references: [id])
 }
 
 // Permissions granulaires
@@ -1750,6 +1792,13 @@ model Quote {
   updatedAt            DateTime    @updatedAt
 
   // Relations
+  customer      Customer     @relation(fields: [customerId], references: [id])
+  team          Team         @relation("TeamQuotes", fields: [teamId], references: [id])
+  createdBy     User         @relation("CreatedQuotes", fields: [createdById], references: [id])
+  vehicle       Vehicle?     @relation("QuoteVehicles", fields: [vehicleId], references: [id])
+  items         QuoteItem[]
+  invoices      Invoice[]    @relation("QuoteInvoices")
+  convertedInvoice Invoice?  @relation("QuoteConversion", fields: [convertedToInvoiceId], references: [id])
 }
 
 // Lignes de devis
@@ -1767,6 +1816,8 @@ model QuoteItem {
   order        Int     @default(0)
 
   // Relations
+  quote   Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  vehicle Vehicle? @relation("QuoteItemVehicles", fields: [vehicleId], references: [id])
 }
 
 // Factures récurrentes
@@ -1785,6 +1836,8 @@ model RecurringInvoice {
   updatedAt       DateTime           @updatedAt
 
   // Relations
+  customer Customer @relation("RecurringInvoiceCustomer", fields: [customerId], references: [id])
+  team     Team     @relation("RecurringInvoiceTeam", fields: [teamId], references: [id])
 }
 
 // Rapports personnalisés
@@ -1865,6 +1918,9 @@ model Review {
   updatedAt   DateTime     @updatedAt
 
   // Relations
+  customer Customer @relation(fields: [customerId], references: [id])
+  vehicle  Vehicle? @relation("VehicleReviews", fields: [vehicleId], references: [id])
+  order    Order?   @relation(fields: [orderId], references: [id])
 }
 
 // Rôles avec permissions
@@ -2037,24 +2093,30 @@ model TaxConfiguration {
 // Équipes/concessions
 // Source: PRD-11-Gestion-Utilisateurs, PRD-01-Gestion-Stock
 model Team {
-  id        String     @id @default(cuid())
-  name      String
-  type      TeamType
-  managerId String
-  status    TeamStatus @default(ACTIVE)
-  code      String     @unique
-  address   String?
-  city      String?
-  wilaya    String?
-  phone     String?
-  email     String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id            String     @id @default(cuid())
+  name          String
+  type          TeamType
+  managerId     String
+  status        TeamStatus @default(ACTIVE)
+  code          String     @unique
+  address       String?
+  city          String?
+  wilaya        String?
+  phone         String?
+  email         String?
+  logoUrl       String?
+  website       String?
+  businessHours Json?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 
   // Relations
   vehicles      Vehicle[]       @relation(name: "TeamVehicles")
   transfersFrom StockTransfer[] @relation(name: "TransfersFrom")
   transfersTo   StockTransfer[] @relation(name: "TransfersTo")
+  invoices      Invoice[]       @relation("TeamInvoices")
+  quotes        Quote[]         @relation("TeamQuotes")
+  recurringInvoices RecurringInvoice[] @relation("RecurringInvoiceTeam")
 }
 
 // Estimations de reprise
@@ -2073,6 +2135,8 @@ model TradeInEstimate {
   createdAt      DateTime         @default(now())
 
   // Relations
+  customer     Customer     @relation(fields: [customerId], references: [id])
+  vehicleModel VehicleModel @relation(fields: [vehicleModelId], references: [id])
 }
 
 // Utilisateurs de la plateforme
@@ -2104,6 +2168,9 @@ model User {
   sessions           Session[]
   refreshTokens      RefreshToken[]
   roles              UsersOnRoles[]
+  createdInvoices    Invoice[]       @relation("CreatedInvoices")
+  createdQuotes      Quote[]         @relation("CreatedQuotes")
+  assignedLeads      Lead[]          @relation("AssignedLeads")
 }
 
 // Rôles des utilisateurs (table de liaison)
@@ -2127,6 +2194,7 @@ model UsersOnRoles {
 model Vehicle {
   id             String           @id @default(cuid())
   vin            String           @unique
+  registrationNumber String?      @unique
   vehicleModelId String
   teamId         String
   status         VehicleStatus    @default(AVAILABLE)
@@ -2142,9 +2210,19 @@ model Vehicle {
   location       String?
   features       Json?
   notes          String?
+  description    String?
   publishedAt    DateTime?
   soldAt         DateTime?
   archivedAt     DateTime?
+  availableForSale Boolean        @default(false)
+  availableForRent Boolean        @default(false)
+  viewCount      Int              @default(0)
+  // Étiquetage énergétique (Algérie - conforme lois 2024)
+  energyClass              EnergyLabel? // Classe énergétique calculée (A++ à G)
+  fuelConsumptionUrban     Decimal?     // L/100km en ville
+  fuelConsumptionHighway   Decimal?     // L/100km sur autoroute
+  fuelConsumptionCombined  Decimal?     // L/100km mixte
+  co2EmissionsActual       Int?         // g/km CO2 mesuré (vs standard du modèle)
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
 
@@ -2153,6 +2231,13 @@ model Vehicle {
   team          Team             @relation(name: "TeamVehicles", fields: [teamId], references: [id])
   media         VehicleMedia[]
   transfers     StockTransfer[]
+  interestedLeads Lead[]
+  favorites     Favorite[]       @relation("VehicleFavorites")
+  financingSimulations FinancingSimulation[] @relation("VehicleFinancingSimulations")
+  reviews       Review[]         @relation("VehicleReviews")
+  quotes        Quote[]          @relation("QuoteVehicles")
+  quoteItems    QuoteItem[]      @relation("QuoteItemVehicles")
+  invoiceItems  InvoiceItem[]    @relation("InvoiceItemVehicles")
 }
 
 // Configurations de véhicules neufs
@@ -2200,6 +2285,7 @@ model VehicleMedia {
   thumbnailUrl String?
   order        Int       @default(0)
   is360        Boolean   @default(false)
+  isPrimary    Boolean   @default(false)
   caption      String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -2232,8 +2318,9 @@ model VehicleModel {
   updatedAt      DateTime         @updatedAt
 
   // Relations
-  brand    Brand      @relation(fields: [brandId], references: [id])
-  vehicles Vehicle[]
+  brand            Brand             @relation(fields: [brandId], references: [id])
+  vehicles         Vehicle[]
+  tradeInEstimates TradeInEstimate[]
 }
 
 // Garanties

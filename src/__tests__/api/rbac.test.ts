@@ -150,7 +150,7 @@ describe('RBAC API Endpoints', () => {
 
       const result = await prismaMock.role.findUnique({
         where: { id: mockRoleId },
-      })
+      }) as any
 
       expect(result).not.toBeNull()
       expect(result?.name).toBe('MANAGER')
@@ -405,7 +405,7 @@ describe('RBAC API Endpoints', () => {
 
       prismaMock.role.findUnique.mockResolvedValue(mockRole as any)
 
-      const role = await prismaMock.role.findUnique({ where: { id: mockRoleId } })
+      const role = await prismaMock.role.findUnique({ where: { id: mockRoleId } }) as any
 
       expect(role?._count.users).toBeGreaterThan(0)
     })

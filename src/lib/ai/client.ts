@@ -12,6 +12,7 @@ import type {
 } from './types'
 import { ClaudeProvider } from './providers/claude'
 import { LocalProvider, VLLMProvider } from './providers/local'
+import { GeminiProvider } from './providers/gemini'
 
 // Singleton instance
 let aiClientInstance: AIClient | null = null
@@ -26,6 +27,9 @@ export class AIClient {
     switch (config.provider) {
       case 'claude':
         this.provider = new ClaudeProvider(config)
+        break
+      case 'gemini':
+        this.provider = new GeminiProvider(config)
         break
       case 'local':
         // Check if baseUrl suggests vLLM (OpenAI-compatible)
@@ -48,12 +52,39 @@ export class AIClient {
    */
   static initialize(config?: AIProviderConfig): AIClient {
     if (!aiClientInstance) {
+      const provider = (process.env.AI_PROVIDER as any) || 'gemini'
+
+      // Determine API key based on provider
+      let apiKey: string | undefined
+      let defaultModel: string
+
+      switch (provider) {
+        case 'claude':
+          apiKey = process.env.ANTHROPIC_API_KEY
+          defaultModel = 'claude-3-5-sonnet-20241022'
+          break
+        case 'gemini':
+          apiKey = process.env.GOOGLE_API_KEY
+          defaultModel = 'gemini-2.5-flash'
+          break
+        case 'openai':
+          apiKey = process.env.OPENAI_API_KEY
+          defaultModel = 'gpt-4-turbo-preview'
+          break
+        case 'local':
+          apiKey = undefined // No API key needed for local models
+          defaultModel = 'mistral'
+          break
+        default:
+          apiKey = process.env.ANTHROPIC_API_KEY
+          defaultModel = 'claude-3-5-sonnet-20241022'
+      }
+
       const defaultConfig: AIProviderConfig = {
-        provider: (process.env.AI_PROVIDER as any) || 'claude',
-        apiKey: process.env.ANTHROPIC_API_KEY,
+        provider,
+        apiKey: apiKey || process.env.AI_API_KEY, // Fallback to generic AI_API_KEY
         baseUrl: process.env.AI_BASE_URL,
-        model:
-          process.env.AI_MODEL || 'claude-3-5-sonnet-20241022',
+        model: process.env.AI_MODEL || defaultModel,
         temperature: parseFloat(process.env.AI_TEMPERATURE || '0.7'),
         maxTokens: parseInt(process.env.AI_MAX_TOKENS || '4096'),
       }
