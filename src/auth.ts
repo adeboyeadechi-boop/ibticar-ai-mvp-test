@@ -3,6 +3,7 @@
 import { NextAuthOptions } from "next-auth"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
 import prisma from "@/prisma/client"
 import bcrypt from "bcrypt"
 import { getServerSession } from "next-auth/next"
@@ -11,6 +12,19 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   providers: [
+    // Google OAuth Provider
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
+    }),
+    // Credentials Provider (Email/Password)
     CredentialsProvider({
       name: "Email et mot de passe",
       credentials: {
@@ -58,10 +72,53 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // Pour OAuth (Google), créer l'utilisateur s'il n'existe pas
+      if (account?.provider === "google") {
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email! }
+        })
+
+        if (!existingUser) {
+          // Créer un nouvel utilisateur pour Google OAuth
+          const [firstName, ...lastNameParts] = (profile?.name || user.name || "").split(" ")
+          const lastName = lastNameParts.join(" ") || firstName
+
+          // Générer un password hash aléatoire pour OAuth (non utilisé)
+          const randomPassword = Math.random().toString(36).slice(-16)
+          const passwordHash = await bcrypt.hash(randomPassword, 10)
+
+          await prisma.user.create({
+            data: {
+              email: user.email!,
+              firstName,
+              lastName,
+              passwordHash, // Hash aléatoire (utilisateur OAuth ne l'utilise pas)
+              role: "USER", // Rôle par défaut
+              emailVerifiedAt: new Date(), // Email vérifié via Google
+              isActive: true,
+            }
+          })
+
+          console.log('✅ New user created via Google OAuth:', user.email)
+        }
+      }
+      return true
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
         token.role = (user as any).role
+      } else if (token.email) {
+        // Récupérer le rôle depuis la DB si pas dans user
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email },
+          select: { id: true, role: true }
+        })
+        if (dbUser) {
+          token.id = dbUser.id
+          token.role = dbUser.role
+        }
       }
       return token
     },

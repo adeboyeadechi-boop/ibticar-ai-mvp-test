@@ -1,0 +1,286 @@
+Starting extraction...
+Processing: Arborescence-Par-Profil.docx
+Processing: MVP-Implementation-Checklist.docx
+Processing: PRD-01-Gestion-Stock\PRD.docx
+Processing: PRD-01-Gestion-Stock\US-001-Ajouter-Vehicule.docx
+Processing: PRD-01-Gestion-Stock\US-002-Rechercher-Vehicule.docx
+Processing: PRD-01-Gestion-Stock\US-003-Modifier-Vehicule.docx
+Processing: PRD-01-Gestion-Stock\US-004-Gerer-Statut-Vehicule.docx
+Processing: PRD-01-Gestion-Stock\US-005-Importer-Vehicules-Masse.docx
+Processing: PRD-01-Gestion-Stock\US-006-Tableau-Bord-Stock.docx
+Processing: PRD-01-Gestion-Stock\US-007-Alertes-Stock.docx
+Processing: PRD-01-Gestion-Stock\US-008-Exporter-Inventaire.docx
+Processing: PRD-01-Gestion-Stock\US-009-Transferer-Vehicule.docx
+Processing: PRD-01-Gestion-Stock\US-010-Stock-Consolide-Multi-Sites.docx
+Processing: PRD-01-Gestion-Stock\US-011-Prediction-Prix-Optimal.docx
+Processing: PRD-01-Gestion-Stock\US-012-Analyser-Rotation-Stock.docx
+Processing: PRD-01-Gestion-Stock\US-013-Synchroniser-Marketplace.docx
+Processing: PRD-01-Gestion-Stock\US-014-Integration-Comptable.docx
+Processing: PRD-01-Gestion-Stock\US-015-Optimiser-Performances.docx
+Processing: PRD-01-Gestion-Stock\US-016-Securiser-Donnees.docx
+Processing: PRD-01-Gestion-Stock\US-017-Archiver-Vehicules-Vendus.docx
+Processing: PRD-01-Gestion-Stock\US-018-Workflow-Publication-Marketplace.docx
+Processing: PRD-01-Gestion-Stock\US-020-Smart-Validation-Workflow.docx
+Processing: PRD-02-Module-Comptable\PRD.docx
+Processing: PRD-02-Module-Comptable\US-001-Creer-Devis-Client.docx
+Processing: PRD-02-Module-Comptable\US-002-Convertir-Devis-Facture.docx
+Processing: PRD-02-Module-Comptable\US-003-Gerer-Acomptes-Paiements.docx
+Processing: PRD-02-Module-Comptable\US-004-Gerer-Avoirs-Remboursements.docx
+Processing: PRD-02-Module-Comptable\US-005-Gerer-Factures-Recurrentes.docx
+Processing: PRD-02-Module-Comptable\US-006-Tableau-Bord-Financier.docx
+Processing: PRD-02-Module-Comptable\US-007-Gestion-TVA-Algerie.docx
+Processing: PRD-02-Module-Comptable\US-008-Relances-Automatiques-Clients.docx
+Processing: PRD-02-Module-Comptable\US-009-Integration-Banques-Algeriennes.docx
+Processing: PRD-02-Module-Comptable\US-010-Conformite-Comptable-Algerie.docx
+Processing: PRD-02-Module-Comptable\US-011-Integration-Paiement-Beyn.docx
+Processing: PRD-02-Module-Comptable\US-012-Dashboard-Fiscal-Unifie.docx
+Processing: PRD-03-Marketplace\PRD.docx
+Processing: PRD-03-Marketplace\US-001-Consulter-Catalogue-Vehicules.docx
+Processing: PRD-03-Marketplace\US-002-Fiche-Detaillee-Vehicule.docx
+Processing: PRD-03-Marketplace\US-003-Filtres-Recherche-Avancee.docx
+Processing: PRD-03-Marketplace\US-004-Galerie-Photos-360.docx
+Processing: PRD-03-Marketplace\US-005-Contacter-Vendeur.docx
+Processing: PRD-03-Marketplace\US-006-Favoris-Comparateur.docx
+Processing: PRD-03-Marketplace\US-007-Estimation-Reprise.docx
+Processing: PRD-03-Marketplace\US-008-Simulation-Financement.docx
+Processing: PRD-03-Marketplace\US-009-Avis-Evaluations-Clients.docx
+Processing: PRD-03-Marketplace\US-010-Alertes-Nouveautes.docx
+Processing: PRD-03-Marketplace\US-022-Preparation-Financement-Phase1.docx
+Processing: PRD-03-Marketplace\US-024-Promotion-Sociale-Automatique.docx
+Processing: PRD-04-CRM\PRD.docx
+Processing: PRD-04-CRM\US-001-Creer-Fiche-Client.docx
+Processing: PRD-04-CRM\US-002-Suivi-Prospection.docx
+Processing: PRD-04-CRM\US-003-Gestion-Rendez-Vous.docx
+Processing: PRD-04-CRM\US-004-Service-Apres-Vente.docx
+Processing: PRD-04-CRM\US-005-Campagnes-Marketing.docx
+Processing: PRD-04-CRM\US-006-Historique-Interactions.docx
+Processing: PRD-04-CRM\US-007-Gestion-Reclamations.docx
+Processing: PRD-04-CRM\US-008-Programme-Fidelite.docx
+Processing: PRD-04-CRM\US-009-Analytics-Clients.docx
+Processing: PRD-04-CRM\US-010-Integration-Telephonie.docx
+Processing: PRD-05-Module-IA\PRD.docx
+Processing: PRD-05-Module-IA\US-001-Recommendations-Smart-Deals.docx
+Processing: PRD-05-Module-IA\US-002-Analyse-Rotation-Stock-IA.docx
+Processing: PRD-05-Module-IA\US-003-Matching-Marche-Algerien.docx
+Processing: PRD-05-Module-IA\US-004-Scoring-Rentabilite-IA.docx
+Processing: PRD-05-Module-IA\US-005-Predictions-Ventes-IA.docx
+Processing: PRD-05-Module-IA\US-006-Chatbot-IA-Clients.docx
+Processing: PRD-05-Module-IA\US-007-Detection-Fraude-IA.docx
+Processing: PRD-05-Module-IA\US-008-Optimisation-Stock-IA.docx
+Processing: PRD-05-Module-IA\US-021-Validation-IA-Automatique.docx
+Processing: PRD-06-Catalogue-Vehicules\PRD.docx
+Processing: PRD-06-Catalogue-Vehicules\US-001-Gestion-Fiches-Vehicules.docx
+Processing: PRD-06-Catalogue-Vehicules\US-002-Import-Donnees-Constructeurs.docx
+Processing: PRD-06-Catalogue-Vehicules\US-003-Gestion-Photos-Videos.docx
+Processing: PRD-06-Catalogue-Vehicules\US-004-Historique-Vehicule.docx
+Processing: PRD-06-Catalogue-Vehicules\US-005-Recherche-Intelligente.docx
+Processing: PRD-06-Catalogue-Vehicules\US-006-Configurateur-Vehicules-Neufs.docx
+Processing: PRD-06-Catalogue-Vehicules\US-007-Etiquetage-Energetique.docx
+Processing: PRD-06-Catalogue-Vehicules\US-008-Catalogue-Multilingue.docx
+Processing: PRD-07-Gestion-Fournisseurs\PRD.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-001-Referentiel-Fournisseurs.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-002-Commandes-Fournisseurs.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-003-Reception-Livraisons.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-004-Facturation-Fournisseurs.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-005-Negociation-Prix.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-006-Performance-Fournisseurs.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-007-Integration-EDI.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-008-Gestion-Garanties.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-009-Planification-Approvisionnements.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-010-Portail-Fournisseurs.docx
+Processing: PRD-07-Gestion-Fournisseurs\US-023-Financement-Stock-B2B.docx
+Processing: PRD-08-Reporting-Analytics\PRD.docx
+Processing: PRD-08-Reporting-Analytics\US-001-Dashboard-Executive.docx
+Processing: PRD-08-Reporting-Analytics\US-002-Analytics-Ventes.docx
+Processing: PRD-08-Reporting-Analytics\US-003-Reporting-Stock.docx
+Processing: PRD-08-Reporting-Analytics\US-004-Analytics-Financiers.docx
+Processing: PRD-08-Reporting-Analytics\US-005-Performance-Marketplace.docx
+Processing: PRD-08-Reporting-Analytics\US-006-Reporting-Personnalise.docx
+Processing: PRD-08-Reporting-Analytics\US-007-Analytics-Predictive.docx
+Processing: PRD-08-Reporting-Analytics\US-008-Integration-BI.docx
+Processing: PRD-09-Notifications\PRD.docx
+Processing: PRD-09-Notifications\US-001-Configurer-Alertes-Stock.docx
+Processing: PRD-09-Notifications\US-002-Notifications-Commerciales.docx
+Processing: PRD-09-Notifications\US-003-Notifications-Rendez-Vous.docx
+Processing: PRD-09-Notifications\US-004-Alertes-Financieres.docx
+Processing: PRD-09-Notifications\US-005-Notifications-SAV.docx
+Processing: PRD-09-Notifications\US-006-Alertes-Conformite.docx
+Processing: PRD-09-Notifications\US-007-Notifications-Personnalisees.docx
+Processing: PRD-09-Notifications\US-008-Integration-SMS-Algerie.docx
+Processing: PRD-09-Notifications\US-009-Notifications-IA.docx
+Processing: PRD-09-Notifications\US-010-Analytics-Notifications.docx
+Processing: PRD-10-Retours-Annulations\PRD.docx
+Processing: PRD-10-Retours-Annulations\US-001-Demande-Annulation.docx
+Processing: PRD-10-Retours-Annulations\US-002-Gestion-Retours-Vehicules.docx
+Processing: PRD-10-Retours-Annulations\US-003-Remboursements-Clients.docx
+Processing: PRD-10-Retours-Annulations\US-004-Gestion-Litiges.docx
+Processing: PRD-10-Retours-Annulations\US-005-Reconditionnement-Vehicules.docx
+Processing: PRD-10-Retours-Annulations\US-006-Analytics-Retours.docx
+Processing: PRD-10-Retours-Annulations\US-007-Notifications-Retours.docx
+Processing: PRD-10-Retours-Annulations\US-008-Conformite-Legale.docx
+Processing: PRD-11-Gestion-Utilisateurs\PRD.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-001-Authentification-Multilingue.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-002-Roles-Permissions-Granulaires.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-003-Gestion-Equipes.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-004-Profils-Utilisateurs-Clients.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-005-Authentification-Forte.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-006-Onboarding-Utilisateurs.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-007-Audit-Activite.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-008-Single-Sign-On.docx
+Processing: PRD-11-Gestion-Utilisateurs\US-019-Validation-Admin-Ibticar.docx
+Processing: PRD-12-Module-Assurance\PRD.docx
+Processing: PRD-12-Module-Assurance\US-001-Referentiel-Assureurs-Algerie.docx
+Processing: PRD-12-Module-Assurance\US-002-Devis-Assurance-Instantane.docx
+Processing: PRD-12-Module-Assurance\US-003-Gestion-Polices-Actives.docx
+Processing: PRD-12-Module-Assurance\US-004-Declaration-Sinistres.docx
+Processing: PRD-12-Module-Assurance\US-005-Scoring-Profil-Risque.docx
+Processing: PRD-12-Module-Assurance\US-006-Gestion-Commissions.docx
+Processing: PRD-12-Module-Assurance\US-007-Rappels-Echeances.docx
+Processing: PRD-12-Module-Assurance\US-008-Conformite-ANPT.docx
+Processing: PRD-12-Module-Assurance\US-009-Integration-Bancaire.docx
+Processing: PRD-12-Module-Assurance\US-010-Analytics-Assurance.docx
+
+Extraction complete! Found 140 files.
+Results saved to: C:\Users\Adeboye Adechi\Documents\ADSERVIO\IBTICAR_AI\ibticar-ai-mvp\implementations_extracted.json
+
+Files processed:
+  - Arborescence-Par-Profil.docx (8992 chars)
+  - MVP-Implementation-Checklist.docx (6828 chars)
+  - PRD-01-Gestion-Stock\PRD.docx (7028 chars)
+  - PRD-01-Gestion-Stock\US-001-Ajouter-Vehicule.docx (869 chars)
+  - PRD-01-Gestion-Stock\US-002-Rechercher-Vehicule.docx (542 chars)
+  - PRD-01-Gestion-Stock\US-003-Modifier-Vehicule.docx (585 chars)
+  - PRD-01-Gestion-Stock\US-004-Gerer-Statut-Vehicule.docx (698 chars)
+  - PRD-01-Gestion-Stock\US-005-Importer-Vehicules-Masse.docx (592 chars)
+  - PRD-01-Gestion-Stock\US-006-Tableau-Bord-Stock.docx (551 chars)
+  - PRD-01-Gestion-Stock\US-007-Alertes-Stock.docx (551 chars)
+  - PRD-01-Gestion-Stock\US-008-Exporter-Inventaire.docx (494 chars)
+  - PRD-01-Gestion-Stock\US-009-Transferer-Vehicule.docx (535 chars)
+  - PRD-01-Gestion-Stock\US-010-Stock-Consolide-Multi-Sites.docx (502 chars)
+  - PRD-01-Gestion-Stock\US-011-Prediction-Prix-Optimal.docx (504 chars)
+  - PRD-01-Gestion-Stock\US-012-Analyser-Rotation-Stock.docx (494 chars)
+  - PRD-01-Gestion-Stock\US-013-Synchroniser-Marketplace.docx (1536 chars)
+  - PRD-01-Gestion-Stock\US-014-Integration-Comptable.docx (484 chars)
+  - PRD-01-Gestion-Stock\US-015-Optimiser-Performances.docx (429 chars)
+  - PRD-01-Gestion-Stock\US-016-Securiser-Donnees.docx (459 chars)
+  - PRD-01-Gestion-Stock\US-017-Archiver-Vehicules-Vendus.docx (2143 chars)
+  - PRD-01-Gestion-Stock\US-018-Workflow-Publication-Marketplace.docx (2772 chars)
+  - PRD-01-Gestion-Stock\US-020-Smart-Validation-Workflow.docx (4818 chars)
+  - PRD-02-Module-Comptable\PRD.docx (8658 chars)
+  - PRD-02-Module-Comptable\US-001-Creer-Devis-Client.docx (607 chars)
+  - PRD-02-Module-Comptable\US-002-Convertir-Devis-Facture.docx (549 chars)
+  - PRD-02-Module-Comptable\US-003-Gerer-Acomptes-Paiements.docx (543 chars)
+  - PRD-02-Module-Comptable\US-004-Gerer-Avoirs-Remboursements.docx (547 chars)
+  - PRD-02-Module-Comptable\US-005-Gerer-Factures-Recurrentes.docx (691 chars)
+  - PRD-02-Module-Comptable\US-006-Tableau-Bord-Financier.docx (564 chars)
+  - PRD-02-Module-Comptable\US-007-Gestion-TVA-Algerie.docx (1276 chars)
+  - PRD-02-Module-Comptable\US-008-Relances-Automatiques-Clients.docx (620 chars)
+  - PRD-02-Module-Comptable\US-009-Integration-Banques-Algeriennes.docx (568 chars)
+  - PRD-02-Module-Comptable\US-010-Conformite-Comptable-Algerie.docx (609 chars)
+  - PRD-02-Module-Comptable\US-011-Integration-Paiement-Beyn.docx (5955 chars)
+  - PRD-02-Module-Comptable\US-012-Dashboard-Fiscal-Unifie.docx (5954 chars)
+  - PRD-03-Marketplace\PRD.docx (12763 chars)
+  - PRD-03-Marketplace\US-001-Consulter-Catalogue-Vehicules.docx (604 chars)
+  - PRD-03-Marketplace\US-002-Fiche-Detaillee-Vehicule.docx (576 chars)
+  - PRD-03-Marketplace\US-003-Filtres-Recherche-Avancee.docx (593 chars)
+  - PRD-03-Marketplace\US-004-Galerie-Photos-360.docx (516 chars)
+  - PRD-03-Marketplace\US-005-Contacter-Vendeur.docx (531 chars)
+  - PRD-03-Marketplace\US-006-Favoris-Comparateur.docx (588 chars)
+  - PRD-03-Marketplace\US-007-Estimation-Reprise.docx (585 chars)
+  - PRD-03-Marketplace\US-008-Simulation-Financement.docx (2388 chars)
+  - PRD-03-Marketplace\US-009-Avis-Evaluations-Clients.docx (625 chars)
+  - PRD-03-Marketplace\US-010-Alertes-Nouveautes.docx (638 chars)
+  - PRD-03-Marketplace\US-022-Preparation-Financement-Phase1.docx (4951 chars)
+  - PRD-03-Marketplace\US-024-Promotion-Sociale-Automatique.docx (6402 chars)
+  - PRD-04-CRM\PRD.docx (7299 chars)
+  - PRD-04-CRM\US-001-Creer-Fiche-Client.docx (611 chars)
+  - PRD-04-CRM\US-002-Suivi-Prospection.docx (594 chars)
+  - PRD-04-CRM\US-003-Gestion-Rendez-Vous.docx (566 chars)
+  - PRD-04-CRM\US-004-Service-Apres-Vente.docx (620 chars)
+  - PRD-04-CRM\US-005-Campagnes-Marketing.docx (580 chars)
+  - PRD-04-CRM\US-006-Historique-Interactions.docx (632 chars)
+  - PRD-04-CRM\US-007-Gestion-Reclamations.docx (594 chars)
+  - PRD-04-CRM\US-008-Programme-Fidelite.docx (593 chars)
+  - PRD-04-CRM\US-009-Analytics-Clients.docx (583 chars)
+  - PRD-04-CRM\US-010-Integration-Telephonie.docx (593 chars)
+  - PRD-05-Module-IA\PRD.docx (7998 chars)
+  - PRD-05-Module-IA\US-001-Recommendations-Smart-Deals.docx (618 chars)
+  - PRD-05-Module-IA\US-002-Analyse-Rotation-Stock-IA.docx (624 chars)
+  - PRD-05-Module-IA\US-003-Matching-Marche-Algerien.docx (612 chars)
+  - PRD-05-Module-IA\US-004-Scoring-Rentabilite-IA.docx (620 chars)
+  - PRD-05-Module-IA\US-005-Predictions-Ventes-IA.docx (612 chars)
+  - PRD-05-Module-IA\US-006-Chatbot-IA-Clients.docx (557 chars)
+  - PRD-05-Module-IA\US-007-Detection-Fraude-IA.docx (579 chars)
+  - PRD-05-Module-IA\US-008-Optimisation-Stock-IA.docx (620 chars)
+  - PRD-05-Module-IA\US-021-Validation-IA-Automatique.docx (5156 chars)
+  - PRD-06-Catalogue-Vehicules\PRD.docx (8019 chars)
+  - PRD-06-Catalogue-Vehicules\US-001-Gestion-Fiches-Vehicules.docx (621 chars)
+  - PRD-06-Catalogue-Vehicules\US-002-Import-Donnees-Constructeurs.docx (623 chars)
+  - PRD-06-Catalogue-Vehicules\US-003-Gestion-Photos-Videos.docx (577 chars)
+  - PRD-06-Catalogue-Vehicules\US-004-Historique-Vehicule.docx (566 chars)
+  - PRD-06-Catalogue-Vehicules\US-005-Recherche-Intelligente.docx (542 chars)
+  - PRD-06-Catalogue-Vehicules\US-006-Configurateur-Vehicules-Neufs.docx (592 chars)
+  - PRD-06-Catalogue-Vehicules\US-007-Etiquetage-Energetique.docx (591 chars)
+  - PRD-06-Catalogue-Vehicules\US-008-Catalogue-Multilingue.docx (562 chars)
+  - PRD-07-Gestion-Fournisseurs\PRD.docx (8411 chars)
+  - PRD-07-Gestion-Fournisseurs\US-001-Referentiel-Fournisseurs.docx (622 chars)
+  - PRD-07-Gestion-Fournisseurs\US-002-Commandes-Fournisseurs.docx (542 chars)
+  - PRD-07-Gestion-Fournisseurs\US-003-Reception-Livraisons.docx (591 chars)
+  - PRD-07-Gestion-Fournisseurs\US-004-Facturation-Fournisseurs.docx (613 chars)
+  - PRD-07-Gestion-Fournisseurs\US-005-Negociation-Prix.docx (601 chars)
+  - PRD-07-Gestion-Fournisseurs\US-006-Performance-Fournisseurs.docx (613 chars)
+  - PRD-07-Gestion-Fournisseurs\US-007-Integration-EDI.docx (534 chars)
+  - PRD-07-Gestion-Fournisseurs\US-008-Gestion-Garanties.docx (545 chars)
+  - PRD-07-Gestion-Fournisseurs\US-009-Planification-Approvisionnements.docx (608 chars)
+  - PRD-07-Gestion-Fournisseurs\US-010-Portail-Fournisseurs.docx (606 chars)
+  - PRD-07-Gestion-Fournisseurs\US-023-Financement-Stock-B2B.docx (5420 chars)
+  - PRD-08-Reporting-Analytics\PRD.docx (8148 chars)
+  - PRD-08-Reporting-Analytics\US-001-Dashboard-Executive.docx (560 chars)
+  - PRD-08-Reporting-Analytics\US-002-Analytics-Ventes.docx (576 chars)
+  - PRD-08-Reporting-Analytics\US-003-Reporting-Stock.docx (554 chars)
+  - PRD-08-Reporting-Analytics\US-004-Analytics-Financiers.docx (534 chars)
+  - PRD-08-Reporting-Analytics\US-005-Performance-Marketplace.docx (531 chars)
+  - PRD-08-Reporting-Analytics\US-006-Reporting-Personnalise.docx (545 chars)
+  - PRD-08-Reporting-Analytics\US-007-Analytics-Predictive.docx (570 chars)
+  - PRD-08-Reporting-Analytics\US-008-Integration-BI.docx (562 chars)
+  - PRD-09-Notifications\PRD.docx (8248 chars)
+  - PRD-09-Notifications\US-001-Configurer-Alertes-Stock.docx (610 chars)
+  - PRD-09-Notifications\US-002-Notifications-Commerciales.docx (508 chars)
+  - PRD-09-Notifications\US-003-Notifications-Rendez-Vous.docx (566 chars)
+  - PRD-09-Notifications\US-004-Alertes-Financieres.docx (582 chars)
+  - PRD-09-Notifications\US-005-Notifications-SAV.docx (568 chars)
+  - PRD-09-Notifications\US-006-Alertes-Conformite.docx (592 chars)
+  - PRD-09-Notifications\US-007-Notifications-Personnalisees.docx (633 chars)
+  - PRD-09-Notifications\US-008-Integration-SMS-Algerie.docx (559 chars)
+  - PRD-09-Notifications\US-009-Notifications-IA.docx (595 chars)
+  - PRD-09-Notifications\US-010-Analytics-Notifications.docx (555 chars)
+  - PRD-10-Retours-Annulations\PRD.docx (8403 chars)
+  - PRD-10-Retours-Annulations\US-001-Demande-Annulation.docx (569 chars)
+  - PRD-10-Retours-Annulations\US-002-Gestion-Retours-Vehicules.docx (575 chars)
+  - PRD-10-Retours-Annulations\US-003-Remboursements-Clients.docx (607 chars)
+  - PRD-10-Retours-Annulations\US-004-Gestion-Litiges.docx (576 chars)
+  - PRD-10-Retours-Annulations\US-005-Reconditionnement-Vehicules.docx (576 chars)
+  - PRD-10-Retours-Annulations\US-006-Analytics-Retours.docx (564 chars)
+  - PRD-10-Retours-Annulations\US-007-Notifications-Retours.docx (562 chars)
+  - PRD-10-Retours-Annulations\US-008-Conformite-Legale.docx (618 chars)
+  - PRD-11-Gestion-Utilisateurs\PRD.docx (8551 chars)
+  - PRD-11-Gestion-Utilisateurs\US-001-Authentification-Multilingue.docx (590 chars)
+  - PRD-11-Gestion-Utilisateurs\US-002-Roles-Permissions-Granulaires.docx (639 chars)
+  - PRD-11-Gestion-Utilisateurs\US-003-Gestion-Equipes.docx (579 chars)
+  - PRD-11-Gestion-Utilisateurs\US-004-Profils-Utilisateurs-Clients.docx (587 chars)
+  - PRD-11-Gestion-Utilisateurs\US-005-Authentification-Forte.docx (574 chars)
+  - PRD-11-Gestion-Utilisateurs\US-006-Onboarding-Utilisateurs.docx (557 chars)
+  - PRD-11-Gestion-Utilisateurs\US-007-Audit-Activite.docx (575 chars)
+  - PRD-11-Gestion-Utilisateurs\US-008-Single-Sign-On.docx (567 chars)
+  - PRD-11-Gestion-Utilisateurs\US-019-Validation-Admin-Ibticar.docx (4277 chars)
+  - PRD-12-Module-Assurance\PRD.docx (8188 chars)
+  - PRD-12-Module-Assurance\US-001-Referentiel-Assureurs-Algerie.docx (611 chars)
+  - PRD-12-Module-Assurance\US-002-Devis-Assurance-Instantane.docx (591 chars)
+  - PRD-12-Module-Assurance\US-003-Gestion-Polices-Actives.docx (576 chars)
+  - PRD-12-Module-Assurance\US-004-Declaration-Sinistres.docx (587 chars)
+  - PRD-12-Module-Assurance\US-005-Scoring-Profil-Risque.docx (603 chars)
+  - PRD-12-Module-Assurance\US-006-Gestion-Commissions.docx (572 chars)
+  - PRD-12-Module-Assurance\US-007-Rappels-Echeances.docx (608 chars)
+  - PRD-12-Module-Assurance\US-008-Conformite-ANPT.docx (597 chars)
+  - PRD-12-Module-Assurance\US-009-Integration-Bancaire.docx (583 chars)
+  - PRD-12-Module-Assurance\US-010-Analytics-Assurance.docx (551 chars)

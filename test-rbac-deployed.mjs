@@ -1,7 +1,7 @@
 // Test RBAC and database initialization on deployed backend
 import fetch from 'node-fetch';
 
-const BASE_URL = 'https://ibticar-ai-mvp-test-87q7629hc-adechi-adeboyes-projects.vercel.app/api';
+const BASE_URL = 'https://ibticar-ai-mvp-test-l0x1tsvsz-adechi-adeboyes-projects.vercel.app/api';
 
 async function main() {
   console.log('==========================================');

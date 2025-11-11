@@ -1,0 +1,360 @@
+# PRD-02 & PRD-03: Complete Implementation Analysis
+
+**Date:** November 10, 2025
+**Analyst:** Claude Code
+**Source:** implementations_extracted.json
+
+---
+
+## Executive Summary
+
+### Current Status
+
+**PRD-02: Module Comptable et Facturation**
+- Current Completion: ~40%
+- Total User Stories: 12
+- Status:
+  - Completed: 0
+  - In Progress: 1 (US-012 Dashboard Fiscal Unifié)
+  - Partial: 1 (US-011 Intégration Beyn)
+  - Not Started: 10
+
+**PRD-03: Marketplace B2B/B2C**
+- Current Completion: ~15%
+- Total User Stories: 12
+- Status:
+  - Completed: 0
+  - In Progress: 0
+  - Partial: 0
+  - Not Started: 12
+
+### Key Findings
+
+1. PRD-02 has foundational work on fiscal management (US-011, US-012)
+2. PRD-03 requires complete greenfield implementation
+3. Core accounting (quotes, invoices, payments) unimplemented
+4. Marketplace catalog and search not yet built
+
+### Estimated Effort
+
+- PRD-02: 70-95 developer days (3-4 months with 1 dev)
+- PRD-03: 58-75 developer days (2-3 months with 1 dev)
+- Total: 128-170 developer days (5-7 months with 1 dev, 2-3 months with 3 devs)
+
+---
+
+================================================================================
+IBTICAR.AI MVP - PRD ANALYSIS
+================================================================================
+
+This analysis covers:
+- PRD-02: Module Comptable et Facturation (~40% complete)
+- PRD-03: Marketplace B2B/B2C (~15% complete)
+
+
+================================================================================
+PRD-02: Module Comptable et Facturation
+================================================================================
+
+
+US-001: Creer Devis Client
+--------------------------------------------------------------------------------
+
+Description:
+  Sélection du véhicule depuis l'inventaire avec prix automatique
+  Calcul automatique des taxes algériennes (TVA 19%, TTC)
+  Ajout de prestations complémentaires (garantie, assurance)
+  Template personnalisable avec logo et coordonnées
+
+Status: Not Started
+
+
+US-002: Convertir Devis Facture
+--------------------------------------------------------------------------------
+
+Description:
+  Conversion en un clic depuis le devis validé
+  Numérotation facture selon normes algériennes
+  Calcul automatique des acomptes déjà versés
+  Mise à jour automatique du statut véhicule (vendu)
+
+Status: Not Started
+
+
+US-003: Gerer Acomptes Paiements
+--------------------------------------------------------------------------------
+
+Description:
+  Enregistrement acomptes avec mode de paiement
+  Support moyens algériens (chèque, virement, CCP, DAHABIA)
+  Calcul automatique du solde restant dû
+  Relances automatiques pour les échéances
+
+Status: Not Started
+
+
+US-004: Gerer Avoirs Remboursements
+--------------------------------------------------------------------------------
+
+Description:
+  Création d'avoir depuis facture existante
+  Motifs d'avoir configurables (retour, erreur, remise)
+  Calcul automatique des montants à rembourser
+  Validation workflow selon montant
+
+Status: Not Started
+
+
+US-005: Gerer Factures Recurrentes
+--------------------------------------------------------------------------------
+
+Description:
+  Configuration des modèles de facturation récurrente
+  Planification automatique des échéances (mensuel, trimestriel, annuel)
+  Génération automatique des factures selon la planification
+  Notification automatique aux clients avant échéance
+
+Status: Not Started
+
+
+US-006: Tableau Bord Financier
+--------------------------------------------------------------------------------
+
+Description:
+  Affichage du CA mensuel et annuel en DZD
+  Suivi des encaissements vs prévisionnel
+  Graphiques évolution chiffre d'affaires par mois
+  Répartition CA par type de véhicule (neuf/occasion)
+
+Status: Not Started
+
+
+US-007: Gestion TVA Algerie
+--------------------------------------------------------------------------------
+
+Description:
+  Application automatique TVA 19% sur ventes véhicules
+  Gestion exonération TVA pour certains cas (export, etc.)
+  Calcul automatique TVA déductible sur achats
+  Gestion crédit TVA et report automatique
+
+Status: Not Started
+
+
+US-008: Relances Automatiques Clients
+--------------------------------------------------------------------------------
+
+Description:
+  Configuration des échéances de relance (J+15, J+30, J+45)
+  Templates personnalisables pour emails et SMS
+  Envoi automatique relances selon planning défini
+  Escalade vers responsable si pas de règlement
+
+Status: Not Started
+
+
+US-009: Integration Banques Algeriennes
+--------------------------------------------------------------------------------
+
+Description:
+  Connexion APIs principales banques (CPA, BNA, BEA, AGB)
+  Import automatique des relevés de compte
+  Rapprochement automatique paiements/factures
+  Gestion des virements RTGS et RIB algériens
+
+Status: Not Started
+
+
+US-010: Conformite Comptable Algerie
+--------------------------------------------------------------------------------
+
+Description:
+  Plan comptable conforme au Système Comptable Financier (SCF)
+  Génération automatique bilan et compte de résultat
+  États annexes requis par la réglementation
+  Journal général et grand livre conformes
+
+Status: Not Started
+
+
+US-011: Integration Paiement Beyn
+--------------------------------------------------------------------------------
+
+Description:
+  Beyn est la plateforme algérienne officielle permettant le paiement en ligne des obligations fiscales. Cette intégration créera le premier système automobile end-to-end en Algérie : calcul → déclaration → paiement → archivage.
+  Configuration API Beyn avec credentials sécurisés (OAuth2)
+  Authentification unique SSO depuis Ibticar vers Beyn
+  Gestion multi-comptes pour groupes avec plusieurs entités
+
+Status: Partial
+
+
+US-012: Dashboard Fiscal Unifie
+--------------------------------------------------------------------------------
+
+Description:
+  Interface centralisée regroupant toutes les informations fiscales : calculs, déclarations, paiements et échéances, avec intégration complète du système Beyn pour un workflow end-to-end.
+  Header : Période fiscale active, score conformité, alertes urgentes
+  Widgets principaux : 4 KPIs clés personnalisables
+  Timeline : Vue chronologique obligations 30 prochains jours
+
+Status: In Progress
+
+
+================================================================================
+PRD-03: Marketplace B2B/B2C
+================================================================================
+
+
+US-001: Consulter Catalogue Vehicules
+--------------------------------------------------------------------------------
+
+Description:
+  Affichage responsive sur mobile et desktop
+  Photos haute qualité avec zoom et galerie (min 8 photos)
+  Filtres avancés (prix, marque, année, kilométrage, carburant)
+  Tri par prix, date d'ajout, popularité
+
+Status: Not Started
+
+
+US-002: Fiche Detaillee Vehicule
+--------------------------------------------------------------------------------
+
+Description:
+  Galerie photos avec mode plein écran
+  Caractéristiques techniques complètes
+  Historique véhicule (accidents, entretien) si disponible
+  Prix clairement affiché en DZD avec mensualités possibles
+
+Status: Not Started
+
+
+US-003: Filtres Recherche Avancee
+--------------------------------------------------------------------------------
+
+Description:
+  Filtres par marque, modèle, année, kilométrage
+  Fourchette de prix en DZD avec slider
+  Filtres par type de carburant (essence, diesel, GPL, hybride)
+  Filtres par transmission (manuelle, automatique)
+
+Status: Not Started
+
+
+US-004: Galerie Photos 360
+--------------------------------------------------------------------------------
+
+Description:
+  Galerie photos haute résolution (extérieur, intérieur, moteur)
+  Vue 360° interactive du véhicule
+  Zoom sur les détails importants
+  Affichage plein écran des images
+
+Status: Not Started
+
+
+US-005: Contacter Vendeur
+--------------------------------------------------------------------------------
+
+Description:
+  Formulaire de contact simplifié (nom, téléphone, message)
+  Click-to-call pour appel direct sur mobile
+  Numéro masqué pour protection données vendeur
+  Notification immédiate au commercial concerné
+
+Status: Not Started
+
+
+US-006: Favoris Comparateur
+--------------------------------------------------------------------------------
+
+Description:
+  Ajout/suppression véhicules en favoris avec compte utilisateur
+  Comparaison simultanée de 2-3 véhicules maximum
+  Tableau comparatif des caractéristiques principales
+  Différences de prix et équipements mises en évidence
+
+Status: Not Started
+
+
+US-007: Estimation Reprise
+--------------------------------------------------------------------------------
+
+Description:
+  Formulaire d'estimation avec caractéristiques du véhicule
+  Algorithme de pricing basé sur le marché algérien
+  Photos obligatoires pour validation de l'état
+  Estimation instantanée avec fourchette de prix
+
+Status: Not Started
+
+
+US-008: Simulation Financement
+--------------------------------------------------------------------------------
+
+Description:
+  ⚠️ Cette fonctionnalité concerne UNIQUEMENT les véhicules NEUFS vendus par les concessionnaires officiels. Le financement B2B pour stock concessionnaires est traité dans US-023.
+  UNIQUEMENT véhicules neufs (0 km)
+  Vendus par concessionnaires agréés
+  Badge "Financement disponible" sur fiche
+
+Status: Not Started
+
+
+US-009: Avis Evaluations Clients
+--------------------------------------------------------------------------------
+
+Description:
+  Système d'évaluation par étoiles (1-5) pour chaque concessionnaire
+  Commentaires clients vérifiés après achat effectif
+  Filtres par type d'avis (service, prix, qualité véhicule)
+  Réponses des concessionnaires aux avis clients
+
+Status: Not Started
+
+
+US-010: Alertes Nouveautes
+--------------------------------------------------------------------------------
+
+Description:
+  Configuration d'alertes personnalisées par critères de recherche
+  Notifications push mobiles pour nouveaux véhicules matching
+  Emails hebdomadaires avec sélection personnalisée
+  Alertes prix si véhicule favori en promotion
+
+Status: Not Started
+
+
+US-022: Preparation Financement Phase1
+--------------------------------------------------------------------------------
+
+Description:
+  Phase 1 (Mois 0-6) : Établir la plateforme et collecter des données sur la demande de financement sans offrir le service. Ces données serviront de levier de négociation avec les banques algériennes.
+  Module de Collecte d'Intentions
+  Question sur chaque fiche véhicule :
+  "Souhaitez-vous un financement pour ce véhicule ?"
+
+Status: Not Started
+
+
+US-024: Promotion Sociale Automatique
+--------------------------------------------------------------------------------
+
+Description:
+  Les réseaux sociaux représentent 70% de la découverte de véhicules en Algérie. L'automatisation de la promotion sociale permet aux concessionnaires de maintenir une présence active sans ressources marketing dédiées.
+  Détection Automatique des Best Deals
+  Critères de sélection (Score 0-100) :
+  30% × (Réduction prix vs marché)
+
+Status: Not Started
+
+Key Requirements (3 items):
+  - Score > 85 : Publication immédiate
+  - Score 70-85 : Publication planifiée
+  - Score < 70 : Pas de promotion auto
+
+
+================================================================================
+END OF ANALYSIS
+================================================================================

@@ -52,7 +52,7 @@ export class AIClient {
    */
   static initialize(config?: AIProviderConfig): AIClient {
     if (!aiClientInstance) {
-      const provider = (process.env.AI_PROVIDER as any) || 'claude'
+      const provider = (process.env.AI_PROVIDER as any) || 'gemini'
 
       // Determine API key based on provider
       let apiKey: string | undefined
@@ -65,7 +65,7 @@ export class AIClient {
           break
         case 'gemini':
           apiKey = process.env.GOOGLE_API_KEY
-          defaultModel = 'gemini-2.0-flash-exp'
+          defaultModel = 'gemini-2.5-flash'
           break
         case 'openai':
           apiKey = process.env.OPENAI_API_KEY

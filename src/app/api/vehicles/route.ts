@@ -50,17 +50,32 @@ export async function GET(request: NextRequest) {
         { registrationNumber: { contains: search, mode: 'insensitive' } },
         { color: { contains: search, mode: 'insensitive' } },
         { model: { name: { contains: search, mode: 'insensitive' } } },
-        { brand: { name: { contains: search, mode: 'insensitive' } } },
+        { model: { brand: { name: { contains: search, mode: 'insensitive' } } } },
       ]
     }
 
     // Filtres spécifiques
     if (status) where.status = status
-    if (brandId) where.brandId = brandId
-    if (modelId) where.modelId = modelId
-    if (fuelType) where.fuelType = fuelType
-    if (transmission) where.transmission = transmission
-    if (teamId) where.currentTeamId = teamId
+    if (brandId) {
+      where.model = {
+        ...where.model,
+        brandId: brandId
+      }
+    }
+    if (modelId) where.vehicleModelId = modelId
+    if (fuelType) {
+      where.model = {
+        ...where.model,
+        fuelType: fuelType
+      }
+    }
+    if (transmission) {
+      where.model = {
+        ...where.model,
+        transmission: transmission
+      }
+    }
+    if (teamId) where.teamId = teamId
 
     // Filtres de prix
     if (minPrice !== null || maxPrice !== null) {
