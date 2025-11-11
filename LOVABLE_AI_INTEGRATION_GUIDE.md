@@ -4,7 +4,7 @@
 >
 > This guide provides comprehensive integration instructions for all critical API endpoints in the Ibticar.AI MVP backend. Each endpoint includes textual descriptions, user stories, React/Next.js integration examples, request/response formats, error handling, and UI/UX recommendations.
 
-**Backend API Base URL:** `https://ibticar-ai-mvp-test-87q7629hc-adechi-adeboyes-projects.vercel.app/api`
+**Backend API Base URL:** `https://ibticar-ai-mvp-test-9dkc152po-adechi-adeboyes-projects.vercel.app`
 
 ---
 

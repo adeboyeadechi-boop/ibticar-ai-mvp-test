@@ -236,7 +236,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Modèle de véhicule non trouvé',
-          message: `Impossible de trouver le modèle ${brand} ${model} dans notre base de données`,
+          message: `Impossible de trouver le modèle ${brandName} ${modelName} dans notre base de données`,
         },
         { status: 404 }
       )

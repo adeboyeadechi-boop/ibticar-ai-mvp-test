@@ -17,7 +17,7 @@
 
 ### URL de Base (Production - Vercel)
 ```
-Base URL: https://ibticar-ai-mvp-test-87q7629hc-adechi-adeboyes-projects.vercel.app/api
+Base URL: https://ibticar-ai-mvp-test-9dkc152po-adechi-adeboyes-projects.vercel.app
 ```
 
 **Note**: Cette URL change à chaque déploiement Vercel. Utilisez toujours la dernière URL fournie.
