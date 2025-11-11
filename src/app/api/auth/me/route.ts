@@ -2,20 +2,18 @@
 // GET /api/auth/me - Récupère les informations de l'utilisateur connecté
 
 import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/auth'
+import { getAuthenticatedUser } from '@/lib/auth-helpers'
 import prisma from '@/prisma/client'
 
 export async function GET(request: NextRequest) {
   try {
-    // Vérifier l'authentification
-    const session = await auth()
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    // Vérifier l'authentification (supporte NextAuth ET Bearer token)
+    const { user: authenticatedUser, error } = await getAuthenticatedUser(request)
+    if (error) return error
 
     // Récupérer les informations complètes de l'utilisateur
     const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
+      where: { id: authenticatedUser!.id },
       select: {
         id: true,
         email: true,

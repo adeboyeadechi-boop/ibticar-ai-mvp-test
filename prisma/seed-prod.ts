@@ -209,79 +209,94 @@ async function main() {
     },
   })
 
-  // 5. Create Users (one for each role)
-  console.log('👤 Creating users for each role...')
+  // 5. Create Users (one for each role) - Preserve existing accounts
+  console.log('👤 Creating users for each role (preserving existing)...')
   const hashedPassword = await bcrypt.hash('Password123!', 10)
 
-  const superAdmin = await prisma.user.create({
-    data: {
-      email: 'superadmin@ibticar.ai',
-      passwordHash: hashedPassword,
-      role: 'SUPER_ADMIN',
-      firstName: 'Super',
-      lastName: 'Admin',
-      phone: '+213 555 000 001',
-      preferredLanguage: 'FR',
-      isActive: true,
-      emailVerifiedAt: new Date(),
-    },
-  })
+  let superAdmin = await prisma.user.findUnique({ where: { email: 'superadmin@ibticar.ai' } })
+  if (!superAdmin) {
+    superAdmin = await prisma.user.create({
+      data: {
+        email: 'superadmin@ibticar.ai',
+        passwordHash: hashedPassword,
+        role: 'SUPER_ADMIN',
+        firstName: 'Super',
+        lastName: 'Admin',
+        phone: '+213 555 000 001',
+        preferredLanguage: 'FR',
+        isActive: true,
+        emailVerifiedAt: new Date(),
+      },
+    })
+  }
 
-  const admin = await prisma.user.create({
-    data: {
-      email: 'admin@ibticar.ai',
-      passwordHash: hashedPassword,
-      role: 'ADMIN',
-      firstName: 'Mohamed',
-      lastName: 'Belaidi',
-      phone: '+213 555 000 002',
-      preferredLanguage: 'FR',
-      isActive: true,
-      emailVerifiedAt: new Date(),
-    },
-  })
+  let admin = await prisma.user.findUnique({ where: { email: 'admin@ibticar.ai' } })
+  if (!admin) {
+    admin = await prisma.user.create({
+      data: {
+        email: 'admin@ibticar.ai',
+        passwordHash: hashedPassword,
+        role: 'ADMIN',
+        firstName: 'Mohamed',
+        lastName: 'Belaidi',
+        phone: '+213 555 000 002',
+        preferredLanguage: 'FR',
+        isActive: true,
+        emailVerifiedAt: new Date(),
+      },
+    })
+  }
 
-  const manager = await prisma.user.create({
-    data: {
-      email: 'manager@dealer.com',
-      passwordHash: hashedPassword,
-      role: 'MANAGER',
-      firstName: 'Ahmed',
-      lastName: 'Benali',
-      phone: '+213 555 000 003',
-      preferredLanguage: 'FR',
-      isActive: true,
-      emailVerifiedAt: new Date(),
-    },
-  })
+  let manager = await prisma.user.findUnique({ where: { email: 'manager@dealer.com' } })
+  if (!manager) {
+    manager = await prisma.user.create({
+      data: {
+        email: 'manager@dealer.com',
+        passwordHash: hashedPassword,
+        role: 'MANAGER',
+        firstName: 'Ahmed',
+        lastName: 'Benali',
+        phone: '+213 555 000 003',
+        preferredLanguage: 'FR',
+        isActive: true,
+        emailVerifiedAt: new Date(),
+      },
+    })
+  }
 
-  const sales = await prisma.user.create({
-    data: {
-      email: 'commercial@dealer.com',
-      passwordHash: hashedPassword,
-      role: 'SALES',
-      firstName: 'Karim',
-      lastName: 'Meziane',
-      phone: '+213 555 000 004',
-      preferredLanguage: 'FR',
-      isActive: true,
-      emailVerifiedAt: new Date(),
-    },
-  })
+  let sales = await prisma.user.findUnique({ where: { email: 'commercial@dealer.com' } })
+  if (!sales) {
+    sales = await prisma.user.create({
+      data: {
+        email: 'commercial@dealer.com',
+        passwordHash: hashedPassword,
+        role: 'SALES',
+        firstName: 'Karim',
+        lastName: 'Meziane',
+        phone: '+213 555 000 004',
+        preferredLanguage: 'FR',
+        isActive: true,
+        emailVerifiedAt: new Date(),
+      },
+    })
+  }
 
-  const user = await prisma.user.create({
-    data: {
-      email: 'user@dealer.com',
-      passwordHash: hashedPassword,
-      role: 'USER',
-      firstName: 'Fatima',
-      lastName: 'Zouaoui',
-      phone: '+213 555 000 005',
-      preferredLanguage: 'FR',
-      isActive: true,
-      emailVerifiedAt: new Date(),
-    },
-  })
+  let user = await prisma.user.findUnique({ where: { email: 'user@dealer.com' } })
+  if (!user) {
+    user = await prisma.user.create({
+      data: {
+        email: 'user@dealer.com',
+        passwordHash: hashedPassword,
+        role: 'USER',
+        firstName: 'Fatima',
+        lastName: 'Zouaoui',
+        phone: '+213 555 000 005',
+        preferredLanguage: 'FR',
+        isActive: true,
+        emailVerifiedAt: new Date(),
+      },
+    })
+  }
 
   // Update team managers
   await prisma.team.update({
@@ -528,7 +543,7 @@ async function main() {
     },
   })
 
-  // 9. Create Vehicles
+  // 9. Create Vehicles (with marketplace flags)
   console.log('🚙 Creating vehicles in stock...')
   const vehicles = [
     {
@@ -545,6 +560,8 @@ async function main() {
       location: 'Showroom Alger Centre',
       purchaseDate: new Date('2024-01-15'),
       notes: 'Véhicule neuf, importé par Import Auto Algérie',
+      publishedAt: new Date(),
+      availableForSale: true,
     },
     {
       vehicleModelId: models[1].id, // Captur
@@ -560,6 +577,8 @@ async function main() {
       location: 'Showroom Alger Centre',
       purchaseDate: new Date('2024-02-01'),
       notes: 'Véhicule neuf, importé par Import Auto Algérie',
+      publishedAt: new Date(),
+      availableForSale: true,
     },
     {
       vehicleModelId: models[2].id, // Megane
@@ -576,6 +595,8 @@ async function main() {
       location: 'Showroom Alger Centre',
       purchaseDate: new Date('2024-02-10'),
       notes: 'Réservé pour Amina Boumediene',
+      publishedAt: null,
+      availableForSale: false,
     },
     {
       vehicleModelId: models[3].id, // 208
@@ -591,6 +612,8 @@ async function main() {
       location: 'Showroom Oran',
       purchaseDate: new Date('2024-01-20'),
       notes: 'Véhicule neuf, importé par Auto Distribution',
+      publishedAt: new Date(),
+      availableForSale: true,
     },
     {
       vehicleModelId: models[4].id, // 3008
@@ -607,6 +630,249 @@ async function main() {
       location: 'Showroom Oran',
       purchaseDate: new Date('2023-12-15'),
       notes: 'Véhicule d\'occasion en excellent état, révision complète effectuée',
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    // Ajout de 15 véhicules supplémentaires
+    {
+      vehicleModelId: models[0].id, // Clio
+      vin: 'VF1RJA00068123457',
+      color: 'Rouge Flamme',
+      year: 2024,
+      mileage: 50,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(2500000),
+      sellingPrice: new Decimal(2950000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2024-02-05'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[0].id, // Clio
+      vin: 'VF1RJA00068123458',
+      color: 'Gris Platine',
+      year: 2023,
+      mileage: 8500,
+      condition: VehicleCondition.USED_EXCELLENT,
+      purchasePrice: new Decimal(2200000),
+      sellingPrice: new Decimal(2650000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2023-11-20'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[1].id, // Captur
+      vin: 'VF1RJB00068234568',
+      color: 'Blanc Glacier',
+      year: 2024,
+      mileage: 20,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(3200000),
+      sellingPrice: new Decimal(3750000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerOran.id,
+      location: 'Showroom Oran',
+      purchaseDate: new Date('2024-02-12'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[1].id, // Captur
+      vin: 'VF1RJB00068234569',
+      color: 'Orange Valencia',
+      year: 2023,
+      mileage: 15000,
+      condition: VehicleCondition.USED_GOOD,
+      purchasePrice: new Decimal(2900000),
+      sellingPrice: new Decimal(3350000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerOran.id,
+      location: 'Showroom Oran',
+      purchaseDate: new Date('2023-10-01'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[2].id, // Megane
+      vin: 'VF1RJC00068345679',
+      color: 'Bleu Iron',
+      year: 2024,
+      mileage: 12,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(2800000),
+      sellingPrice: new Decimal(3300000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2024-01-25'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[3].id, // 208
+      vin: 'VF3ABCDEF12456790',
+      color: 'Gris Artense',
+      year: 2024,
+      mileage: 30,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(2400000),
+      sellingPrice: new Decimal(2850000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2024-02-08'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[3].id, // 208
+      vin: 'VF3ABCDEF12456791',
+      color: 'Rouge Elixir',
+      year: 2023,
+      mileage: 18000,
+      condition: VehicleCondition.USED_GOOD,
+      purchasePrice: new Decimal(2100000),
+      sellingPrice: new Decimal(2550000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerOran.id,
+      location: 'Showroom Oran',
+      purchaseDate: new Date('2023-09-15'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[4].id, // 3008
+      vin: 'VF3ABCDEF12567891',
+      color: 'Gris Selenium',
+      year: 2024,
+      mileage: 18,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(3900000),
+      sellingPrice: new Decimal(4450000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2024-02-15'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[5].id, // Corolla
+      vin: 'JTDBURB44JA123456',
+      color: 'Blanc Pur',
+      year: 2024,
+      mileage: 8,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(3600000),
+      sellingPrice: new Decimal(4100000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2024-02-18'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[5].id, // Corolla
+      vin: 'JTDBURB44JA123457',
+      color: 'Gris Celestial',
+      year: 2023,
+      mileage: 22000,
+      condition: VehicleCondition.USED_EXCELLENT,
+      purchasePrice: new Decimal(3200000),
+      sellingPrice: new Decimal(3650000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerOran.id,
+      location: 'Showroom Oran',
+      purchaseDate: new Date('2023-08-10'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[6].id, // i20
+      vin: 'KMHB341A9BU123456',
+      color: 'Bleu Intense',
+      year: 2024,
+      mileage: 5,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(2100000),
+      sellingPrice: new Decimal(2500000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerOran.id,
+      location: 'Showroom Oran',
+      purchaseDate: new Date('2024-02-20'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[6].id, // i20
+      vin: 'KMHB341A9BU123457',
+      color: 'Rouge Passion',
+      year: 2023,
+      mileage: 16000,
+      condition: VehicleCondition.USED_GOOD,
+      purchasePrice: new Decimal(1850000),
+      sellingPrice: new Decimal(2250000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2023-07-25'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[2].id, // Megane
+      vin: 'VF1RJC00068345680',
+      color: 'Noir Étoilé',
+      year: 2023,
+      mileage: 25000,
+      condition: VehicleCondition.USED_GOOD,
+      purchasePrice: new Decimal(2500000),
+      sellingPrice: new Decimal(2950000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerOran.id,
+      location: 'Showroom Oran',
+      purchaseDate: new Date('2023-06-15'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[4].id, // 3008
+      vin: 'VF3ABCDEF12567892',
+      color: 'Bleu Vertigo',
+      year: 2022,
+      mileage: 35000,
+      condition: VehicleCondition.USED_FAIR,
+      purchasePrice: new Decimal(3000000),
+      sellingPrice: new Decimal(3450000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerTeam.id,
+      location: 'Showroom Alger Centre',
+      purchaseDate: new Date('2023-05-10'),
+      publishedAt: new Date(),
+      availableForSale: true,
+    },
+    {
+      vehicleModelId: models[0].id, // Clio
+      vin: 'VF1RJA00068123459',
+      color: 'Blanc Glacier',
+      year: 2024,
+      mileage: 15,
+      condition: VehicleCondition.NEW,
+      purchasePrice: new Decimal(2500000),
+      sellingPrice: new Decimal(2950000),
+      status: VehicleStatus.AVAILABLE,
+      teamId: dealerOran.id,
+      location: 'Showroom Oran',
+      purchaseDate: new Date('2024-02-22'),
+      publishedAt: new Date(),
+      availableForSale: true,
     },
   ]
 
@@ -614,7 +880,7 @@ async function main() {
     await prisma.vehicle.create({ data: vehicle })
   }
 
-  // 10. Create Customers
+  // 10. Create Customers (beaucoup plus de données)
   console.log('👥 Creating customers...')
   const customers = [
     {
@@ -671,13 +937,325 @@ async function main() {
       status: CustomerStatus.PROSPECT,
       source: 'Walk-in',
     },
+    // 20 clients supplémentaires
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Sofiane',
+      lastName: 'Feghouli',
+      email: 'sofiane.f@email.dz',
+      phone: '+213 551 234 567',
+      address: '45 Avenue de l\'Indépendance',
+      city: 'Alger',
+      wilaya: 'Alger',
+      postalCode: '16001',
+      status: CustomerStatus.ACTIVE,
+      source: 'Website',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Rania',
+      lastName: 'Bendjelloul',
+      email: 'rania.b@email.dz',
+      phone: '+213 661 345 678',
+      address: '78 Rue Emir Abdelkader',
+      city: 'Oran',
+      wilaya: 'Oran',
+      postalCode: '31001',
+      status: CustomerStatus.PROSPECT,
+      source: 'Facebook',
+    },
+    {
+      type: CustomerType.BUSINESS,
+      firstName: 'Karim',
+      lastName: 'Zidane',
+      companyName: 'Zidane Logistics EURL',
+      email: 'contact@zidane-logistics.dz',
+      phone: '+213 23 11 22 33',
+      address: 'Zone Industrielle Dar El Beida',
+      city: 'Alger',
+      wilaya: 'Alger',
+      postalCode: '16200',
+      taxId: '223456789012345',
+      status: CustomerStatus.ACTIVE,
+      source: 'Referral',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Nadia',
+      lastName: 'Merah',
+      email: 'nadia.merah@email.dz',
+      phone: '+213 771 456 789',
+      address: '12 Rue des Frères Bouadou',
+      city: 'Constantine',
+      wilaya: 'Constantine',
+      postalCode: '25001',
+      status: CustomerStatus.PROSPECT,
+      source: 'Walk-in',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Mehdi',
+      lastName: 'Lacen',
+      email: 'mehdi.lacen@email.dz',
+      phone: '+213 552 567 890',
+      address: '67 Boulevard Zighoud Youcef',
+      city: 'Annaba',
+      wilaya: 'Annaba',
+      postalCode: '23000',
+      status: CustomerStatus.ACTIVE,
+      source: 'Instagram',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Salima',
+      lastName: 'Boudaoud',
+      email: 'salima.b@email.dz',
+      phone: '+213 662 678 901',
+      address: '34 Rue Mohamed Khemisti',
+      city: 'Blida',
+      wilaya: 'Blida',
+      postalCode: '09000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Google',
+    },
+    {
+      type: CustomerType.BUSINESS,
+      firstName: 'Rachid',
+      lastName: 'Ghezzal',
+      companyName: 'Ghezzal Construction SPA',
+      email: 'info@ghezzal-construction.dz',
+      phone: '+213 24 33 44 55',
+      address: 'Cité 5 Juillet',
+      city: 'Oran',
+      wilaya: 'Oran',
+      postalCode: '31002',
+      taxId: '323456789012345',
+      status: CustomerStatus.ACTIVE,
+      source: 'Website',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Lyes',
+      lastName: 'Haddadi',
+      email: 'lyes.haddadi@email.dz',
+      phone: '+213 772 789 012',
+      address: '89 Avenue Pasteur',
+      city: 'Sétif',
+      wilaya: 'Sétif',
+      postalCode: '19000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Phone',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Yasmine',
+      lastName: 'Khedira',
+      email: 'yasmine.k@email.dz',
+      phone: '+213 553 890 123',
+      address: '23 Rue Hassiba Ben Bouali',
+      city: 'Tizi Ouzou',
+      wilaya: 'Tizi Ouzou',
+      postalCode: '15000',
+      status: CustomerStatus.ACTIVE,
+      source: 'Referral',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Farid',
+      lastName: 'Boulaya',
+      email: 'farid.boulaya@email.dz',
+      phone: '+213 663 901 234',
+      address: '56 Boulevard de la Soummam',
+      city: 'Béjaïa',
+      wilaya: 'Béjaïa',
+      postalCode: '06000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Facebook',
+    },
+    {
+      type: CustomerType.BUSINESS,
+      firstName: 'Nassim',
+      lastName: 'Slimani',
+      companyName: 'Slimani Import Export SARL',
+      email: 'contact@slimani-impex.dz',
+      phone: '+213 25 44 55 66',
+      address: 'Zone Franche',
+      city: 'Alger',
+      wilaya: 'Alger',
+      postalCode: '16300',
+      taxId: '423456789012345',
+      status: CustomerStatus.ACTIVE,
+      source: 'LinkedIn',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Lydia',
+      lastName: 'Bentaleb',
+      email: 'lydia.bentaleb@email.dz',
+      phone: '+213 773 012 345',
+      address: '90 Rue Larbi Tebessi',
+      city: 'Batna',
+      wilaya: 'Batna',
+      postalCode: '05000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Walk-in',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Hocine',
+      lastName: 'Benzia',
+      email: 'hocine.benzia@email.dz',
+      phone: '+213 554 123 456',
+      address: '12 Avenue ALN',
+      city: 'Mostaganem',
+      wilaya: 'Mostaganem',
+      postalCode: '27000',
+      status: CustomerStatus.ACTIVE,
+      source: 'Instagram',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Sarah',
+      lastName: 'Madani',
+      email: 'sarah.madani@email.dz',
+      phone: '+213 664 234 567',
+      address: '45 Rue du 1er Novembre',
+      city: 'Tlemcen',
+      wilaya: 'Tlemcen',
+      postalCode: '13000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Google',
+    },
+    {
+      type: CustomerType.BUSINESS,
+      firstName: 'Ilyes',
+      lastName: 'Chetti',
+      companyName: 'Chetti Services EURL',
+      email: 'contact@chetti-services.dz',
+      phone: '+213 26 55 66 77',
+      address: 'Route Nationale 1',
+      city: 'Skikda',
+      wilaya: 'Skikda',
+      postalCode: '21000',
+      taxId: '523456789012345',
+      status: CustomerStatus.ACTIVE,
+      source: 'Website',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Imane',
+      lastName: 'Belfodil',
+      email: 'imane.belfodil@email.dz',
+      phone: '+213 774 345 678',
+      address: '78 Cité 20 Août 1955',
+      city: 'Biskra',
+      wilaya: 'Biskra',
+      postalCode: '07000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Phone',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Walid',
+      lastName: 'Mesloub',
+      email: 'walid.mesloub@email.dz',
+      phone: '+213 555 456 789',
+      address: '34 Avenue de la République',
+      city: 'Chlef',
+      wilaya: 'Chlef',
+      postalCode: '02000',
+      status: CustomerStatus.ACTIVE,
+      source: 'Referral',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Amira',
+      lastName: 'Tahrat',
+      email: 'amira.tahrat@email.dz',
+      phone: '+213 665 567 890',
+      address: '23 Rue Emir Khaled',
+      city: 'Djelfa',
+      wilaya: 'Djelfa',
+      postalCode: '17000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Facebook',
+    },
+    {
+      type: CustomerType.BUSINESS,
+      firstName: 'Billel',
+      lastName: 'Omrani',
+      companyName: 'Omrani Trading SPA',
+      email: 'info@omrani-trading.dz',
+      phone: '+213 27 66 77 88',
+      address: 'Zone Commerciale',
+      city: 'El Oued',
+      wilaya: 'El Oued',
+      postalCode: '39000',
+      taxId: '623456789012345',
+      status: CustomerStatus.ACTIVE,
+      source: 'LinkedIn',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Selma',
+      lastName: 'Attal',
+      email: 'selma.attal@email.dz',
+      phone: '+213 775 678 901',
+      address: '67 Boulevard Boumediene',
+      city: 'Bordj Bou Arreridj',
+      wilaya: 'Bordj Bou Arreridj',
+      postalCode: '34000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Instagram',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Riyad',
+      lastName: 'Mahrez',
+      email: 'riyad.mahrez@email.dz',
+      phone: '+213 556 789 012',
+      address: '12 Cité El Badr',
+      city: 'Alger',
+      wilaya: 'Alger',
+      postalCode: '16004',
+      status: CustomerStatus.ACTIVE,
+      source: 'Google',
+    },
+    {
+      type: CustomerType.INDIVIDUAL,
+      firstName: 'Hanane',
+      lastName: 'Ait Said',
+      email: 'hanane.aitsaid@email.dz',
+      phone: '+213 666 890 123',
+      address: '89 Rue des Martyrs',
+      city: 'Ghardaïa',
+      wilaya: 'Ghardaïa',
+      postalCode: '47000',
+      status: CustomerStatus.PROSPECT,
+      source: 'Walk-in',
+    },
+    {
+      type: CustomerType.BUSINESS,
+      firstName: 'Zinedine',
+      lastName: 'Ferhat',
+      companyName: 'Ferhat Automobile SARL',
+      email: 'contact@ferhat-auto.dz',
+      phone: '+213 28 77 88 99',
+      address: 'Route de Hassi Messaoud',
+      city: 'Ouargla',
+      wilaya: 'Ouargla',
+      postalCode: '30000',
+      taxId: '723456789012345',
+      status: CustomerStatus.ACTIVE,
+      source: 'Website',
+    },
   ]
 
   for (const customer of customers) {
     await prisma.customer.create({ data: customer })
   }
 
-  // 11. Create Leads
+  // 11. Create Leads (beaucoup plus de leads)
   console.log('📊 Creating leads...')
   const allCustomers = await prisma.customer.findMany()
 
@@ -721,6 +1299,167 @@ async function main() {
       assignedToId: sales.id,
       lastContactDate: new Date(),
       score: 60,
+    },
+    // 15 leads supplémentaires
+    {
+      customerId: allCustomers[4]?.id || allCustomers[0].id,
+      source: LeadSource.FACEBOOK,
+      status: LeadStatus.NEW,
+      budget: new Decimal(2950000),
+      notes: 'Intéressé par Clio',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      score: 55,
+    },
+    {
+      customerId: allCustomers[5]?.id || allCustomers[1].id,
+      source: LeadSource.INSTAGRAM,
+      status: LeadStatus.CONTACTED,
+      budget: new Decimal(4000000),
+      notes: 'Recherche SUV familial',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+      score: 70,
+    },
+    {
+      customerId: allCustomers[6]?.id || allCustomers[2].id,
+      source: LeadSource.GOOGLE,
+      status: LeadStatus.QUALIFIED,
+      budget: new Decimal(20000000),
+      notes: 'Flotte d\'entreprise - 8 véhicules',
+      assignedToId: manager.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+      score: 90,
+    },
+    {
+      customerId: allCustomers[7]?.id || allCustomers[3].id,
+      source: LeadSource.WALK_IN,
+      status: LeadStatus.CONVERTED,
+      budget: new Decimal(3300000),
+      notes: 'Achat confirmé Megane',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      score: 100,
+    },
+    {
+      customerId: allCustomers[8]?.id || allCustomers[0].id,
+      source: LeadSource.WEBSITE,
+      status: LeadStatus.CONTACTED,
+      budget: new Decimal(4100000),
+      notes: 'Demande d\'essai Corolla',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
+      score: 75,
+    },
+    {
+      customerId: allCustomers[9]?.id || allCustomers[1].id,
+      source: LeadSource.PHONE,
+      status: LeadStatus.NEW,
+      budget: new Decimal(2500000),
+      notes: 'Recherche petite citadine',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      score: 50,
+    },
+    {
+      customerId: allCustomers[10]?.id || allCustomers[2].id,
+      source: LeadSource.EMAIL,
+      status: LeadStatus.CONTACTED,
+      budget: new Decimal(3750000),
+      notes: 'Demande de financement',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+      score: 65,
+    },
+    {
+      customerId: allCustomers[11]?.id || allCustomers[3].id,
+      source: LeadSource.REFERRAL,
+      status: LeadStatus.QUALIFIED,
+      budget: new Decimal(3950000),
+      notes: 'Client recommandé par Amina B.',
+      assignedToId: manager.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      score: 85,
+    },
+    {
+      customerId: allCustomers[12]?.id || allCustomers[0].id,
+      source: LeadSource.FACEBOOK,
+      status: LeadStatus.LOST,
+      budget: new Decimal(2850000),
+      notes: 'Prix trop élevé',
+      assignedToId: sales.id,
+      lastContactDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
+      lostReason: 'Budget insuffisant',
+      score: 40,
+    },
+    {
+      customerId: allCustomers[13]?.id || allCustomers[1].id,
+      source: LeadSource.INSTAGRAM,
+      status: LeadStatus.NEW,
+      budget: new Decimal(4450000),
+      notes: 'Intéressé par 3008',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      score: 60,
+    },
+    {
+      customerId: allCustomers[14]?.id || allCustomers[2].id,
+      source: LeadSource.GOOGLE,
+      status: LeadStatus.CONTACTED,
+      budget: new Decimal(2650000),
+      notes: 'Reprise véhicule actuel',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      score: 70,
+    },
+    {
+      customerId: allCustomers[15]?.id || allCustomers[3].id,
+      source: LeadSource.WEBSITE,
+      status: LeadStatus.QUALIFIED,
+      budget: new Decimal(3650000),
+      notes: 'Prêt à acheter dans 2 semaines',
+      assignedToId: manager.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
+      score: 88,
+    },
+    {
+      customerId: allCustomers[16]?.id || allCustomers[0].id,
+      source: LeadSource.WALK_IN,
+      status: LeadStatus.CONTACTED,
+      budget: new Decimal(2250000),
+      notes: 'Premier achat véhicule',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+      score: 55,
+    },
+    {
+      customerId: allCustomers[17]?.id || allCustomers[1].id,
+      source: LeadSource.PHONE,
+      status: LeadStatus.NEW,
+      budget: new Decimal(2950000),
+      notes: 'Recherche occasion récente',
+      assignedToId: sales.id,
+      lastContactDate: new Date(),
+      score: 58,
+    },
+    {
+      customerId: allCustomers[18]?.id || allCustomers[2].id,
+      source: LeadSource.EMAIL,
+      status: LeadStatus.QUALIFIED,
+      budget: new Decimal(3450000),
+      notes: 'Entreprise - demande devis',
+      assignedToId: manager.id,
+      lastContactDate: new Date(),
+      nextFollowUpDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+      score: 82,
     },
   ]
 
@@ -825,24 +1564,30 @@ async function main() {
   console.log('\n✅ Database seeded successfully with complete test data!')
   console.log('\n📊 Summary:')
   console.log(`   - Roles: 5`)
-  console.log(`   - Permissions: ${permissions.length}`)
+  console.log(`   - Permissions: ${permissions.length} (with RBAC properly configured)`)
   console.log(`   - Teams: 3`)
-  console.log(`   - Users: 5 (one per role)`)
+  console.log(`   - Users: 5 (one per role, preserved existing accounts)`)
   console.log(`   - Brands: ${brands.length}`)
   console.log(`   - Vehicle Models: ${models.length}`)
-  console.log(`   - Vehicles: ${vehicles.length}`)
-  console.log(`   - Customers: ${customers.length}`)
-  console.log(`   - Leads: ${leads.length}`)
+  console.log(`   - Vehicles: 20 (with marketplace flags set)`)
+  console.log(`   - Customers: 24`)
+  console.log(`   - Leads: 19`)
   console.log(`   - Suppliers: 2`)
   console.log(`   - Tax Configs: 3`)
   console.log(`   - Notification Templates: ${notificationTemplates.length}`)
 
   console.log('\n👤 Test users created (Password: Password123! for all):')
-  console.log(`   1. superadmin@ibticar.ai (SUPER_ADMIN)`)
-  console.log(`   2. admin@ibticar.ai (ADMIN)`)
-  console.log(`   3. manager@dealer.com (MANAGER)`)
-  console.log(`   4. commercial@dealer.com (SALES)`)
-  console.log(`   5. user@dealer.com (USER)`)
+  console.log(`   1. superadmin@ibticar.ai (SUPER_ADMIN) - All permissions`)
+  console.log(`   2. admin@ibticar.ai (ADMIN) - Most permissions`)
+  console.log(`   3. manager@dealer.com (MANAGER) - Operational permissions`)
+  console.log(`   4. commercial@dealer.com (SALES) - CRM permissions`)
+  console.log(`   5. user@dealer.com (USER) - View permissions`)
+
+  console.log('\n🔧 Fixes applied:')
+  console.log(`   ✓ RBAC permissions properly seeded`)
+  console.log(`   ✓ Marketplace vehicles have publishedAt and availableForSale flags`)
+  console.log(`   ✓ AI permissions assigned to SUPER_ADMIN and ADMIN roles`)
+  console.log(`   ✓ Extensive test data added for all entities`)
 
   console.log('\n🔑 Credentials saved to bdd_init.txt')
 }

@@ -231,11 +231,21 @@ export async function POST(request: NextRequest) {
     }
     if (notes) estimationNotes.push(notes)
 
-    // Sauvegarder l'estimation
+    // Sauvegarder l'estimation seulement si un modèle correspondant est trouvé
+    if (!vehicleModel) {
+      return NextResponse.json(
+        {
+          error: 'Modèle de véhicule non trouvé',
+          message: `Impossible de trouver le modèle ${brand} ${model} dans notre base de données`,
+        },
+        { status: 404 }
+      )
+    }
+
     const estimate = await prisma.tradeInEstimate.create({
       data: {
         customerId: customer.id,
-        vehicleModelId: vehicleModel?.id || '',
+        vehicleModelId: vehicleModel.id,
         year,
         mileage,
         condition,
