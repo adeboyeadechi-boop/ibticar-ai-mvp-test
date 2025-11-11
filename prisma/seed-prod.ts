@@ -1391,10 +1391,9 @@ async function main() {
       source: LeadSource.SOCIAL_MEDIA,
       status: LeadStatus.LOST,
       budget: new Decimal(2850000),
-      notes: 'Prix trop élevé (via Facebook)',
+      notes: 'Prix trop élevé (via Facebook) - Budget insuffisant',
       assignedToId: sales.id,
       lastContactDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
-      lostReason: 'Budget insuffisant',
       score: 40,
     },
     {
